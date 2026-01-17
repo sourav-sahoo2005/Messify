@@ -1,0 +1,31 @@
+
+
+#navbar {
+    transition: all 0.25s ease-in-out;
+    background-color: #34333350;
+
+    backdrop-filter: blur(10px);
+}
+
+#navbar:hover {
+
+    /* filter: drop-shadow(0 2px 0px #ff00ff); */
+    /* border-bottom: 2px solid#ffe600; */
+    transform: scale(1.01);
+    transition: all 0.25s ease-in-out;
+
+}
+
+
+.kaushan-script-regular {
+    font-family: "Kaushan Script", cursive;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.zalando-sans-expanded-head {
+  font-family: "Zalando Sans Expanded", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+}

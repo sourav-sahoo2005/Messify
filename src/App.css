@@ -1,0 +1,12 @@
+
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+
+#hero{
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  color: blueviolet;
+}
