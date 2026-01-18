@@ -8,7 +8,7 @@ const Navbar = () => {
       mx-auto
       h-20
       px-8
-      flex justify-between 
+      flex justify-between
       items-center
       rounded-full
       fixed
@@ -19,12 +19,13 @@ const Navbar = () => {
       backdrop-blur-md
       bg-transparent
       shadow-lg
+      zalando-sans-expanded-head
     '>
             <span className='text-2xl text-yellow-600 font-popins font-bold zalando-sans-expanded-head drop-shadow-xl/50  drop-shadow-amber-500/40'>
                 MessiFy
             </span>
 
-            <div className='flex gap-10 items-center justify-center'>
+            <div className='flex gap-10 items-center justify-center font-thin'>
                 <ul className='flex gap-7  text-sm'>
                     <li className='cursor-pointer hover:text-amber-500 flex items-center flex-col'>
                         <img className='invert' src="../Icons/icons8-home-24.png" alt="" />
