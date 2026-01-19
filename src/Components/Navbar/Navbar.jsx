@@ -36,8 +36,8 @@ const Navbar = () => {
                         <span>About</span>
                     </li>
                     <li className='cursor-pointer hover:text-amber-600 flex items-center flex-col'>
-                        <img className='invert' src="../Icons/icons8-dashboard-24.png" alt="" />
-                        <span>Dashboard</span>
+                        <img className='invert' src="../Icons/icons8-faq-24.png" alt="" />
+                        <span>FAQ</span>
                     </li>
                 </ul>
 
