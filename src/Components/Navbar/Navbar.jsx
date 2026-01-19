@@ -1,4 +1,5 @@
 import React from 'react'
+import { useLocation, Link } from 'react-router'
 import './Navbar.css'
 
 const Navbar = () => {
@@ -21,36 +22,36 @@ const Navbar = () => {
       shadow-lg
       zalando-sans-expanded-head
     '>
-            <span className='text-2xl text-yellow-600 font-popins font-bold zalando-sans-expanded-head drop-shadow-xl/50  drop-shadow-amber-500/40'>
+            <span className='text-2xl text-yellow-600 drop-shadow-xl/50  drop-shadow-amber-500/40'>
                 MessiFy
             </span>
 
             <div className='flex gap-10 items-center justify-center font-thin'>
                 <ul className='flex gap-7  text-sm'>
-                    <li className='cursor-pointer hover:text-amber-500 flex items-center flex-col'>
-                        <img className='invert' src="../Icons/icons8-home-24.png" alt="" />
-                        <span>Home</span>
-                    </li>
-                    <li className='cursor-pointer hover:text-amber-500 flex items-center flex-col'>
-                        <img className='invert' src="../Icons/icons8-about-24.png" alt="" />
-                        <span>About</span>
-                    </li>
-                    <li className='cursor-pointer hover:text-amber-600 flex items-center flex-col'>
-                        <img className='invert' src="../Icons/icons8-faq-24.png" alt="" />
-                        <span>FAQ</span>
-                    </li>
+                    {["Home", "About", "FAQ"].map((item, i) => (
+                        <li
+                            key={i}
+                            className="cursor-pointer hover:text-amber-500 flex items-center flex-col"
+                        >
+                            <img
+                                className="invert w-5 h-5"
+                                src={`../Icons/icons8-${item.toLowerCase()}-24.png`}
+                                alt=""
+                            />
+                            <Link
+                                to={item === "Home" ? "/" : `/${item.toLowerCase()}`}
+                                className={`pt-1.5 ${useLocation().pathname === (item === "Home" ? "/" : `/${item.toLowerCase()}`) ? "text-amber-400 font-semibold" : ""}`}
+                            >{item}</Link>
+                        </li>
+                    ))}
                 </ul>
 
-                <button className='
-          px-4 py-1.5
-          rounded-lg
-          bg-amber-600
-          text-white
-          hover:bg-amber-700
-          transition
-        '>
+                <Link
+                    className='px-4 py-1.5 rounded-lg bg-amber-600 text-white hover:bg-amber-700 transition-all '
+                    to="/login"
+                >
                     Login / SignUp
-                </button>
+                </Link>
             </div>
         </nav>
     )
