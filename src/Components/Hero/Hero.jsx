@@ -1,8 +1,11 @@
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
+import {Link} from 'react-router'
+
 
 import './Hero.css'
 import HeroIntro from '../HeroIntro/HeroIntro';
+import Card from '../Card/Card'
 import HeroSearchBar from '../HeroSearchBar/HeroSearchBar';
 
 const Hero = () => {
@@ -33,7 +36,13 @@ const Hero = () => {
     <div  className='px-10 bg-[radial-gradient(circle_at_center,#131313,#0f0f0f,#000000)]'>
       <div className='min-h-screen w-full flex flex-col items-center justify-center gap-8 py-70'>
         <HeroIntro />
-        <HeroSearchBar />
+        <Link 
+        to={'/search'}
+        className='bg-amber-600 p-2 w-50 flex items-center justify-center rounded-xl'
+        >Search Now
+        </Link>
+       
+        
 
 
       </div>
