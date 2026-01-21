@@ -33,8 +33,9 @@ const Hero = () => {
   return (
 
 
-    <div  className='px-10 bg-[radial-gradient(circle_at_center,#131313,#0f0f0f,#000000)]'>
-      <div className='min-h-screen w-full flex flex-col items-center justify-center gap-8 py-70'>
+    <div  className=' bg-[url(../Images/messify-background.jpg)] bg-cover repeat-none'>
+      <div className='px-10  bg-black/50 w-full h-full'>
+      <div className=' min-h-screen w-full flex flex-col items-center justify-center gap-8 py-70'>
         <HeroIntro />
         <Link 
         to={'/search'}
@@ -45,6 +46,7 @@ const Hero = () => {
         
 
 
+      </div>
       </div>
     </div>
   )
