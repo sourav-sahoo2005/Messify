@@ -2,10 +2,11 @@ import React from 'react'
 
 const HeroIntro = () => {
   return (
-    <div className='zalando-sans-expanded-head text-center'>
-      <p id='hero_intro' className='text-5xl  tracking-wide leading-14 drop-shadow-[0_0_190px_#ffffff] '>
-        <span className='text-amber-500 text-6xl'>MessiFy</span>
-        <br />One
+    <div className='zalando-sans-expanded-head text-center flex flex-col justify-center items-center lg:gap-2 gap-4'>
+      <span id='hero_logo' className='text-amber-500 lg:text-6xl text-5xl'>MessiFy</span>
+      <p id='hero_intro' className='lg:text-5xl text-3xl  tracking-wide lg:leading-14   '>
+        
+        One
         <span className='text-amber-600'> Platform</span>, Multiple <span className='text-amber-600'>Solution</span>
       </p>
       <p id='hero_sub_intro' className='text-xl mt-1 font-light'>Track meals, control costs, and stay updated in real time.</p>
