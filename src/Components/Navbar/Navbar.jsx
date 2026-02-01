@@ -6,7 +6,7 @@ const Navbar = () => {
     return (
         <>
         <nav className='p-5 h-20 w-full fixed flex justify-between items-center lg:hidden md:hidden zalando-sans-expanded-head z-10 bg-black/50 backdrop-blur-md'>
-              <span className='text-2xl text-yellow-600 drop-shadow-xl/50  drop-shadow-amber-500/40'>
+              <span className='text-2xl text-amber-500 drop-shadow-xl/50  drop-shadow-amber-500/40'>
                     MessiFy
                 </span>
                  <Link
