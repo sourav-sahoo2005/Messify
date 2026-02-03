@@ -16,9 +16,9 @@ const Footer = () => {
 
           <div className='flex gap-3 mt-2 text-xl'>
             <i className="fa fa-instagram hover:text-pink-500 hover:drop-shadow-xl cursor-pointer"></i>
-            <i class="fa fa-facebook-f hover:text-blue-600 hover:drop-shadow-xl cursor-pointer"></i>
-            <i class="fa fa-twitter hover:text-blue-500 hover:drop-shadow-xl cursor-pointer"></i>
-            <i class="fa fa-youtube-play hover:text-red-500 hover:drop-shadow-xl cursor-pointer"></i>
+            <i className="fa fa-facebook-f hover:text-blue-600 hover:drop-shadow-xl cursor-pointer"></i>
+            <i className="fa fa-twitter hover:text-blue-500 hover:drop-shadow-xl cursor-pointer"></i>
+            <i className="fa fa-youtube-play hover:text-red-500 hover:drop-shadow-xl cursor-pointer"></i>
 
           </div>
         </div>
