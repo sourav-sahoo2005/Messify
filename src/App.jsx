@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './App.css'
 import Navbar from './Components/Navbar/Navbar'
 import Hero from './Components/Hero/Hero'
@@ -8,10 +8,30 @@ import About from './Components/AboutUs/About'
 import Login from './Components/Login/Login'
 import Footer from './Components/Footer/Footer'
 import ScrollTop from './Components/ScrollTop/ScrollTop'
+import Loading from './Components/Loding/Loding'
 
 
 const App = () => {
-  return (
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    const onLoad = () => {
+      console.log('Page is fully loaded');
+      setIsLoading(false);
+    };
+
+    if (document.readyState === 'complete') {
+      onLoad();
+    } else {
+      window.addEventListener('load', onLoad);
+      return () => window.removeEventListener('load', onLoad);
+    }
+  }, []);
+
+  useEffect(() => {
+    console.log('App component mounted');
+  }, []);
+
+  return isLoading ? <Loading /> : (
     <>
       <ScrollTop />
 
