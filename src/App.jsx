@@ -9,6 +9,7 @@ import Login from './Components/Login/Login'
 import Footer from './Components/Footer/Footer'
 import ScrollTop from './Components/ScrollTop/ScrollTop'
 import Loading from './Components/Loding/Loding'
+import FindMess from './Components/FindMess/FindMess'
 
 
 const App = () => {
@@ -42,6 +43,7 @@ const App = () => {
         <Route path='/about' element={<About />} />
         <Route path='/faq' element={<Faq />} />
         <Route path='/login' element={<Login />} />
+        <Route path='/search' element={<FindMess />} />
 
       </Routes >
       <Footer />
