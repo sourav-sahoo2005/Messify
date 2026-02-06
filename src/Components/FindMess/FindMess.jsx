@@ -1,6 +1,7 @@
 import React from 'react'
 import MessData from './FindMessData';
 import MessCard from '../MessCard/MessCard';
+import { Link } from 'react-router'
 
 const FindMess = () => {
   return (
@@ -246,6 +247,11 @@ const FindMess = () => {
 
         </div>
       </div>
+
+
+       <Link to='/search'className='border block h-15 w-15 bg-amber-600 rounded-full absolute bottom-25 right-5 z-50 shadow-lg shadow-gray-800/50 flex justify-center items-center ' >
+       <img src="../Icons/icons8-down-arrow-24.png" alt="" className='invert rotate-180 ' />
+       </Link>
 
     </div>
   )
