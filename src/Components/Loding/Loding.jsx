@@ -1,15 +1,60 @@
-import React from 'react'
-
+import { useEffect, useRef } from "react";
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
 
 
 
 
 const Loding = () => {
-  return (
-    <div className='h-screen bg-white text-6xl text-black'>
-        <h1>Loading...</h1>
 
-      
+
+  const textRef = useRef(null);
+
+  useGSAP(
+    () => {
+      const letters = textRef.current.querySelectorAll("span");
+
+      gsap.fromTo(
+        letters,
+        {
+          y: 40,
+          opacity: 0,
+        },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.6,
+          stagger: 0.08,
+          ease: "back.out(1.7)",
+          repeat: -1,
+          repeatDelay: 0.8,
+        }
+      );
+    },
+    { scope: textRef }
+  );
+  const text = "Loading...";
+
+
+
+  return (
+    <div className='h-screen w-full  bg-black/50 backdrop-blur-sm flex flex-col justify-center items-center absolute z-50'>
+
+      <h1
+        ref={textRef}
+        className="text-white text-6xl font-semibold flex"
+      >
+        {text.split("").map((char, index) => (
+          <span
+            key={index}
+            className="inline-block"
+          >
+            {char === " " ? "\u00A0" : char}
+          </span>
+        ))}
+      </h1>
+
+
     </div>
   )
 }

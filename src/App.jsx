@@ -34,6 +34,7 @@ const App = () => {
 
   return isLoading ? <Loading /> : (
     <>
+      
       <ScrollTop />
 
       <Navbar />
