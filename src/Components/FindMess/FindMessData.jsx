@@ -2,7 +2,7 @@ const MessData = [
   {
     "messName": "Sunrise Boys Mess",
     "type": "Boys",
-    "amenities": "AC",
+    "amenities": ["Wifi"],
     "capacity": 120,
     "vacancy": 18,
     "price": 2800,
@@ -20,7 +20,7 @@ const MessData = [
   {
     "messName": "Green Leaf Family Mess",
     "type": "Family",
-    "amenities": "AC",
+    "amenities": ["AC","Geyser"],
     "capacity": 80,
     "vacancy": 5,
     "price": 3500,
@@ -38,7 +38,7 @@ const MessData = [
   {
     "messName": "Spice Hub Students Mess",
     "type": "Students",
-    "amenities": "AC",
+    "amenities": [],
     "capacity": 200,
     "vacancy": 0,
     "price": 2500,
@@ -56,7 +56,7 @@ const MessData = [
   {
     "messName": "Royal Tiffin Center",
     "type": "Boys",
-    "amenities": "AC",
+    "amenities": ["Wifi","Geyser"],
     "capacity": 90,
     "vacancy": 12,
     "price": 2600,
@@ -74,7 +74,7 @@ const MessData = [
   {
     "messName": "Annapurna Veg Mess",
     "type": "Family",
-    "amenities": "AC",
+    "amenities": ["AC","Wifi","Geyser"],
     "capacity": 70,
     "vacancy": 8,
     "price": 3200,
@@ -92,7 +92,7 @@ const MessData = [
   {
     "messName": "Campus Cravings Mess",
     "type": "Students",
-    "amenities": "AC",
+    "amenities": [],
     "capacity": 150,
     "vacancy": 22,
     "price": 2400,
@@ -110,7 +110,7 @@ const MessData = [
   {
     "messName": "Shree Krishna Mess",
     "type": "Boys",
-    "amenities": "AC",
+    "amenities": ["Wifi"],
     "capacity": 110,
     "vacancy": 15,
     "price": 2700,
@@ -128,7 +128,7 @@ const MessData = [
   {
     "messName": "Home Delight Mess",
     "type": "Family",
-    "amenities": "AC",
+    "amenities": ["AC","Wifi"],
     "capacity": 60,
     "vacancy": 6,
     "price": 3400,
@@ -146,7 +146,7 @@ const MessData = [
   {
     "messName": "Student Bites Hub",
     "type": "Students",
-    "amenities": "AC",
+    "amenities": ["AC","Wifi"],
     "capacity": 140,
     "vacancy": 20,
     "price": 2300,
@@ -164,7 +164,7 @@ const MessData = [
   {
     "messName": "Sai Prasad Mess",
     "type": "Boys",
-    "amenities": "AC",
+    "amenities": [],
     "capacity": 100,
     "vacancy": 10,
     "price": 2600,
@@ -182,7 +182,7 @@ const MessData = [
   {
     "messName": "Maa Ka Khana",
     "type": "Family",
-    "amenities": "AC",
+    "amenities": ["AC"],
     "capacity": 50,
     "vacancy": 4,
     "price": 3000,
@@ -200,7 +200,7 @@ const MessData = [
   {
     "messName": "Hostel Hunger Stop",
     "type": "Students",
-    "amenities": "AC",
+    "amenities": [],
     "capacity": 160,
     "vacancy": 25,
     "price": 2200,
@@ -218,7 +218,7 @@ const MessData = [
   {
     "messName": "Vaishnav Bhojanalaya",
     "type": "Boys",
-    "amenities": "AC",
+    "amenities": ["Wifi"],
     "capacity": 95,
     "vacancy": 9,
     "price": 2500,
@@ -236,7 +236,7 @@ const MessData = [
   {
     "messName": "Daily Dabba Mess",
     "type": "Students",
-    "amenities": "AC",
+    "amenities": [],
     "capacity": 130,
     "vacancy": 17,
     "price": 2100,
@@ -254,7 +254,7 @@ const MessData = [
   {
     "messName": "Comfort Zone Mess",
     "type": "Family",
-    "amenities": "AC",
+    "amenities": [],
     "capacity": 65,
     "vacancy": 7,
     "price": 3300,

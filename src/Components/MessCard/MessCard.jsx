@@ -10,12 +10,15 @@ const MessCard = (props) => {
 
     return (
 
-        <div className=" my-2 flex flex-col justify-evenly p-3 lg:h-70 md:h-70 h-85 lg:w-60 md:w-60 w-full rounded-2xl bg-white shadow-2xl text-black">
+        <div className=" my-2 flex flex-col justify-evenly p-3 lg:h-70 md:h-70 h-85 lg:w-60 md:w-60 w-full rounded-2xl bg-white shadow-2xl text-black relative ">
             <div className="top p-2  flex justify-between items-center ">
-                <span className='p-0.5 lg:h-7 md:h-7 h-10 lg:w-7 md:w-7  w-10 flex justify-center items-center  font-bold bg-amber-300 rounded-4xl border border-stone-400 object-contain'>{messName.split("")[0]}</span>
-                <span className={` ${vacancy !== 0 ? 'block' : 'hidden'} w-20 px-3 py-1 border font-semibold text-white text-[11px] text-center rounded-2xl bg-red-700 cursor-pointer`}>
+                <span className='p-0.5 lg:h-7 md:h-7 h-10 lg:w-7 md:w-7  w-10 flex justify-center items-center  font-bold bg-amber-300 rounded-4xl '>{messName.split("")[0]}</span>
+                <span className={` ${vacancy !== 0 ? 'block' : 'hidden'} w-20 px-3 py-1  font-semibold text-white text-[11px] text-center  bg-red-700 cursor-pointer absolute top-0 right-0 rounded-bl-2xl rounded-tr-2xl shadow-lg shadow-gray-950/50`}>
                     Vacant
                 </span>
+                {/* <span className={` ${vacancy !== 0 ? 'block' : 'hidden'} w-20 px-3 py-1 border font-semibold text-white text-[11px] text-center rounded-2xl bg-red-700 cursor-pointer`}>
+                    Vacant
+                </span> */}
             </div>
             <div className="center  p-2 pb-2 border-b border-b-gray-300 ">
                 <span className='lg:text-sm md:text-sm text-xl font-semibold line-clamp-1'>{messName}</span>
@@ -23,7 +26,11 @@ const MessCard = (props) => {
                 {/* <h3 className=' font-bold text-sm'>Vacant : {vacancy}</h3> */}
                 <div className="mt-2 tag flex text-[9px] gap-2 text-center">
                     <span className='bg-gray-300 py-1 px-2 rounded-xl'>{type}</span>
-                    <span className='bg-gray-300 py-1 px-2 rounded-xl'>{amenities}</span>
+                    <div className='flex items-center gap-1'>
+                        {amenities.map((amenity, index) => (
+                             <span className='bg-gray-300 py-1 px-2 rounded-xl'>{amenity}</span>
+                        ))}
+                    </div>
                 </div>
                 <div className='flex flex-col pt-2 '>
                     <span className='font-semibold lg:text-sm  md:text-sm'>{price}/-</span>
