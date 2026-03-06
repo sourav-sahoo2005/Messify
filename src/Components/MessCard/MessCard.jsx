@@ -16,7 +16,7 @@ const MessCard = (props) => {
                 <span className='p-0.5 lg:h-7 md:h-7 h-10 lg:w-7 md:w-7  w-10 flex justify-center items-center text-white  font-bold  rounded-4xl ' style={{
                     backgroundColor: `hsl(${Math.random() * 360}, 80%,40%)`,
                 }}  >{messName.split("")[0]}</span>
-                <span className={` ${vacancy !== 0 ? 'block' : 'hidden'} w-20 px-3 py-1  font-semibold text-white text-[11px] text-center  bg-red-700 cursor-pointer absolute top-0 right-0 rounded-bl-2xl rounded-tr-2xl shadow-lg shadow-gray-950/50`}>
+                <span className={` ${vacancy !== 0 ? 'block' : 'hidden'} w-20 px-3 py-1  font-semibold text-white text-[11px] text-center  bg-red-700 cursor-pointer absolute top-0 right-0 rounded-bl-2xl rounded-tr-2xl shadow-lg shadow-gray-950/50 `}>
                     Vacant
                 </span>
 
@@ -44,8 +44,11 @@ const MessCard = (props) => {
                 <button className='lg:text-[10px] md:text-[10px] text-sm w-1/2 bg-amber-600 text-white px-2 lg:py-2 md:py-2 py-3 rounded text-center cursor-pointer '>Contact Now</button>
             </div>
 
-           
+
+
         </div>
+
+
     )
 }
 
