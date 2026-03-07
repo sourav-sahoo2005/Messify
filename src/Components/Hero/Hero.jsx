@@ -1,13 +1,11 @@
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { Link } from 'react-router';
-import './Hero.css'
-import HeroIntro from '../HeroIntro/HeroIntro';
-import HMW from '../HMW/HMW';
-import PowerfulFeature from '../PowerfulFeature/PowerfulFeature';
-import Cities from '../Cities/Cities';
-import Testimonials from '../Testimonials/Testimonials';
-import CTA from '../CTA/CTA';
+import HeroIntro from './HeroIntro';
+import PowerfulFeature from './PowerfulFeature';
+import Cities from './Cities';
+import Testimonials from './Testimonials';
+import CTA from './CTA';
 
 const Hero = () => {
 
@@ -62,6 +60,7 @@ const Hero = () => {
       
       <PowerfulFeature/>
       <Cities/>
+      
       <Testimonials/>
       <CTA/>
     </div>
