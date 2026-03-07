@@ -1,6 +1,6 @@
 import React from 'react'
 import MessData from './FindMessData';
-import MessCard from '../MessCard/MessCard';
+import MessCard from './MessCard';
 import { Link } from 'react-router'
 
 const FindMess = () => {

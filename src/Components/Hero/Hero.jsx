@@ -60,7 +60,6 @@ const Hero = () => {
       
       <PowerfulFeature/>
       <Cities/>
-      
       <Testimonials/>
       <CTA/>
     </div>
