@@ -11,7 +11,7 @@ const MessCard = (props) => {
 
     return (
 
-        <div className=" my-2 flex flex-col justify-evenly p-3 lg:h-70 md:h-70 h-85 lg:w-60 md:w-60 w-full rounded-2xl bg-white shadow-2xl text-black relative ">
+        <div className=" my-2 flex flex-col justify-evenly p-3 lg:h-65 md:h-70 h-85 lg:w-60 md:w-60 w-80 rounded-2xl bg-white shadow-2xl text-black relative hover:scale-105 transition-transform duration-200  ">
             <div className="top p-2  flex justify-between items-center ">
                 <span className='p-0.5 lg:h-7 md:h-7 h-10 lg:w-7 md:w-7  w-10 flex justify-center items-center text-white  font-bold  rounded-4xl ' style={{
                     backgroundColor: `hsl(${Math.random() * 360}, 80%,40%)`,
@@ -29,7 +29,7 @@ const MessCard = (props) => {
                     <span className='bg-gray-300 py-1 px-2 rounded-xl'>{type}</span>
                     <div className='flex items-center gap-1'>
                         {amenities.map((amenity, index) => (
-                            <span className='bg-gray-300 py-1 px-2 rounded-xl'>{amenity}</span>
+                            <span key={index} className='bg-gray-300 py-1 px-2 rounded-xl'>{amenity}</span>
                         ))}
                     </div>
                 </div>

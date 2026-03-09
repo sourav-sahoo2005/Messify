@@ -1,274 +1,61 @@
-const MessData = [
-  {
-    "messName": "Sunrise Boys Mess",
-    "type": "Boys",
-    "amenities": ["Wifi"],
-    "capacity": 120,
-    "vacancy": 18,
-    "price": 2800,
-    "owner": {
-      "name": "Ramesh Kumar",
-      "phone": "9876543210",
-      "email": "sunrisemess@gmail.com"
-    },
-    "location": {
-      "area": "Station Road",
-      "city": "Balasore",
-      "state": "Odisha"
-    }
-  },
-  {
-    "messName": "Green Leaf Family Mess",
-    "type": "Family",
-    "amenities": ["AC","Geyser"],
-    "capacity": 80,
-    "vacancy": 5,
-    "price": 3500,
-    "owner": {
-      "name": "Anita Sharma",
-      "phone": "9123456789",
-      "email": "greenleafmess@gmail.com"
-    },
-    "location": {
-      "area": "Takatpur",
-      "city": "Baripada",
-      "state": "Odisha"
-    }
-  },
-  {
-    "messName": "Spice Hub Students Mess",
-    "type": "Students",
-    "amenities": [],
-    "capacity": 200,
-    "vacancy": 0,
-    "price": 2500,
-    "owner": {
-      "name": "Mohammed Irfan",
-      "phone": "9988776655",
-      "email": "spicehub@gmail.com"
-    },
-    "location": {
-      "area": "Charampa",
-      "city": "Bhadrak",
-      "state": "Odisha"
-    }
-  },
-  {
-    "messName": "Royal Tiffin Center",
-    "type": "Boys",
-    "amenities": ["Wifi","Geyser"],
-    "capacity": 90,
-    "vacancy": 12,
-    "price": 2600,
-    "owner": {
-      "name": "Suresh Patel",
-      "phone": "9012345678",
-      "email": "royaltiffin@gmail.com"
-    },
-    "location": {
-      "area": "Patia",
-      "city": "Bhubaneswar",
-      "state": "Odisha"
-    }
-  },
-  {
-    "messName": "Annapurna Veg Mess",
-    "type": "Family",
-    "amenities": ["AC","Wifi","Geyser"],
-    "capacity": 70,
-    "vacancy": 8,
-    "price": 3200,
-    "owner": {
-      "name": "Meena Joshi",
-      "phone": "9345678123",
-      "email": "annapurnamess@gmail.com"
-    },
-    "location": {
-      "area": "College Square",
-      "city": "Cuttack",
-      "state": "Odisha"
-    }
-  },
-  {
-    "messName": "Campus Cravings Mess",
-    "type": "Students",
-    "amenities": [],
-    "capacity": 150,
-    "vacancy": 22,
-    "price": 2400,
-    "owner": {
-      "name": "Rahul Verma",
-      "phone": "9823456712",
-      "email": "campuscravings@gmail.com"
-    },
-    "location": {
-      "area": "Grand Road",
-      "city": "Puri",
-      "state": "Odisha"
-    }
-  },
-  {
-    "messName": "Shree Krishna Mess",
-    "type": "Boys",
-    "amenities": ["Wifi"],
-    "capacity": 110,
-    "vacancy": 15,
-    "price": 2700,
-    "owner": {
-      "name": "Vijay Mishra",
-      "phone": "9898989898",
-      "email": "shreekrishna@gmail.com"
-    },
-    "location": {
-      "area": "Remuna",
-      "city": "Balasore",
-      "state": "Odisha"
-    }
-  },
-  {
-    "messName": "Home Delight Mess",
-    "type": "Family",
-    "amenities": ["AC","Wifi"],
-    "capacity": 60,
-    "vacancy": 6,
-    "price": 3400,
-    "owner": {
-      "name": "Neha Kapoor",
-      "phone": "9765432189",
-      "email": "homedelight@gmail.com"
-    },
-    "location": {
-      "area": "Baripada Town",
-      "city": "Baripada",
-      "state": "Odisha"
-    }
-  },
-  {
-    "messName": "Student Bites Hub",
-    "type": "Students",
-    "amenities": ["AC","Wifi"],
-    "capacity": 140,
-    "vacancy": 20,
-    "price": 2300,
-    "owner": {
-      "name": "Arjun Reddy",
-      "phone": "9955332211",
-      "email": "studentbites@gmail.com"
-    },
-    "location": {
-      "area": "Bhadrak Bypass",
-      "city": "Bhadrak",
-      "state": "Odisha"
-    }
-  },
-  {
-    "messName": "Sai Prasad Mess",
-    "type": "Boys",
-    "amenities": [],
-    "capacity": 100,
-    "vacancy": 10,
-    "price": 2600,
-    "owner": {
-      "name": "Mahesh Patil",
-      "phone": "9870012345",
-      "email": "saiprasad@gmail.com"
-    },
-    "location": {
-      "area": "Khandagiri",
-      "city": "Bhubaneswar",
-      "state": "Odisha"
-    }
-  },
-  {
-    "messName": "Maa Ka Khana",
-    "type": "Family",
-    "amenities": ["AC"],
-    "capacity": 50,
-    "vacancy": 4,
-    "price": 3000,
-    "owner": {
-      "name": "Sunita Devi",
-      "phone": "9311122233",
-      "email": "maakakhana@gmail.com"
-    },
-    "location": {
-      "area": "Badambadi",
-      "city": "Cuttack",
-      "state": "Odisha"
-    }
-  },
-  {
-    "messName": "Hostel Hunger Stop",
-    "type": "Students",
-    "amenities": [],
-    "capacity": 160,
-    "vacancy": 25,
-    "price": 2200,
-    "owner": {
-      "name": "Amit Singh",
-      "phone": "9090909090",
-      "email": "hostelhunger@gmail.com"
-    },
-    "location": {
-      "area": "Sea Beach Road",
-      "city": "Puri",
-      "state": "Odisha"
-    }
-  },
-  {
-    "messName": "Vaishnav Bhojanalaya",
-    "type": "Boys",
-    "amenities": ["Wifi"],
-    "capacity": 95,
-    "vacancy": 9,
-    "price": 2500,
-    "owner": {
-      "name": "Kailash Sharma",
-      "phone": "9887766554",
-      "email": "vaishnav@gmail.com"
-    },
-    "location": {
-      "area": "Motiganj",
-      "city": "Balasore",
-      "state": "Odisha"
-    }
-  },
-  {
-    "messName": "Daily Dabba Mess",
-    "type": "Students",
-    "amenities": [],
-    "capacity": 130,
-    "vacancy": 17,
-    "price": 2100,
-    "owner": {
-      "name": "Rohit Malhotra",
-      "phone": "9812345670",
-      "email": "dailydabba@gmail.com"
-    },
-    "location": {
-      "area": "Baripada Market",
-      "city": "Baripada",
-      "state": "Odisha"
-    }
-  },
-  {
-    "messName": "Comfort Zone Mess",
-    "type": "Family",
-    "amenities": [],
-    "capacity": 65,
-    "vacancy": 7,
-    "price": 3300,
-    "owner": {
-      "name": "Pooja Nair",
-      "phone": "9445566778",
-      "email": "comfortzone@gmail.com"
-    },
-    "location": {
-      "area": "Old Town",
-      "city": "Bhubaneswar",
-      "state": "Odisha"
-    }
-  }
-]
+
+
+const MessData =
+  [
+    { "messName": "Green Leaf Mess", "type": "Boys", "amenities": ["WIFI", "Geyser"], "capacity": 50, "vacancy": 6, "price": 1500, "owner": { "name": "Ramesh Kumar", "phone": "9876543210", "email": "greenleaf@gmail.com" }, "location": { "area": "Saheed Nagar", "city": "Bhubaneswar", "state": "Odisha" } },
+    { "messName": "Sunrise Stay Mess", "type": "Girls", "amenities": ["AC", "WIFI"], "capacity": 40, "vacancy": 5, "price": 2200, "owner": { "name": "Anita Das", "phone": "9123456780", "email": "sunrise@gmail.com" }, "location": { "area": "Patia", "city": "Bhubaneswar", "state": "Odisha" } },
+    { "messName": "Blue Sky Mess", "type": "Boys", "amenities": ["WIFI"], "capacity": 35, "vacancy": 4, "price": 1300, "owner": { "name": "Sanjay Mishra", "phone": "9988776655", "email": "bluesky@gmail.com" }, "location": { "area": "Chandini Chowk", "city": "Cuttack", "state": "Odisha" } },
+    { "messName": "Royal Comfort Mess", "type": "Family", "amenities": ["AC", "WIFI", "Geyser"], "capacity": 70, "vacancy": 10, "price": 3200, "owner": { "name": "Rahul Sharma", "phone": "9345678901", "email": "royalcomfort@gmail.com" }, "location": { "area": "Badambadi", "city": "Cuttack", "state": "Odisha" } },
+    { "messName": "Ocean Breeze Mess", "type": "Working Professionals", "amenities": ["AC", "WIFI"], "capacity": 45, "vacancy": 8, "price": 2800, "owner": { "name": "Deepak Singh", "phone": "9556677889", "email": "oceanbreeze@gmail.com" }, "location": { "area": "Sea Beach Road", "city": "Puri", "state": "Odisha" } },
+
+    { "messName": "Student Hub Mess", "type": "Boys", "amenities": ["WIFI", "Geyser"], "capacity": 60, "vacancy": 12, "price": 1700, "owner": { "name": "Amit Nayak", "phone": "9887766554", "email": "studenthub@gmail.com" }, "location": { "area": "Remuna", "city": "Balasore", "state": "Odisha" } },
+    { "messName": "Happy Home Mess", "type": "Family", "amenities": ["AC", "Geyser"], "capacity": 55, "vacancy": 6, "price": 3000, "owner": { "name": "Pooja Singh", "phone": "9765432109", "email": "happyhome@gmail.com" }, "location": { "area": "Station Road", "city": "Bhadrak", "state": "Odisha" } },
+    { "messName": "Silver Nest Mess", "type": "Girls", "amenities": ["WIFI"], "capacity": 30, "vacancy": 3, "price": 1400, "owner": { "name": "Neha Patra", "phone": "9654321876", "email": "silvernest@gmail.com" }, "location": { "area": "Laxmi Talkies", "city": "Berhampur", "state": "Odisha" } },
+    { "messName": "Golden Stay Mess", "type": "Working Professionals", "amenities": ["AC", "WIFI"], "capacity": 48, "vacancy": 7, "price": 2600, "owner": { "name": "Vikram Reddy", "phone": "9543216789", "email": "goldenstay@gmail.com" }, "location": { "area": "Kharvel Nagar", "city": "Bhubaneswar", "state": "Odisha" } },
+    { "messName": "Peaceful Corner Mess", "type": "Boys", "amenities": ["WIFI", "Geyser"], "capacity": 38, "vacancy": 5, "price": 1600, "owner": { "name": "Arun Das", "phone": "9456123789", "email": "peacefulcorner@gmail.com" }, "location": { "area": "Link Road", "city": "Cuttack", "state": "Odisha" } },
+
+    { "messName": "Urban Comfort Mess", "type": "Working Professionals", "amenities": ["AC", "WIFI", "Geyser"], "capacity": 52, "vacancy": 9, "price": 2900, "owner": { "name": "Rajiv Menon", "phone": "9334455667", "email": "urbancomfort@gmail.com" }, "location": { "area": "Patrapada", "city": "Bhubaneswar", "state": "Odisha" } },
+    { "messName": "Metro Stay Mess", "type": "Girls", "amenities": ["AC", "WIFI"], "capacity": 36, "vacancy": 4, "price": 2100, "owner": { "name": "Sonalika Das", "phone": "9122334455", "email": "metrostay@gmail.com" }, "location": { "area": "Acharya Vihar", "city": "Bhubaneswar", "state": "Odisha" } },
+    { "messName": "City Light Mess", "type": "Boys", "amenities": ["WIFI"], "capacity": 42, "vacancy": 6, "price": 1500, "owner": { "name": "Kunal Sharma", "phone": "9988445566", "email": "citylight@gmail.com" }, "location": { "area": "Madhupatna", "city": "Cuttack", "state": "Odisha" } },
+    { "messName": "Comfort Nest Mess", "type": "Family", "amenities": ["AC", "Geyser"], "capacity": 60, "vacancy": 11, "price": 3100, "owner": { "name": "Priya Nair", "phone": "9345678123", "email": "comfortnest@gmail.com" }, "location": { "area": "Dolamandap", "city": "Puri", "state": "Odisha" } },
+    { "messName": "Smart Living Mess", "type": "Working Professionals", "amenities": ["AC", "WIFI"], "capacity": 44, "vacancy": 6, "price": 2700, "owner": { "name": "Naveen Das", "phone": "9234567810", "email": "smartliving@gmail.com" }, "location": { "area": "Baramunda", "city": "Bhubaneswar", "state": "Odisha" } },
+
+    { "messName": "Lake View Mess", "type": "Girls", "amenities": ["WIFI", "Geyser"], "capacity": 34, "vacancy": 5, "price": 1800, "owner": { "name": "Ritika Singh", "phone": "9456677812", "email": "lakeview@gmail.com" }, "location": { "area": "Tulasipur", "city": "Cuttack", "state": "Odisha" } },
+    { "messName": "Elite Stay Mess", "type": "Family", "amenities": ["AC", "WIFI"], "capacity": 58, "vacancy": 9, "price": 3400, "owner": { "name": "Karthik Iyer", "phone": "9766554433", "email": "elitestay@gmail.com" }, "location": { "area": "Jaydev Vihar", "city": "Bhubaneswar", "state": "Odisha" } },
+    { "messName": "Bright Future Mess", "type": "Boys", "amenities": ["WIFI"], "capacity": 40, "vacancy": 7, "price": 1400, "owner": { "name": "Manoj Das", "phone": "9123445566", "email": "brightfuture@gmail.com" }, "location": { "area": "Old Bus Stand", "city": "Baripada", "state": "Odisha" } },
+    { "messName": "Relax Stay Mess", "type": "Working Professionals", "amenities": ["AC", "WIFI", "Geyser"], "capacity": 50, "vacancy": 8, "price": 3000, "owner": { "name": "Arvind Rao", "phone": "9871234560", "email": "relaxstay@gmail.com" }, "location": { "area": "Sahid Nagar", "city": "Bhubaneswar", "state": "Odisha" } },
+    { "messName": "Comfort Stay Mess", "type": "Girls", "amenities": ["AC", "WIFI"], "capacity": 33, "vacancy": 4, "price": 2000, "owner": { "name": "Meera Patel", "phone": "9445566001", "email": "comfortstay@gmail.com" }, "location": { "area": "Buxi Bazaar", "city": "Cuttack", "state": "Odisha" } },
+
+    { "messName": "City Nest Mess", "type": "Boys", "amenities": ["WIFI", "Geyser"], "capacity": 46, "vacancy": 6, "price": 1650, "owner": { "name": "Prakash Nayak", "phone": "9881234567", "email": "citynest@gmail.com" }, "location": { "area": "Kalpana Square", "city": "Bhubaneswar", "state": "Odisha" } },
+    { "messName": "Ocean View Mess", "type": "Family", "amenities": ["AC", "WIFI"], "capacity": 62, "vacancy": 10, "price": 3300, "owner": { "name": "Suresh Patra", "phone": "9778899001", "email": "oceanview@gmail.com" }, "location": { "area": "Marine Drive", "city": "Puri", "state": "Odisha" } },
+    { "messName": "Happy Stay Mess", "type": "Girls", "amenities": ["WIFI"], "capacity": 28, "vacancy": 3, "price": 1350, "owner": { "name": "Lina Mohanty", "phone": "9432109876", "email": "happystay@gmail.com" }, "location": { "area": "Unit 4", "city": "Bhubaneswar", "state": "Odisha" } },
+    { "messName": "Budget Boys Mess", "type": "Boys", "amenities": ["WIFI"], "capacity": 48, "vacancy": 9, "price": 1200, "owner": { "name": "Sandeep Rout", "phone": "9874501236", "email": "budgetboys@gmail.com" }, "location": { "area": "College Square", "city": "Cuttack", "state": "Odisha" } },
+    { "messName": "Royal Family Mess", "type": "Family", "amenities": ["AC", "WIFI", "Geyser"], "capacity": 70, "vacancy": 13, "price": 3500, "owner": { "name": "Rituparna Das", "phone": "9123498765", "email": "royalfamily@gmail.com" }, "location": { "area": "Khandagiri", "city": "Bhubaneswar", "state": "Odisha" } },
+
+    { "messName": "Elite Boys Mess", "type": "Boys", "amenities": ["WIFI", "Geyser"], "capacity": 45, "vacancy": 7, "price": 1700, "owner": { "name": "Anil Patnaik", "phone": "9333345678", "email": "eliteboys@gmail.com" }, "location": { "area": "Rasulgarh", "city": "Bhubaneswar", "state": "Odisha" } },
+    { "messName": "Peace Nest Mess", "type": "Girls", "amenities": ["AC", "WIFI"], "capacity": 38, "vacancy": 4, "price": 2100, "owner": { "name": "Priyanka Sahu", "phone": "9888899123", "email": "peacenest@gmail.com" }, "location": { "area": "Badambadi", "city": "Cuttack", "state": "Odisha" } },
+    { "messName": "Comfort Palace Mess", "type": "Family", "amenities": ["AC", "WIFI"], "capacity": 65, "vacancy": 9, "price": 3200, "owner": { "name": "Kishore Babu", "phone": "9000012345", "email": "comfortpalace@gmail.com" }, "location": { "area": "Grand Road", "city": "Puri", "state": "Odisha" } },
+    { "messName": "Youth Hub Mess", "type": "Working Professionals", "amenities": ["AC", "WIFI", "Geyser"], "capacity": 50, "vacancy": 6, "price": 2800, "owner": { "name": "Rahul Das", "phone": "9898981234", "email": "youthhub@gmail.com" }, "location": { "area": "Patia", "city": "Bhubaneswar", "state": "Odisha" } },
+    { "messName": "Modern Living Mess", "type": "Working Professionals", "amenities": ["AC", "WIFI"], "capacity": 48, "vacancy": 8, "price": 2600, "owner": { "name": "Anupam Sen", "phone": "9777712345", "email": "modernliving@gmail.com" }, "location": { "area": "IRC Village", "city": "Bhubaneswar", "state": "Odisha" } },
+
+    { "messName": "Smart Nest Mess", "type": "Girls", "amenities": ["WIFI", "Geyser"], "capacity": 36, "vacancy": 5, "price": 1900, "owner": { "name": "Divya Nair", "phone": "9666612345", "email": "smartnest@gmail.com" }, "location": { "area": "Old Town", "city": "Bhubaneswar", "state": "Odisha" } },
+    { "messName": "Student Paradise Mess", "type": "Boys", "amenities": ["WIFI"], "capacity": 55, "vacancy": 11, "price": 1500, "owner": { "name": "Bikram Rout", "phone": "9555512345", "email": "studentparadise@gmail.com" }, "location": { "area": "Remuna", "city": "Balasore", "state": "Odisha" } },
+    { "messName": "Royal Comfort Stay", "type": "Family", "amenities": ["AC", "WIFI", "Geyser"], "capacity": 68, "vacancy": 10, "price": 3400, "owner": { "name": "Nikhil Sharma", "phone": "9444412345", "email": "royalcomfortstay@gmail.com" }, "location": { "area": "Jaydev Vihar", "city": "Bhubaneswar", "state": "Odisha" } },
+    { "messName": "Peaceful Living Mess", "type": "Working Professionals", "amenities": ["AC", "WIFI"], "capacity": 42, "vacancy": 7, "price": 2500, "owner": { "name": "Sourav Mohanty", "phone": "9333312345", "email": "peacefulliving@gmail.com" }, "location": { "area": "Chandrasekharpur", "city": "Bhubaneswar", "state": "Odisha" } },
+    { "messName": "Golden Nest Mess", "type": "Girls", "amenities": ["AC", "WIFI"], "capacity": 37, "vacancy": 6, "price": 2200, "owner": { "name": "Ankita Das", "phone": "9222212345", "email": "goldennest@gmail.com" }, "location": { "area": "Baramunda", "city": "Bhubaneswar", "state": "Odisha" } },
+
+    { "messName": "City Comfort Mess", "type": "Working Professionals", "amenities": ["AC", "WIFI"], "capacity": 44, "vacancy": 7, "price": 2700, "owner": { "name": "Rajat Sharma", "phone": "9111112345", "email": "citycomfort@gmail.com" }, "location": { "area": "Unit 9", "city": "Bhubaneswar", "state": "Odisha" } },
+    { "messName": "Silver Comfort Mess", "type": "Family", "amenities": ["AC", "WIFI"], "capacity": 60, "vacancy": 9, "price": 3100, "owner": { "name": "Suman Patra", "phone": "9009912345", "email": "silvercomfort@gmail.com" }, "location": { "area": "Station Road", "city": "Bhadrak", "state": "Odisha" } },
+    { "messName": "Bright Stay Mess", "type": "Boys", "amenities": ["WIFI"], "capacity": 40, "vacancy": 8, "price": 1400, "owner": { "name": "Rohit Nayak", "phone": "8999912345", "email": "brightstay@gmail.com" }, "location": { "area": "Link Road", "city": "Cuttack", "state": "Odisha" } },
+    { "messName": "Urban Nest Mess", "type": "Girls", "amenities": ["AC", "WIFI"], "capacity": 34, "vacancy": 4, "price": 2100, "owner": { "name": "Lipi Sahu", "phone": "8888812345", "email": "urbannest@gmail.com" }, "location": { "area": "Patrapada", "city": "Bhubaneswar", "state": "Odisha" } },
+    { "messName": "Modern Comfort Mess", "type": "Working Professionals", "amenities": ["AC", "WIFI", "Geyser"], "capacity": 52, "vacancy": 9, "price": 2900, "owner": { "name": "Ajay Kumar", "phone": "8777712345", "email": "moderncomfort@gmail.com" }, "location": { "area": "Khandagiri", "city": "Bhubaneswar", "state": "Odisha" } },
+
+    { "messName": "Elite Comfort Mess", "type": "Family", "amenities": ["AC", "WIFI"], "capacity": 63, "vacancy": 8, "price": 3300, "owner": { "name": "Deepa Nair", "phone": "8666612345", "email": "elitecomfort@gmail.com" }, "location": { "area": "Dolamandap", "city": "Puri", "state": "Odisha" } },
+    { "messName": "Student Comfort Mess", "type": "Boys", "amenities": ["WIFI"], "capacity": 47, "vacancy": 6, "price": 1500, "owner": { "name": "Subham Rout", "phone": "8555512345", "email": "studentcomfort@gmail.com" }, "location": { "area": "College Square", "city": "Cuttack", "state": "Odisha" } },
+    { "messName": "Happy Nest Mess", "type": "Girls", "amenities": ["AC", "WIFI"], "capacity": 32, "vacancy": 5, "price": 2000, "owner": { "name": "Mitali Das", "phone": "8444412345", "email": "happynest@gmail.com" }, "location": { "area": "Patia", "city": "Bhubaneswar", "state": "Odisha" } },
+    { "messName": "Urban Stay Mess", "type": "Working Professionals", "amenities": ["AC", "WIFI"], "capacity": 46, "vacancy": 7, "price": 2600, "owner": { "name": "Siddharth Sen", "phone": "8333312345", "email": "urbanstay@gmail.com" }, "location": { "area": "Jaydev Vihar", "city": "Bhubaneswar", "state": "Odisha" } },
+    { "messName": "Comfort Zone Mess", "type": "Family", "amenities": ["AC", "WIFI", "Geyser"], "capacity": 65, "vacancy": 7, "price": 3300, "owner": { "name": "Pooja Nair", "phone": "9445566778", "email": "comfortzone@gmail.com" }, "location": { "area": "Old Town", "city": "Bhubaneswar", "state": "Odisha" } }
+
+  ]
 
 export default MessData;
