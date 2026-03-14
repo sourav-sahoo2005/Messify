@@ -4,6 +4,7 @@ import MessCard from './MessCard';
 import { useState } from 'react';
 import SearchForm from './SearchForm';
 import FilterForm from './FilterForm';
+import ContactPopup from './ContactPopup';
 
 
 const FindMess = () => {
@@ -150,7 +151,7 @@ const FindMess = () => {
 
 
   return (
-    <div className="min-h-screen w-full lg:pt-30 pt-25 lg:p-10 p-5 mb-5">
+    <div className="min-h-screen w-full lg:pt-30 pt-25 lg:p-10 md:p-5 mb-5">
 
       <button onClick={openSearch} className=' lg:hidden md:hidden h-10 w-10 flex justify-center items-center bg-amber-700 rounded-full fixed z-100 right-9 cursor-pointer'>
         <img
@@ -183,24 +184,25 @@ const FindMess = () => {
         {/* Mess Card Section */}
         <div className="lg:ml-3 flex-1 sticky top-24">
 
-          <div className="rounded p-5 bg-zinc-900 ">
+          <div className="rounded lg:p-5 md:p-5 bg-zinc-900 ">
 
             <h1 className="text-xl px-7 py-2 font-semibold">
               <span className="text-amber-400">({newData.length})</span> Results Found
             </h1>
 
             {/* Cards */}
-            <div className="flex  flex-wrap justify-center items-center lg:gap-5 gap-3 overflow-y-auto  h-[calc(100vh-8rem)]   py-15 scrollbar-hidden scrollbar-thin [mask-image:linear-gradient(to_bottom,transparent,black_15%,black_85%,transparent)] 
+            <div className="flex  flex-wrap justify-center items-center lg:gap-5 gap-3 overflow-y-auto  h-[calc(100vh-8rem)]   py-15 scrollbar-hidden scrollbar-thin mask-[linear-gradient(to_bottom,transparent,black_15%,black_85%,transparent)] 
   [-webkit-mask-image:linear-gradient(to_bottom,transparent,black_15%,black_75%,transparent)]">
 
               {newData.map((data, idx) => (
-                <MessCard key={data.messName || idx} data={data} />
+                <MessCard key={data.messName || idx} data={data} id={idx} />
               ))}
 
             </div>
           </div>
         </div>
       </div>
+      <ContactPopup/>
     </div>
 
   )

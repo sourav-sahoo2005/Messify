@@ -10,6 +10,7 @@ import Footer from './Components/Footer/Footer'
 import ScrollTop from './Components/ScrollTop/ScrollTop'
 import Loading from './Components/Loding/Loding'
 import FindMess from './Components/FindMess/FindMess'
+import MessDetails from './Components/MessDetails/MessDetails'
 
 
 const App = () => {
@@ -45,6 +46,7 @@ const App = () => {
         <Route path='/faq' element={<Faq />} />
         <Route path='/login' element={<Login />} />
         <Route path='/search' element={<FindMess />} />
+        <Route path='/mess/:id' element={<MessDetails />} />
 
       </Routes >
       <Footer />
