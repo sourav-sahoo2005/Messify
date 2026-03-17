@@ -48,7 +48,7 @@ const Login = () => {
                     {/* Forms */}
                     <div className="forms">
                         {/* Login Form */}
-                        <form className="form login-form ">
+                        <form className="form login-form "  action={"/owner/login"} method='POST'>
                             <h2>Mess Owner Login</h2>
                             <input type="email" placeholder="User Id" required className='w-full p-3 mb-3.75 rounded-md border border-[#ccc] text-sm' />
                             <input type="password" placeholder="Password" required className='w-full p-3 mb-3.75 rounded-md border border-[#ccc] text-sm' />
@@ -57,7 +57,7 @@ const Login = () => {
                         </form>
 
                         {/* Registration Form */}
-                        <form className="form register-form">
+                        <form className="form register-form"  action={"/owner/registation"} method='POST'>
                             <h2>Owner Registration</h2>
                             <h3 className='p-2 pl-5 mb-2 rounded-full bg-zinc-300'>Personal Details</h3>
                             <div className='flex items-center justify-between   flex-wrap p-5'>

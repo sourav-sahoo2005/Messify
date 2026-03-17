@@ -25,7 +25,7 @@ const CTA = () => {
           </Link>
 
           <Link
-            to="/owner/register"
+            to="/login"
             className="px-8 py-3 border-2 border-black rounded-lg hover:bg-black hover:text-white transition"
           >
             Register Your Mess
