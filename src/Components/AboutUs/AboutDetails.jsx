@@ -27,7 +27,7 @@ const AboutDetails = () => {
     return (
          <section
       ref={sectionRef}
-      className="w-full min-h-screen  text-white px-8 py-20 flex flex-col items-center gap-10 backdrop-blur-2xl bg-transparent"
+      className="w-full h-auto text-white px-8 py-20 flex flex-col items-center gap-10 backdrop-blur-2xl bg-transparent"
     >
 
       {/* Heading */}
