@@ -1,10 +1,12 @@
-import React from 'react';
+import {React,useState} from 'react';
 import { useForm } from "react-hook-form";
+import Loding from '../Loding/Loding';
 import './Login.css';
 
 const Login = () => {
-    // 1. Initialize with default values (important for checkboxes and selects)
-   // 1. Separate instance for Login
+    
+    const [loding,setLoding] = useState(false);
+    // 1. Separate instance for Login
     const {
         register: registerLogin,
         handleSubmit: handleSubmitLogin,
@@ -20,20 +22,72 @@ const Login = () => {
         defaultValues: { amenities: [] }
     });
 
-    const handleLoginFormSubmit = (data) => {
-        console.log("Login Data:", data);
+
+
+
+    //Send The Login Data To The Back-end
+
+    const handleLoginFormSubmit = async (data) => {
+        console.log(data);
+
+        try {
+            setLoding(true)
+            const response = await fetch('http://localhost:5000/owner/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data),
+            });
+            const resData = await response.json();
+
+            console.log("Response Data :", resData);
+            setLoding(false);
+        } catch (e) {
+            console.error("This is not JSON! It's likely an HTML error page.");
+        }
     };
 
-    // 2. REMOVED data.preventDefault() - RHF handles this automatically.
-    const handleRegisterFormSubmit = (data) => {
-        console.log("Registration Data:", data);
+
+    //send the registration data to the back-end
+
+    const handleRegisterFormSubmit = async (data) => {
+        try {
+            setLoding(true)
+            const response = await fetch('http://localhost:5000/owner/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data),
+            });
+            const resData = await response.json();
+
+            console.log("Response Data :", resData);
+            setLoding(false);
+        } catch (e) {
+            console.error("This is not JSON! It's likely an HTML error page.");
+        }
     };
 
 
+
+    if (loding) {
+        return (
+          <div className="h-screen flex justify-center items-center bg-black">
+            {/* <h1 className="text-white text-3xl">Loading...</h1> */}
+            <Loding/>
+          </div>
+        );
+      }
 
 
 
     return (
+        
+        
+
+
         <div className='bg-[url(../Images/default-bg.jpg)] bg-cover bg-center w-full h-screen top-0 left-0'>
             <div className='p-5 h-screen w-full bg-black/70 flex justify-center items-center'>
                 <div className="container">
