@@ -10,14 +10,18 @@ const Login = () => {
     const {
         register: registerLogin,
         handleSubmit: handleSubmitLogin,
-        formState: { errors: loginErrors },
+        formState: {
+            errors: loginErrors,
+        },
     } = useForm();
 
     // 2. Separate instance for Registration
     const {
         register: registerRegister,
         handleSubmit: handleSubmitRegister,
-        formState: { errors: registerErrors },
+        formState: {
+            errors: registerErrors,
+        },
     } = useForm({
         defaultValues: { amenities: [] }
     });
@@ -85,9 +89,6 @@ const Login = () => {
 
     return (
 
-
-
-
         <div className='bg-[url(../Images/default-bg.jpg)] bg-cover bg-center w-full h-screen top-0 left-0'>
             <div className='p-5 h-screen w-full bg-black/70 flex justify-center items-center'>
                 <div className="container">
@@ -106,13 +107,13 @@ const Login = () => {
                             <input type="text" placeholder="User Id"
                                 {...registerLogin("userid", {
                                     required: {
-                                            value: true,
-                                            message: "User Id is required"
-                                        },
-                                         pattern: {
-                                            value: /^[a-zA-Z0-9]+$/,
-                                            message: "User ID must be alphanumeric whitout spaces EX:user123"
-                                        }
+                                        value: true,
+                                        message: "User Id is required"
+                                    },
+                                    pattern: {
+                                        value: /^[a-zA-Z0-9]+$/,
+                                        message: "User ID must be alphanumeric whitout spaces EX:user123"
+                                    }
 
                                 })} className='w-full p-3  rounded-md border border-[#ccc] text-sm' />
                             {loginErrors.userid && <span className='error-text'>{loginErrors.userid.message}</span>}
@@ -120,9 +121,9 @@ const Login = () => {
                             <input type="password" placeholder="Password"
                                 {...registerLogin("password", {
                                     required: {
-                                            value: true,
-                                            message: "Password  is required"
-                                        }
+                                        value: true,
+                                        message: "Password  is required"
+                                    }
 
                                 })} className='w-full p-3 mt-3.75 rounded-md border border-[#ccc] text-sm' />
                             {loginErrors.password && <span className='error-text'>Password is required</span>}
@@ -352,6 +353,10 @@ const Login = () => {
                                         maxLength: {
                                             value: 6,
                                             message: "PIN must be 6 digits"
+                                        },
+                                        pattern: {
+                                            value: /^[0-9]{6}$/,
+                                            message: "PIN code must be exactly 6 digits"
                                         }
                                     })}
                                     placeholder="PIN Code" className='input-field' />
@@ -368,7 +373,7 @@ const Login = () => {
                                         },
                                         pattern: {
                                             value: /^[a-zA-Z0-9]+$/,
-                                            message: "User ID must be alphanumeric whitout spaces EX:user123"
+                                            message: "User ID must be alphanumeric without spaces EX:user123"
                                         }
                                     })}
                                     placeholder="User Id" className='input-field' />
