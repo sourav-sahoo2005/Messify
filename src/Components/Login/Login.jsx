@@ -1,11 +1,11 @@
-import {React,useState} from 'react';
+import { React, useState } from 'react';
 import { useForm } from "react-hook-form";
 import Loding from '../Loding/Loding';
 import './Login.css';
 
 const Login = () => {
-    
-    const [loding,setLoding] = useState(false);
+
+    const [loding, setLoding] = useState(false);
     // 1. Separate instance for Login
     const {
         register: registerLogin,
@@ -74,18 +74,18 @@ const Login = () => {
 
     if (loding) {
         return (
-          <div className="h-screen flex justify-center items-center bg-black">
-            {/* <h1 className="text-white text-3xl">Loading...</h1> */}
-            <Loding/>
-          </div>
+            <div className="h-screen flex justify-center items-center bg-black">
+                {/* <h1 className="text-white text-3xl">Loading...</h1> */}
+                <Loding />
+            </div>
         );
-      }
+    }
 
 
 
     return (
-        
-        
+
+
 
 
         <div className='bg-[url(../Images/default-bg.jpg)] bg-cover bg-center w-full h-screen top-0 left-0'>
@@ -103,42 +103,191 @@ const Login = () => {
                         {/* Login Form */}
                         <form className="form login-form" onSubmit={handleSubmitLogin(handleLoginFormSubmit)}>
                             <h2>Mess Owner Login</h2>
-                            <input type="text" placeholder="User Id" {...registerLogin("userid", { required: true })} className='w-full p-3 mb-3.75 rounded-md border border-[#ccc] text-sm' />
-                            <input type="password" placeholder="Password" {...registerLogin("password", { required: true })} className='w-full p-3 mb-3.75 rounded-md border border-[#ccc] text-sm' />
-                            <input type="submit" className='min-w-52 p-3 rounded-full bg-amber-500 text-white' value="Login" />
+                            <input type="text" placeholder="User Id"
+                                {...registerLogin("userid", {
+                                    required: {
+                                            value: true,
+                                            message: "User Id is required"
+                                        },
+                                         pattern: {
+                                            value: /^[a-zA-Z0-9]+$/,
+                                            message: "User ID must be alphanumeric whitout spaces EX:user123"
+                                        }
+
+                                })} className='w-full p-3  rounded-md border border-[#ccc] text-sm' />
+                            {loginErrors.userid && <span className='error-text'>{loginErrors.userid.message}</span>}
+
+                            <input type="password" placeholder="Password"
+                                {...registerLogin("password", {
+                                    required: {
+                                            value: true,
+                                            message: "Password  is required"
+                                        }
+
+                                })} className='w-full p-3 mt-3.75 rounded-md border border-[#ccc] text-sm' />
+                            {loginErrors.password && <span className='error-text'>Password is required</span>}
+
+                            <input type="submit" className='min-w-52 mt-10.75 p-3 rounded-full bg-amber-500 text-white' value="Login" />
                         </form>
 
                         {/* Registration Form */}
                         <form className="form register-form" onSubmit={handleSubmitRegister(handleRegisterFormSubmit)}>
                             <h2>Owner Registration</h2>
+                            <h1 className='mb-4 text-sm text-center font-semibold text-red-500'>Note: All fields are required,So kindly fill all the fields for further process</h1>
 
                             <h3 className='p-2 pl-5 mb-2 rounded-full bg-zinc-300'>Personal Details</h3>
-                            <div className='flex items-center justify-between flex-wrap p-5'>
+                            <div className='flex items-center justify-between flex-wrap p-5 '>
                                 {/* Note: Removed manual 'name' and 'required' attributes as RHF handles them */}
-                                <input type="text" {...registerRegister("firstname", { required: true })} placeholder='First Name' className='input-field' />
-                                <input type="text" {...registerRegister("lastname", { required: true })} placeholder='Last Name' className='input-field' />
-                                <input type="email" {...registerRegister("email", { required: true })} placeholder="Email Address" className='input-field' />
-                                <input type="tel" {...registerRegister("phone", { required: true, minLength: 10 })} placeholder="Mobile Number" className='input-field' />
+                                <input type="text"
+                                    {...registerRegister("firstname", {
+                                        required: {
+                                            value: true,
+                                            message: "First Name is required"
+                                        },
+                                        minLength: {
+                                            value: 3,
+                                            message: "First Name must be at least 3 characters long"
+                                        }
+                                    })}
+                                    placeholder='First Name' className='input-field' />
+                                {registerErrors.firstname && <span className='error-text'>{registerErrors.firstname.message}</span>}
+
+
+                                <input type="text"
+                                    {...registerRegister("lastname", {
+                                        required: {
+                                            value: true,
+                                            message: "Last Name is required"
+                                        },
+                                        minLength: {
+                                            value: 2,
+                                            message: "Last Name must be at least 2 characters long"
+                                        }
+                                    })}
+                                    placeholder='Last Name' className='input-field' />
+                                {registerErrors.lastname && <span className='error-text'>{registerErrors.lastname.message}</span>}
+
+
+                                <input type="email"
+                                    {...registerRegister("email", {
+                                        required: {
+                                            value: true,
+                                            message: "Email is required"
+                                        },
+                                        pattern: {
+                                            value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                                            message: "Invalid email address"
+                                        }
+
+                                    })}
+                                    placeholder="Email Address" className='input-field' />
+                                {registerErrors.email && <span className='error-text'>{registerErrors.email.message}</span>}
+
+                                <input type="number"
+                                    {...registerRegister("phone", {
+                                        required: {
+                                            value: true,
+                                            message: "Phone number is required"
+                                        },
+                                        minLength: {
+                                            value: 10,
+                                            message: "Phone number must be at least 10 characters long"
+                                        },
+                                        pattern: {
+                                            value: /^[0-9]{10}$/,
+                                            message: "Phone number must be exactly 10 digits"
+                                        }
+                                    })}
+                                    placeholder="Mobile Number" className='input-field' />
+                                {registerErrors.phone && <span className='error-text'>{registerErrors.phone.message}</span>}
                             </div>
 
                             <h3 className='p-2 pl-5 mb-2 rounded-full bg-zinc-300'>Mess Details</h3>
                             <div className='flex items-center justify-between flex-wrap p-5'>
-                                <input type="text" placeholder="Mess / Lodging Name" {...registerRegister("messname", { required: true })} className='input-field' />
 
-                                <select {...registerRegister("type", { required: true })} className='input-field'>
+                                <input type="text"
+                                    placeholder="Mess / Lodging Name"
+                                    {...registerRegister("messname", {
+                                        required: {
+                                            value: true,
+                                            message: "Mess Name is required"
+                                        }
+
+                                    })}
+                                    className='input-field' />
+                                {registerErrors.messname && <span className='error-text'>{registerErrors.messname.message}</span>}
+
+                                <select
+                                    {...registerRegister("type", {
+                                        required: {
+                                            value: true,
+                                            message: "This field is required"
+                                        }
+                                    })}
+                                    className='input-field'>
                                     <option value="">Select Mess Type</option>
                                     <option value="boys">Boys</option>
                                     <option value="girls">Girls</option>
                                     <option value="family">Family</option>
                                     <option value="working-professionals">Working Professionals</option>
                                 </select>
+                                {registerErrors.type && <span className='error-text'>{registerErrors.type.message}</span>}
 
-                                <textarea {...registerRegister("aboutmess", { required: true })} placeholder="About Your Mess" className='input-field text-wrap h-26' maxLength={180}></textarea>
+                                <textarea
+                                    {...registerRegister("aboutmess", {
+                                        required: {
+                                            value: true,
+                                            message: "This field is required"
+                                        },
+                                        maxLength: {
+                                            value: 180,
+                                            message: "About Mess must be less than 180 characters"
+                                        }
 
-                                <input type="number" {...registerRegister("capacity", { required: true })} placeholder='Capacity' min={0} className='input-field' />
-                                <input type="number" {...registerRegister("vacancy", { required: true })} placeholder='Vacancy' min={0} className='input-field' />
-                                <input type="number" {...registerRegister("price", { required: true })} placeholder='Price Per Month' min={0} className='input-field' />
-                                <input type="number" {...registerRegister("security", { required: true })} placeholder='Security Deposit' min={0} className='input-field' />
+                                    })}
+                                    placeholder="About Your Mess in 180 characters" className='input-field text-wrap h-26' ></textarea>
+                                {registerErrors.aboutmess && <span className='error-text'>{registerErrors.aboutmess.message}</span>}
+
+                                <input type="number"
+                                    {...registerRegister("capacity", {
+                                        required: {
+                                            value: true,
+                                            message: "Capacity is required"
+                                        }
+                                    })}
+                                    placeholder='Capacity' min={0} className='input-field' />
+                                {registerErrors.capacity && <span className='error-text'>{registerErrors.capacity.message}</span>}
+
+                                <input type="number"
+                                    {...registerRegister("vacancy", {
+                                        required: {
+                                            value: true,
+                                            message: "Vacancy is required"
+                                        }
+                                    })}
+                                    placeholder='Vacancy' min={0} className='input-field' />
+                                {registerErrors.vacancy && <span className='error-text'>{registerErrors.vacancy.message}</span>}
+
+
+                                <input type="number"
+                                    {...registerRegister("price", {
+                                        required: {
+                                            value: true,
+                                            message: "Price is required"
+                                        }
+                                    })}
+                                    placeholder='Price Per Month' min={0} className='input-field' />
+                                {registerErrors.price && <span className='error-text'>{registerErrors.price.message}</span>}
+
+                                <input type="number"
+                                    {...registerRegister("security", {
+                                        required: {
+                                            value: true,
+                                            message: "Security Deposit is required"
+                                        }
+                                    })}
+                                    placeholder='Security Deposit' min={0} className='input-field' />
+                                {registerErrors.security && <span className='error-text'>{registerErrors.security.message}</span>}
 
                                 {/* Amenities Checkboxes */}
                                 <div className='input-field border-none'>
@@ -154,9 +303,36 @@ const Login = () => {
 
                             <h3 className='p-2 pl-5 mb-2 rounded-full bg-zinc-300'>Mess Address Details</h3>
                             <div className='flex items-center justify-between flex-wrap p-5'>
-                                <input type="text" {...registerRegister("location", { required: true })} placeholder="Location / Place" className='input-field' />
-                                <input type="text" {...registerRegister("landmark", { required: true })} placeholder="Landmark area" className='input-field' />
-                                <select name="City" {...registerRegister("city")} className="input-field">
+
+                                <input type="text"
+                                    {...registerRegister("location", {
+                                        required: {
+                                            value: true,
+                                            message: "Location is required"
+                                        }
+                                    })}
+                                    placeholder="Location / Place" className='input-field' />
+                                {registerErrors.location && <span className='error-text'>{registerErrors.location.message}</span>}
+
+                                <input type="text"
+                                    {...registerRegister("landmark", {
+                                        required: {
+                                            value: true,
+                                            message: "landmark is required"
+                                        }
+                                    })}
+                                    placeholder="Landmark area" className='input-field' />
+                                {registerErrors.landmark && <span className='error-text'>{registerErrors.landmark.message}</span>}
+
+                                <select name="City"
+                                    {...registerRegister("city", {
+                                        required: {
+                                            value: true,
+                                            message: "City is required"
+                                        }
+
+                                    })}
+                                    className="input-field">
                                     <option value="" className="text-black" >Select Your City</option>
                                     <option value="Balasore">Balasore</option>
                                     <option value="Baripada">Baripada</option>
@@ -165,13 +341,48 @@ const Login = () => {
                                     <option value="Cuttack">Cuttack</option>
                                     <option value="Puri">Puri</option>
                                 </select>
-                                <input type="text" {...registerRegister("pincode", { required: true, maxLength: 6 })} placeholder="PIN Code" className='input-field' />
+                                {registerErrors.city && <span className='error-text'>{registerErrors.city.message}</span>}
+
+                                <input type="text"
+                                    {...registerRegister("pincode", {
+                                        required: {
+                                            value: true,
+                                            message: "PIN code is required"
+                                        },
+                                        maxLength: {
+                                            value: 6,
+                                            message: "PIN must be 6 digits"
+                                        }
+                                    })}
+                                    placeholder="PIN Code" className='input-field' />
+                                {registerErrors.pincode && <span className='error-text'>{registerErrors.pincode.message}</span>}
                             </div>
 
                             <h3 className='p-2 pl-5 mb-2 rounded-full bg-zinc-300'>Additional Details</h3>
                             <div className='flex items-center justify-between gap-2 flex-wrap p-5'>
-                                <input type="text" {...registerRegister("userId", { required: true })} placeholder="User Id" className='input-field' />
-                                <input type="password" {...registerRegister("password", { required: true })} placeholder="Create Password" className='input-field' />
+                                <input type="text"
+                                    {...registerRegister("userId", {
+                                        required: {
+                                            value: true,
+                                            message: "User ID is required"
+                                        },
+                                        pattern: {
+                                            value: /^[a-zA-Z0-9]+$/,
+                                            message: "User ID must be alphanumeric whitout spaces EX:user123"
+                                        }
+                                    })}
+                                    placeholder="User Id" className='input-field' />
+                                {registerErrors.userId && <span className='error-text'>{registerErrors.userId.message}</span>}
+
+                                <input type="password"
+                                    {...registerRegister("password", {
+                                        required: {
+                                            value: true,
+                                            message: "Password is required"
+                                        },
+                                    })}
+                                    placeholder="Create Password" className='input-field' />
+                                {registerErrors.password && <span className='error-text'>{registerErrors.password.message}</span>}
                             </div>
 
                             <div className='flex flex-col justify-center items-center'>
