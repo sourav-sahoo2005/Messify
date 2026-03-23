@@ -1,15 +1,18 @@
 import { React, useState } from 'react';
 import { useForm } from "react-hook-form";
 import Loding from '../Loding/Loding';
+import axios from 'axios';
 import './Login.css';
 
 const Login = () => {
 
     const [loding, setLoding] = useState(false);
+    const [isOTPSend, setIsOTPSend] = useState(false)
     // 1. Separate instance for Login
     const {
         register: registerLogin,
         handleSubmit: handleSubmitLogin,
+        getValues,
         formState: {
             errors: loginErrors,
         },
@@ -32,9 +35,10 @@ const Login = () => {
     //Send The Login Data To The Back-end
 
     const handleLoginFormSubmit = async (data) => {
-        console.log(data);
+        // console.log(data);
 
         try {
+            // const isSend = await sendOTP(data.userid);
             setLoding(true)
             const response = await fetch('http://localhost:5000/owner/login', {
                 method: 'POST',
@@ -57,7 +61,7 @@ const Login = () => {
 
     const handleRegisterFormSubmit = async (data) => {
         try {
-            setLoding(true)
+
             const response = await fetch('http://localhost:5000/owner/register', {
                 method: 'POST',
                 headers: {
@@ -73,6 +77,38 @@ const Login = () => {
             console.error("This is not JSON! It's likely an HTML error page.");
         }
     };
+
+    //Send OTP to the Email
+    const sendOTP = async () => {
+
+        const currentUserId = getValues("userid");
+        const currentPassword = getValues("password");
+
+        if (!currentUserId) {
+            alert("Please enter a User ID before requesting an OTP");
+            return;
+        }
+
+        console.log("Sending OTP for User:", currentUserId);
+        setIsOTPSend(true);
+
+        // Now you can pass them to your API
+        const response = await axios.post('http://localhost:5000/owner/send-otp', { userid: currentUserId, password: currentPassword })
+
+        console.log(response);
+    };
+
+    const verifyOTP = () => {
+
+        const currentUserId = getValues("userid");
+        const OTP = getValues('OTP')
+        console.log(currentUserId, OTP)
+
+
+
+    };
+
+
 
 
 
@@ -128,8 +164,43 @@ const Login = () => {
                                 })} className='w-full p-3 mt-3.75 rounded-md border border-[#ccc] text-sm' />
                             {loginErrors.password && <span className='error-text'>Password is required</span>}
 
-                            <input type="submit" className='min-w-52 mt-10.75 p-3 rounded-full bg-amber-500 text-white' value="Login" />
+                            {isOTPSend && (
+                                <div className="mt-3.75 flex flex-col gap-2 justify-between">
+                                  
+                                        <input
+                                            type="text"
+                                            name="OTP"
+                                            id="otp-input"
+                                            placeholder="Enter Your OTP"
+                                            maxLength="6"
+                                            {...registerLogin("OTP", {
+                                                required: {
+                                                    value: true,
+                                                    message: "OTP is required"
+                                                },
+                                                maxLength: {
+                                                    value: 6,
+                                                    message: "OTP must be a 6 digit "
+
+                                                }
+
+                                            })}
+                                            className="w-full p-3 rounded-md border border-[#ccc] text-sm focus:outline-none focus:border-amber-500 transition-colors"
+                                        />
+                                        {loginErrors.OTP && <span className='error-text'>{loginErrors.OTP.message}</span>}
+                                    </div>
+                                   
+                           
+                            )}
+
+                            {!isOTPSend ?
+                                (<button onClick={sendOTP} className='min-w-52 mt-10.75 p-3 rounded-full bg-amber-500 text-white'>Send OTP</button>)
+                                : (
+
+                                    <input type="submit" className='min-w-52 mt-10.75 p-3 rounded-full bg-amber-500 text-white' value="Login" />
+                                )}
                         </form>
+
 
                         {/* Registration Form */}
                         <form className="form register-form" onSubmit={handleSubmitRegister(handleRegisterFormSubmit)}>
@@ -398,7 +469,7 @@ const Login = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     );
 };
 
