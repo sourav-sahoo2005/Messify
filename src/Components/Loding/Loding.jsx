@@ -38,7 +38,7 @@ const Loding = () => {
 
 
   return (
-    <div className='h-screen w-full  bg-black/50 backdrop-blur-sm flex flex-col justify-center items-center absolute z-50'>
+    <div className='h-screen w-full  bg-black/20 backdrop-blur-sm flex flex-col justify-center items-center absolute z-50'>
 
       <h1
         ref={textRef}

@@ -1,6 +1,7 @@
-import { React, useState } from 'react';
+import { React, useState, useEffect } from 'react';
 import { useForm } from "react-hook-form";
 import Loding from '../Loding/Loding';
+import Msgpopup from './Msgpopup';
 import axios from 'axios';
 import './Login.css';
 
@@ -8,6 +9,7 @@ const Login = () => {
 
     const [loding, setLoding] = useState(false);
     const [isOTPSend, setIsOTPSend] = useState(false)
+    const [serverMsg, setServerMsg] = useState("");
     // 1. Separate instance for Login
     const {
         register: registerLogin,
@@ -35,22 +37,13 @@ const Login = () => {
     //Send The Login Data To The Back-end
 
     const handleLoginFormSubmit = async (data) => {
-        // console.log(data);
 
         try {
-            // const isSend = await sendOTP(data.userid);
             setLoding(true)
-            const response = await fetch('http://localhost:5000/owner/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data),
-            });
-            const resData = await response.json();
-
-            console.log("Response Data :", resData);
+            const resData = await axios.post('http://localhost:5000/owner/login', data)
+            resData.status == 200 && resData.data.message != "Invalid OTP" ? setIsOTPSend(false) : setIsOTPSend(true);
             setLoding(false);
+            setServerMsg(resData.data.message);
         } catch (e) {
             console.error("This is not JSON! It's likely an HTML error page.");
         }
@@ -62,17 +55,9 @@ const Login = () => {
     const handleRegisterFormSubmit = async (data) => {
         try {
 
-            const response = await fetch('http://localhost:5000/owner/register', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data),
-            });
-            const resData = await response.json();
-
-            console.log("Response Data :", resData);
+            const resData = await axios.post('http://localhost:5000/owner/register', data)
             setLoding(false);
+            setServerMsg(resData.data.message)
         } catch (e) {
             console.error("This is not JSON! It's likely an HTML error page.");
         }
@@ -85,37 +70,22 @@ const Login = () => {
         const currentPassword = getValues("password");
 
         if (!currentUserId) {
-            alert("Please enter a User ID before requesting an OTP");
+            setServerMsg("Please enter a User ID and Password before requesting an OTP");
             return;
         }
-
-        console.log("Sending OTP for User:", currentUserId);
-        setIsOTPSend(true);
-
         // Now you can pass them to your API
+        setLoding(true)
         const response = await axios.post('http://localhost:5000/owner/send-otp', { userid: currentUserId, password: currentPassword })
-
-        console.log(response);
+        response.status == 200 && response.data.message == "OTP send successfully" ? setIsOTPSend(true) : setIsOTPSend(false);
+        setLoding(false)
+        setServerMsg(response.data.message)
+        // console.log(response);
     };
-
-    const verifyOTP = () => {
-
-        const currentUserId = getValues("userid");
-        const OTP = getValues('OTP')
-        console.log(currentUserId, OTP)
-
-
-
-    };
-
-
-
 
 
     if (loding) {
         return (
             <div className="h-screen flex justify-center items-center bg-black">
-                {/* <h1 className="text-white text-3xl">Loading...</h1> */}
                 <Loding />
             </div>
         );
@@ -126,6 +96,10 @@ const Login = () => {
     return (
 
         <div className='bg-[url(../Images/default-bg.jpg)] bg-cover bg-center w-full h-screen top-0 left-0'>
+            <Msgpopup
+                message={serverMsg}
+                onClose={() => setServerMsg("")}
+            />
             <div className='p-5 h-screen w-full bg-black/70 flex justify-center items-center'>
                 <div className="container">
                     <input type="radio" name="tab" id="login" defaultChecked />
@@ -166,38 +140,38 @@ const Login = () => {
 
                             {isOTPSend && (
                                 <div className="mt-3.75 flex flex-col gap-2 justify-between">
-                                  
-                                        <input
-                                            type="text"
-                                            name="OTP"
-                                            id="otp-input"
-                                            placeholder="Enter Your OTP"
-                                            maxLength="6"
-                                            {...registerLogin("OTP", {
-                                                required: {
-                                                    value: true,
-                                                    message: "OTP is required"
-                                                },
-                                                maxLength: {
-                                                    value: 6,
-                                                    message: "OTP must be a 6 digit "
 
-                                                }
+                                    <input
+                                        type="text"
+                                        name="OTP"
+                                        id="otp-input"
+                                        placeholder="Enter Your OTP"
+                                        maxLength="6"
+                                        {...registerLogin("OTP", {
+                                            required: {
+                                                value: true,
+                                                message: "OTP is required"
+                                            },
+                                            maxLength: {
+                                                value: 6,
+                                                message: "OTP must be a 6 digit "
 
-                                            })}
-                                            className="w-full p-3 rounded-md border border-[#ccc] text-sm focus:outline-none focus:border-amber-500 transition-colors"
-                                        />
-                                        {loginErrors.OTP && <span className='error-text'>{loginErrors.OTP.message}</span>}
-                                    </div>
-                                   
-                           
+                                            }
+
+                                        })}
+                                        className="w-full p-3 rounded-md border border-[#ccc] text-sm focus:outline-none focus:border-amber-500 transition-colors"
+                                    />
+                                    {loginErrors.OTP && <span className='error-text'>{loginErrors.OTP.message}</span>}
+                                </div>
+
+
                             )}
 
                             {!isOTPSend ?
-                                (<button onClick={sendOTP} className='min-w-52 mt-10.75 p-3 rounded-full bg-amber-500 text-white'>Send OTP</button>)
+                                (<button type='button' onClick={sendOTP} className='min-w-52 mt-10.75 p-3 rounded-full bg-[#ff8400] text-white'>Send OTP</button>)
                                 : (
 
-                                    <input type="submit" className='min-w-52 mt-10.75 p-3 rounded-full bg-amber-500 text-white' value="Login" />
+                                    <input type="submit" className='min-w-52 mt-10.75 p-3 rounded-full bg-[#ff8400] text-white' value="Login" />
                                 )}
                         </form>
 
