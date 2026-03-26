@@ -17,12 +17,13 @@ const Navbar = () => {
                     </Link>
 
         </nav>
-            <nav id='navbar' className='
+            <nav id='navbar' className={`
       w-[95%]
       mx-auto
       h-20
       px-8
-      flex justify-between
+      ${useLocation().pathname == '/admin/dashboard'? 'hidden':'flex'}
+      justify-between
       items-center
       rounded-full
       fixed
@@ -36,7 +37,7 @@ const Navbar = () => {
       bg-transparent
       shadow-lg
       zalando-sans-expanded-head
-    '>
+    `}>
                 <span className='text-2xl text-yellow-600 drop-shadow-xl/50 hidden md:block drop-shadow-amber-500/40'>
                     MessiFy
                 </span>

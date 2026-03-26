@@ -4,6 +4,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Loding from "../Loding/Loding";
 
+
 const MessDetails = () => {
 
   const { id } = useParams();     // get id from URL

@@ -4,8 +4,12 @@ import Loding from '../Loding/Loding';
 import Msgpopup from './Msgpopup';
 import axios from 'axios';
 import './Login.css';
+import { useNavigate } from 'react-router';
+
 
 const Login = () => {
+
+    const navigate = useNavigate();
 
     const [loding, setLoding] = useState(false);
     const [isOTPSend, setIsOTPSend] = useState(false)
@@ -37,15 +41,26 @@ const Login = () => {
     //Send The Login Data To The Back-end
 
     const handleLoginFormSubmit = async (data) => {
-
         try {
-            setLoding(true)
-            const resData = await axios.post('http://localhost:5000/owner/login', data)
-            resData.status == 200 && resData.data.message != "Invalid OTP" ? setIsOTPSend(false) : setIsOTPSend(true);
-            setLoding(false);
+            setLoding(true);
+            const resData = await axios.post('http://localhost:5000/owner/login', data);
+
             setServerMsg(resData.data.message);
+            setLoding(false);
+
+            // 3. Logic to Redirect
+            if (resData.status === 200 && resData.data.message !== "Invalid OTP") {
+                setIsOTPSend(false);
+                localStorage.setItem('token', resData.data.token);
+                navigate('/admin/dashboard');
+            } else {
+                setIsOTPSend(true);
+            }
+
         } catch (e) {
-            console.error("This is not JSON! It's likely an HTML error page.");
+            setLoding(false);
+            console.error("Login Error:", e);
+            setServerMsg("Server error. Please try again.");
         }
     };
 
@@ -58,6 +73,13 @@ const Login = () => {
             const resData = await axios.post('http://localhost:5000/owner/register', data)
             setLoding(false);
             setServerMsg(resData.data.message)
+            console.log(resData)
+
+            if (resData.status === 200 && resData.data.message == "Registration successful") {
+
+                localStorage.setItem('token', resData.data.token);
+                navigate('/admin/dashboard');
+            }
         } catch (e) {
             console.error("This is not JSON! It's likely an HTML error page.");
         }

@@ -11,6 +11,8 @@ import ScrollTop from './Components/ScrollTop/ScrollTop'
 import Loading from './Components/Loding/Loding'
 import FindMess from './Components/FindMess/FindMess'
 import MessDetails from './Components/MessDetails/MessDetails'
+import AdminLayout from './Components/AdminLayout/AdminLayout'
+import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute'
 
 
 const App = () => {
@@ -35,7 +37,7 @@ const App = () => {
 
   return isLoading ? <Loading /> : (
     <>
-      
+
       <ScrollTop />
 
       <Navbar />
@@ -47,6 +49,9 @@ const App = () => {
         <Route path='/login' element={<Login />} />
         <Route path='/search' element={<FindMess />} />
         <Route path='/mess/:id' element={<MessDetails />} />
+        <Route element={<ProtectedRoute />}>
+          <Route path='/admin/dashboard' element={<AdminLayout />} />
+        </Route>
 
       </Routes >
       <Footer />
