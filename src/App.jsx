@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './App.css'
+import axios from 'axios';
 import Navbar from './Components/Navbar/Navbar'
 import Hero from './Components/Hero/Hero'
 import { Routes, Route } from 'react-router'
@@ -16,6 +17,7 @@ import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute'
 
 
 const App = () => {
+  axios.defaults.withCredentials = true;  // This applies to ALL axios calls
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     const onLoad = () => {

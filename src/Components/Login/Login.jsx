@@ -44,6 +44,7 @@ const Login = () => {
         try {
             setLoding(true);
             const resData = await axios.post('http://localhost:5000/owner/login', data);
+            console.log(resData)
 
             setServerMsg(resData.data.message);
             setLoding(false);
@@ -58,7 +59,6 @@ const Login = () => {
             }
 
         } catch (e) {
-            setLoding(false);
             console.error("Login Error:", e);
             setServerMsg("Server error. Please try again.");
         }
@@ -82,6 +82,7 @@ const Login = () => {
             }
         } catch (e) {
             console.error("This is not JSON! It's likely an HTML error page.");
+            setServerMsg("Server error. Please try again.");
         }
     };
 
