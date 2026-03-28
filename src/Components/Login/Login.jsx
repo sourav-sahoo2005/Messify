@@ -52,7 +52,7 @@ const Login = () => {
             // 3. Logic to Redirect
             if (resData.status === 200 && resData.data.message !== "Invalid OTP") {
                 setIsOTPSend(false);
-                localStorage.setItem('token', resData.data.token);
+                localStorage.setItem('token', true);
                 navigate('/admin/dashboard');
             } else {
                 setIsOTPSend(true);
@@ -77,7 +77,7 @@ const Login = () => {
 
             if (resData.status === 200 && resData.data.message == "Registration successful") {
 
-                localStorage.setItem('token', resData.data.token);
+                localStorage.setItem('token', true);
                 navigate('/admin/dashboard');
             }
         } catch (e) {
