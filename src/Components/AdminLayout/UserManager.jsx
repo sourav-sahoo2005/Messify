@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import { UserPlus, Mail, Phone, User, Trash2, Search } from 'lucide-react';
+import SendSms from './SendSms';
 
 const UsersManager = ({ data, setServerMsg }) => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const [users, setUsers] = useState([]);
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
@@ -218,9 +220,17 @@ const UsersManager = ({ data, setServerMsg }) => {
             </div>
             <div className='flex justify-end'>
                 <button
+                    onClick={() => setIsModalOpen(true)}
                     className='px-3 py-2 border bg-indigo-600 hover:bg-indigo-700 rounded-lg'>
                     Send Message
                 </button>
+                {isModalOpen && (
+                    <SendSms
+                        customers={users}
+                        messData={data}
+                        onClose={() => setIsModalOpen(false)}
+                    />
+                )}
             </div>
         </div>
     );

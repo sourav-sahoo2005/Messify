@@ -47,7 +47,7 @@ const AdminLayout = ({ children }) => {
       case 'profile':
         return <MessProfile data={profile} />;
       case 'users':
-        return <UsersManager data={profile.customer} setServerMsg={setServerMsg} />;
+        return <UsersManager data={profile} setServerMsg={setServerMsg} />;
       case 'dashboard':
         return <Dashboard data={profile} />;
       case 'edit':
