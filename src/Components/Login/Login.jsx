@@ -73,7 +73,8 @@ const Login = () => {
             const resData = await axios.post('http://localhost:5000/owner/register', data)
             setLoding(false);
             setServerMsg(resData.data.message)
-            console.log(resData)
+            // console.log(resData)
+            // console.log("Registration Data:", data);
 
             if (resData.status === 200 && resData.data.message == "Registration successful") {
 
@@ -358,6 +359,24 @@ const Login = () => {
                                     placeholder='Security Deposit' min={0} className='input-field' />
                                 {registerErrors.security && <span className='error-text'>{registerErrors.security.message}</span>}
 
+
+                                {/* meal tracking facility */}
+                                <select
+                                    {...registerRegister("meal", {
+                                        required: {
+                                            value: true,
+                                            message: "Please select an option for meal tracking facility"
+                                        }
+                                    })}
+                                    className='input-field'>
+                                    <option value="">Do you want to add Meal tracking facility</option>
+                                    <option value="yes">Yes</option>
+                                    <option value="no">No</option>
+
+                                </select>
+                                {registerErrors.meal && <span className='error-text'>{registerErrors.meal.message}</span>}
+
+
                                 {/* Amenities Checkboxes */}
                                 <div className='input-field border-none'>
                                     <h3 className='lg:px-4 pb-3 font-semibold '>Amenities</h3>
@@ -369,6 +388,9 @@ const Login = () => {
                                     </div>
                                 </div>
                             </div>
+
+
+
 
                             <h3 className='p-2 pl-5 mb-2 rounded-full bg-zinc-300'>Mess Address Details</h3>
                             <div className='flex items-center justify-between flex-wrap p-5'>

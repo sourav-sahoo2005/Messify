@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { Layout } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
-import { CircleUserRound, Users, LayoutDashboard, UserRoundPen, LogOut } from 'lucide-react'
+import { CircleUserRound, Users, LayoutDashboard, UserRoundPen, CookingPot, LogOut } from 'lucide-react'
 import Loding from '../Loding/Loding';
 import MessProfile from './MessProfile';
 import UsersManager from './UserManager';
@@ -9,6 +9,7 @@ import EditProfile from './EditProfile';
 import Dashboard from './Dashboard';
 import { useNavigate } from 'react-router';
 import Msgpopup from '../Login/Msgpopup';
+import MealTrackingDashboard from './MealTrackingDashboard';
 
 const AdminLayout = ({ children }) => {
 
@@ -52,6 +53,8 @@ const AdminLayout = ({ children }) => {
         return <Dashboard data={profile} />;
       case 'edit':
         return <EditProfile data={profile} setServerMsg={setServerMsg} />;
+      case 'meal':
+        return <MealTrackingDashboard />
       default:
         return <MessProfile data={profile} />;
     }
@@ -118,6 +121,15 @@ const AdminLayout = ({ children }) => {
             <span>Edit Profile</span>
 
           </div>
+
+          {(profile.meal === "yes") && (
+            <div onClick={() => setActiveTab('meal')}
+              className={`p-3 ${activeTab === 'meal' ? 'bg-indigo-600' : 'hover:bg-slate-800'} rounded-lg cursor-pointer transition flex items-center gap-3`}>
+              <CookingPot />
+              <span>Track Meal</span>
+
+            </div>
+          )}
 
           <div className="p-3 hover:bg-slate-800 rounded-lg cursor-pointer transition flex items-center gap-3">
             <LogOut />

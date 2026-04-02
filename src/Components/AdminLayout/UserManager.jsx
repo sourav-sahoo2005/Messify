@@ -3,11 +3,14 @@ import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import { UserPlus, Mail, Phone, User, Trash2, Search } from 'lucide-react';
 import SendSms from './SendSms';
+import MakeManagerPopup from './MakeManagerPopup';
 
 const UsersManager = ({ data, setServerMsg }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isMakeManagerOpen, setIsMakeManagerOpen] = useState(false);
     const [users, setUsers] = useState([]);
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
+
 
     // 1. Function to fetch users from the backend
     const fetchUsers = async () => {
@@ -25,6 +28,7 @@ const UsersManager = ({ data, setServerMsg }) => {
     // 2. Initial load
     useEffect(() => {
         fetchUsers();
+
     }, []);
 
     // 3. Handle Form Submission
@@ -43,6 +47,7 @@ const UsersManager = ({ data, setServerMsg }) => {
             }
         } catch (error) {
             setServerMsg("Failed to add customer");
+
         }
     };
 
@@ -63,6 +68,8 @@ const UsersManager = ({ data, setServerMsg }) => {
 
         }
     }
+
+
 
     return (
         <div className="space-y-8">
@@ -178,6 +185,7 @@ const UsersManager = ({ data, setServerMsg }) => {
                             <tr className="bg-gray-50">
                                 <th className="px-6 py-4 text-xs font-bold text-gray-400 uppercase">Customer</th>
                                 <th className="px-6 py-4 text-xs font-bold text-gray-400 uppercase">Contact Info</th>
+                                <th className="px-6 py-4 text-xs font-bold text-gray-400 uppercase">Role</th>
                                 <th className="px-6 py-4 text-xs font-bold text-gray-400 uppercase text-right">Actions</th>
                             </tr>
                         </thead>
@@ -196,6 +204,13 @@ const UsersManager = ({ data, setServerMsg }) => {
                                         <td className="px-6 py-4">
                                             <div className="text-sm text-gray-600">{user.email}</div>
                                             <div className="text-xs text-gray-400">{user.phone}</div>
+                                        </td>
+                                        <td className="px-6 py-4">
+                                            {user.ismanager && (
+                                                <span className="px-2 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full">
+                                                    Manager
+                                                </span>
+                                            )}
                                         </td>
                                         <td className="px-6 py-4 text-right">
                                             <button
@@ -218,7 +233,7 @@ const UsersManager = ({ data, setServerMsg }) => {
                     </table>
                 </div>
             </div>
-            <div className='flex justify-end'>
+            <div className='flex justify-end gap-3'>
                 <button
                     onClick={() => setIsModalOpen(true)}
                     className='px-3 py-2 border bg-indigo-600 hover:bg-indigo-700 rounded-lg'>
@@ -229,6 +244,24 @@ const UsersManager = ({ data, setServerMsg }) => {
                         customers={users}
                         messData={data}
                         onClose={() => setIsModalOpen(false)}
+                    />
+                )}
+
+
+                {(data.meal === "yes") && (
+                    <button
+                        onClick={() => setIsMakeManagerOpen(true)}
+                        className='px-3 py-2 border bg-indigo-600 hover:bg-indigo-700 rounded-lg'>
+                        Make Manager
+                    </button>
+                )}
+
+                {isMakeManagerOpen && (
+                    <MakeManagerPopup
+                        isOpen={isMakeManagerOpen}
+                        onClose={() => setIsMakeManagerOpen(false)}
+                        customers={users}
+                        fetchUsers = {fetchUsers}
                     />
                 )}
             </div>
