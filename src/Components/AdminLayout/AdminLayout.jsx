@@ -10,8 +10,10 @@ import Dashboard from './Dashboard';
 import { useNavigate } from 'react-router';
 import Msgpopup from '../Login/Msgpopup';
 import MealTrackingDashboard from './MealTrackingDashboard';
+// import { BACKEND_URL } from '../../config';
 
 const AdminLayout = ({ children }) => {
+  console.log(import.meta.env.VITE_BACKEND_URL);
 
   const navigate = useNavigate();
 
@@ -23,7 +25,7 @@ const AdminLayout = ({ children }) => {
     const fetchData = async () => {
       try {
         const response = await axios.post(
-          'http://localhost:5000/owner/dashboard',
+          `${import.meta.env.VITE_BACKEND_URL}/owner/dashboard`,
           {}, // No body needed for the token!
           { withCredentials: true } // Tells Axios to send the cookie
         );
@@ -64,7 +66,7 @@ const AdminLayout = ({ children }) => {
   const logOut = async function () {
 
     if (confirm("Are you sure want to logout from your account")) {
-      await axios.get('http://localhost:5000/owner/logout');
+      await axios.get(`${import.meta.env.VITE_BACKEND_URL}/owner/logout`);
       localStorage.clear();
       navigate('/');
 

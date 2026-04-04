@@ -43,7 +43,7 @@ const Login = () => {
     const handleLoginFormSubmit = async (data) => {
         try {
             setLoding(true);
-            const resData = await axios.post('http://localhost:5000/owner/login', data);
+            const resData = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/owner/login`, data);
             console.log(resData)
 
             setServerMsg(resData.data.message);
@@ -70,7 +70,7 @@ const Login = () => {
     const handleRegisterFormSubmit = async (data) => {
         try {
 
-            const resData = await axios.post('http://localhost:5000/owner/register', data)
+            const resData = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/owner/register`, data)
             setLoding(false);
             setServerMsg(resData.data.message)
             // console.log(resData)

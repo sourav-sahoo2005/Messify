@@ -16,7 +16,7 @@ const UsersManager = ({ data, setServerMsg }) => {
     const fetchUsers = async () => {
         try {
             // This route should return the array of customers linked to the owner
-            const response = await axios.get('http://localhost:5000/owner/get-customers', {
+            const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/owner/get-customers`, {
                 withCredentials: true
             });
             setUsers(response.data.customers);
@@ -35,7 +35,7 @@ const UsersManager = ({ data, setServerMsg }) => {
     const userFormSubmit = async (formData) => {
         try {
             const response = await axios.post(
-                'http://localhost:5000/owner/add-customer',
+                `${import.meta.env.VITE_BACKEND_URL}/owner/add-customer`,
                 formData,
                 { withCredentials: true }
             );
@@ -54,7 +54,7 @@ const UsersManager = ({ data, setServerMsg }) => {
     // Handle Delete
     const deleteUser = (id) => {
         if (window.confirm("Are you sure you want to delete this customer?")) {
-            axios.delete(`http://localhost:5000/owner/delete-customer/${id}`, { withCredentials: true })
+            axios.delete(`${import.meta.env.VITE_BACKEND_URL}/owner/delete-customer/${id}`, { withCredentials: true })
                 .then(response => {
                     if (response.status === 200) {
                         fetchUsers();

@@ -23,7 +23,7 @@ const MakeManagerPopup = ({ isOpen, onClose, customers, fetchUsers }) => {
             prev.includes(id) ? prev.filter(i => i !== id) : [...prev, id]
         );
     };
-    console.log(selectedIds);
+    // console.log(selectedIds);
 
     const toggleSelectAll = () => {
         if (selectedIds.length === filteredCustomers.length) {
@@ -34,9 +34,9 @@ const MakeManagerPopup = ({ isOpen, onClose, customers, fetchUsers }) => {
     };
 
     const makeManager = async function () {
-        console.log(selectedIds);
+        // console.log(selectedIds);
 
-        const response = await axios.post('http://localhost:5000/owner/make-manager', { managerIds: selectedIds, customerIds: filteredCustomers.map(c => c._id) }, { withCredentials: true });
+        const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/owner/make-manager`, { managerIds: selectedIds, customerIds: filteredCustomers.map(c => c._id) }, { withCredentials: true });
         console.log(response.data);
         if (response.status === 200) {
 

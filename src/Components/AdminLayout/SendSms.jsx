@@ -18,7 +18,7 @@ const SendSms = ({ customers, onClose, messData }) => {
     const onSubmit = async (data) => {
 
         try {
-            const response = await axios.post('http://localhost:5000/owner/send-mess-update', {
+            const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/owner/send-mess-update`, {
                 subject: data.subject,
                 message: data.message,
                 messDetails: {
