@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { Layout } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
-import { CircleUserRound, Users, LayoutDashboard, UserRoundPen, CookingPot, LogOut } from 'lucide-react'
+import { CircleUserRound, Users, LayoutDashboard, UserRoundPen, CookingPot, LogOut, X, Menu } from 'lucide-react'
 import Loding from '../Loding/Loding';
 import MessProfile from './MessProfile';
 import UsersManager from './UserManager';
@@ -13,13 +13,17 @@ import MealTrackingDashboard from './MealTrackingDashboard';
 // import { BACKEND_URL } from '../../config';
 
 const AdminLayout = ({ children }) => {
-  console.log(import.meta.env.VITE_BACKEND_URL);
+
 
   const navigate = useNavigate();
 
   const [profile, setProfile] = useState('');
   const [activeTab, setActiveTab] = useState('profile');
   const [serverMsg, setServerMsg] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
+
+
+  const toggleSidebar = () => setIsOpen(!isOpen);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -77,77 +81,116 @@ const AdminLayout = ({ children }) => {
 
   return (
 
-    <div className="flex h-screen overflow-hidden bg-gray-100 z-200">
+    <div className="flex w-full h-screen overflow-hidden bg-gray-900 z-200">
       <Msgpopup
         message={serverMsg}
         onClose={() => setServerMsg("")}
       />
-      <aside className="w-64 bg-slate-900 text-white flex flex-col shrink-0">
-        <div className="p-6  border-b border-slate-800">
-          <p className='text-2xl font-bold text-amber-500'>Messify</p>
-          <p className='text-xl font-bold'>Admin Panel</p>
-          <p className='py-1'>Hello,{` ${profile.owner.name}`}</p>
-        </div>
+      <div className="flex w-full h-screen bg-slate-100 overflow-hidden">
+        {/* Mobile Overlay */}
+        {isOpen && (
+          <div
+            className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+            onClick={toggleSidebar}
+          />
+        )}
 
-        <nav className="flex-1 overflow-y-auto p-4 space-y-2">
-          <div onClick={() => setActiveTab('profile')}
-            className={`p-3 ${activeTab === 'profile' ? 'bg-indigo-600' : 'hover:bg-slate-800'} rounded-lg cursor-pointer flex items-center gap-3`}>
-            <CircleUserRound />
-            <span>Mess Profile</span>
-          </div>
-          <div onClick={() => setActiveTab('users')}
-            className={`p-3 ${activeTab === 'users' ? 'bg-indigo-600' : 'hover:bg-slate-800'} rounded-lg cursor-pointer transition flex items-center gap-3`}>
-            <Users />
-            <span>Users</span>
-          </div>
-          <div onClick={() => setActiveTab('dashboard')}
-            className={`p-3 ${activeTab === 'dashboard' ? 'bg-indigo-600' : 'hover:bg-slate-800'} rounded-lg cursor-pointer transition flex items-center gap-3`}>
-            <LayoutDashboard />
-            <span>Dashboard</span>
-
-          </div>
-
-          <div onClick={() => setActiveTab('edit')}
-            className={`p-3 ${activeTab === 'edit' ? 'bg-indigo-600' : 'hover:bg-slate-800'} rounded-lg cursor-pointer transition flex items-center gap-3`}>
-            <UserRoundPen />
-            <span>Edit Profile</span>
-
-          </div>
-
-          {(profile.meal === "yes") && (
-            <div onClick={() => setActiveTab('meal')}
-              className={`p-3 ${activeTab === 'meal' ? 'bg-indigo-600' : 'hover:bg-slate-800'} rounded-lg cursor-pointer transition flex items-center gap-3`}>
-              <CookingPot />
-              <span>Track Meal</span>
-
+        {/* Sidebar */}
+        <aside className={`
+        fixed inset-y-0 left-0 z-50 w-64 bg-slate-900 text-white flex flex-col transition-transform duration-300 ease-in-out transform
+        ${isOpen ? 'translate-x-0' : '-translate-x-full'}
+        lg:relative lg:translate-x-0 shrink-0
+      `}>
+          <div className="p-6 border-b border-slate-800 flex justify-between items-center">
+            <div>
+              <p className='text-2xl font-bold text-amber-500'>Messify</p>
+              <p className='text-xl font-bold'>Admin Panel</p>
+              <p className='py-1 text-sm text-slate-400'>Hello, {profile.owner.name}</p>
             </div>
-          )}
-
-          <div className="p-3 hover:bg-slate-800 rounded-lg cursor-pointer transition flex items-center gap-3">
-            <LogOut />
-            <span onClick={logOut}>Log Out</span>
-
+            {/* Close button for mobile */}
+            <button onClick={toggleSidebar} className="lg:hidden p-1">
+              <X size={24} />
+            </button>
           </div>
-        </nav>
 
-        <div className="p-4 border-t border-slate-800 text-xs text-slate-500">
-          Logged in as Admin
-        </div>
-      </aside>
+          <nav className="flex-1 overflow-y-auto p-4 space-y-2">
+            <NavItem
+              active={activeTab === 'profile'}
+              onClick={() => { setActiveTab('profile'); setIsOpen(false); }}
+              icon={<CircleUserRound />}
+              label="Mess Profile"
+            />
+            <NavItem
+              active={activeTab === 'users'}
+              onClick={() => { setActiveTab('users'); setIsOpen(false); }}
+              icon={<Users />}
+              label="Users"
+            />
+            <NavItem
+              active={activeTab === 'dashboard'}
+              onClick={() => { setActiveTab('dashboard'); setIsOpen(false); }}
+              icon={<LayoutDashboard />}
+              label="Dashboard"
+            />
+            <NavItem
+              active={activeTab === 'edit'}
+              onClick={() => { setActiveTab('edit'); setIsOpen(false); }}
+              icon={<UserRoundPen />}
+              label="Edit Profile"
+            />
 
-      <main className="flex-1 overflow-y-auto overflow-x-hidden p-8">
-        <div className="max-w-7xl mx-auto">
+            {profile.meal === "yes" && (
+              <NavItem
+                active={activeTab === 'meal'}
+                onClick={() => { setActiveTab('meal'); setIsOpen(false); }}
+                icon={<CookingPot />}
+                label="Track Meal"
+              />
+            )}
 
+            <div
+              onClick={logOut}
+              className="p-3 hover:bg-slate-800 rounded-lg cursor-pointer transition flex items-center gap-3 mt-auto"
+            >
+              <LogOut />
+              <span>Log Out</span>
+            </div>
+          </nav>
 
-          <div className="">
-
-            {renderContent()}
+          <div className="p-4 border-t border-slate-800 text-xs text-slate-500">
+            Logged in as Admin
           </div>
+        </aside>
+
+        {/* Main Content Area */}
+        <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
+          {/* Mobile Header */}
+          <header className="lg:hidden bg-white border-b p-4 flex items-center justify-between">
+            <p className='font-bold text-amber-500 text-xl'>Messify</p>
+            <button onClick={toggleSidebar} className="p-2 text-slate-600">
+              <Menu size={28} />
+            </button>
+          </header>
+
+          <main className="w-full flex-1 overflow-y-auto p-4 md:p-8 bg-slate-50">
+            <div className="max-w-7xl mx-auto">
+              {renderContent()}
+            </div>
+          </main>
         </div>
-      </main>
+      </div>
 
     </div>
   );
 };
+const NavItem = ({ icon, label, onClick, active }) => (
+  <div
+    onClick={onClick}
+    className={`p-3 ${active ? 'bg-indigo-600' : 'hover:bg-slate-800'} rounded-lg cursor-pointer transition flex items-center gap-3`}
+  >
+    {icon}
+    <span>{label}</span>
+  </div>
+);
 
 export default AdminLayout;

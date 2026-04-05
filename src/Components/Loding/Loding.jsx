@@ -8,39 +8,41 @@ import { useGSAP } from '@gsap/react';
 const Loding = () => {
 
 
-  const textRef = useRef(null);
+  // const textRef = useRef(null);
 
-  useGSAP(
-    () => {
-      const letters = textRef.current.querySelectorAll("span");
+  // useGSAP(
+  //   () => {
+  //     const letters = textRef.current.querySelectorAll("span");
 
-      gsap.fromTo(
-        letters,
-        {
-          y: 40,
-          opacity: 0,
-        },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.6,
-          stagger: 0.08,
-          ease: "back.out(1.7)",
-          repeat: -1,
-          repeatDelay: 0.8,
-        }
-      );
-    },
-    { scope: textRef }
-  );
-  const text = "Loading...";
+  //     gsap.fromTo(
+  //       letters,
+  //       {
+  //         y: 40,
+  //         opacity: 0,
+  //       },
+  //       {
+  //         y: 0,
+  //         opacity: 1,
+  //         duration: 0.6,
+  //         stagger: 0.08,
+  //         ease: "back.out(1.7)",
+  //         repeat: -1,
+  //         repeatDelay: 0.8,
+  //       }
+  //     );
+  //   },
+  //   { scope: textRef }
+  // );
+  // const text = "Loading...";
 
 
 
   return (
-    <div className='h-screen w-full  bg-black/20 backdrop-blur-sm flex flex-col justify-center items-center absolute z-50'>
 
-      <h1
+    
+    <div className='h-screen w-full  bg-black/20 backdrop-blur-sm flex flex-col justify-center items-center absolute z-1000'>
+
+      {/* <h1
         ref={textRef}
         className="text-white text-6xl font-semibold flex"
       >
@@ -52,8 +54,9 @@ const Loding = () => {
             {char === " " ? "\u00A0" : char}
           </span>
         ))}
-      </h1>
+      </h1> */}
 
+      <div className="h-12 w-12 animate-spin rounded-full border-8 border-gray-200 border-t-blue-600 border-b-amber-500"></div> 
 
     </div>
   )

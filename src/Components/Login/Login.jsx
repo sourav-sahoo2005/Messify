@@ -99,7 +99,7 @@ const Login = () => {
         }
         // Now you can pass them to your API
         setLoding(true)
-        const response = await axios.post('http://localhost:5000/owner/send-otp', { userid: currentUserId, password: currentPassword })
+        const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/owner/send-otp`, { userid: currentUserId, password: currentPassword })
         response.status == 200 && response.data.message == "OTP send successfully" ? setIsOTPSend(true) : setIsOTPSend(false);
         setLoding(false)
         setServerMsg(response.data.message)
