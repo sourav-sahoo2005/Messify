@@ -70,6 +70,7 @@ const Login = () => {
     const handleRegisterFormSubmit = async (data) => {
         try {
 
+            setLoding(true)
             const resData = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/owner/register`, data)
             setLoding(false);
             setServerMsg(resData.data.message)
