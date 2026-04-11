@@ -6,6 +6,7 @@ import PowerfulFeature from './PowerfulFeature';
 import Cities from './Cities';
 import Testimonials from './Testimonials';
 import CTA from './CTA';
+import Feedback from './Feedback';
 
 const Hero = () => {
 
@@ -60,8 +61,9 @@ const Hero = () => {
       
       <PowerfulFeature/>
       <Cities/>
-      <Testimonials/>
+      <Testimonials/>  
       <CTA/>
+      <Feedback/>
     </div>
   )
 }
