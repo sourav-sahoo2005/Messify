@@ -3,11 +3,11 @@ import { Link } from "react-router";
 
 const CTA = () => {
   return (
-    <section className="w-full py-20 bg-linear-to-r from-amber-500 to-yellow-600 text-black">
+    <section className="w-full h-auto py-20 bg-linear-to-r from-amber-500 to-yellow-600 text-black">
       
       <div className="max-w-5xl mx-auto text-center px-6">
 
-        <h2 className="text-4xl font-semibold mb-6">
+        <h2 className="lg:text-4xl text-3xl font-semibold mb-6">
           Find Your Perfect Mess Today
         </h2>
 
@@ -19,14 +19,14 @@ const CTA = () => {
           
           <Link
             to="/search"
-            className="px-8 py-3 bg-black text-white rounded-lg hover:bg-gray-800 transition"
+            className="px-8 py-3 flex justify-center items-center  text-sm bg-black text-white rounded-lg hover:bg-gray-800 transition"
           >
             Find a Mess
           </Link>
 
           <Link
             to="/login"
-            className="px-8 py-3 border-2 border-black rounded-lg hover:bg-black hover:text-white transition"
+            className="px-8 py-3 border-2 flex justify-center items-center  text-sm border-black rounded-lg hover:bg-black hover:text-white transition"
           >
             Register Your Mess
           </Link>

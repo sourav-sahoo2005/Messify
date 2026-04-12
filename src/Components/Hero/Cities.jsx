@@ -13,17 +13,17 @@ const Cities = () => {
   return (
     <section className="w-full py-20 bg-black text-white overflow-hidden">
 
-      <h2 className="text-4xl font-semibold text-center mb-12">
+      <h2 className="lg:text-4xl text-3xl  font-semibold text-center mb-12">
         Cities We <span className="text-amber-500">Serve</span>
       </h2>
 
       <div className="overflow-hidden w-full bg-amber-600 ">
-        <div className="flex gap-8 w-max animate-marquee">
+        <div className="flex lg:gap-8 gap-4 w-max animate-marquee">
 
           {[...cities, ...cities].map((city, index) => (
             <div
               key={index}
-              className="min-w-50 text-3xl h-20   flex items-center justify-center  hover:text-zinc-900 font-semibold transition"
+              className="min-w-50 lg:text-3xl text-2xl h-20   flex items-center justify-center  hover:text-zinc-900 font-semibold transition"
             >
               {city}
             </div>

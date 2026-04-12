@@ -16,7 +16,7 @@ const Feedback = () => {
                 onClose={() => setServerMessage("")}
             />
 
-            <h1 className='text-4xl font-semibold pt-10 '>Share Your valueable <span className='text-amber-500'>Feedback</span></h1>
+            <h1 className='lg:text-4xl text-3xl font-semibold pt-10 '>Share Your valueable <span className='text-amber-500'>Feedback</span></h1>
             <p className=' lg:text-center text-lg text-gray-300 pt-4 '>We'd love to hear your thoughts and suggestions. <br /> Feel free to let us know how we can improve.</p>
 
             <button className='mt-6 bg-amber-600 hover:bg-amber-700 text-white font-semibold py-3 px-5 rounded-4xl ' onClick={() => setShowForm(true)}>Submit Feedback</button>

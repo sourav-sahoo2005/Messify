@@ -5,12 +5,12 @@ import './Navbar.css'
 const Navbar = () => {
     return (
         <>
-        <nav className={`p-5 h-20 w-full fixed  justify-between items-center lg:hidden md:hidden zalando-sans-expanded-head z-10 bg-black/50 backdrop-blur-md ${useLocation().pathname == '/admin/dashboard' ? 'hidden' : 'flex'}`}>
-              <span className='text-2xl text-amber-500 drop-shadow-xl/50  drop-shadow-amber-500/40'>
+        <nav className={`p-5 h-15 w-full fixed  justify-between items-center lg:hidden md:hidden  zalando-sans-expanded-head z-10 bg-black/50 backdrop-blur-md ${useLocation().pathname == '/admin/dashboard' ? 'hidden' : 'flex'}`}>
+              <Link to='/' className='text-xl text-amber-500 drop-shadow-xl/50  drop-shadow-amber-500/40'>
                     MessiFy
-                </span>
+                </Link>
                  <Link
-                        className='px-4 py-1.5  rounded-lg bg-amber-600 text-white hover:bg-amber-700 transition-all '
+                        className='px-4 py-1.5  rounded-full bg-amber-600 text-white hover:bg-amber-700 transition-all '
                         to="/login"
                     >
                         Login
@@ -20,7 +20,7 @@ const Navbar = () => {
             <nav id='navbar' className={`
       w-[95%]
       mx-auto
-      h-20
+      h-15
       px-8
       ${useLocation().pathname == '/admin/dashboard'? 'hidden':'flex'}
       justify-between
@@ -38,9 +38,9 @@ const Navbar = () => {
       shadow-lg
       zalando-sans-expanded-head
     `}>
-                <span className='text-2xl text-yellow-600 drop-shadow-xl/50 hidden md:block drop-shadow-amber-500/40'>
+                <Link to='/' className='text-2xl text-yellow-600 drop-shadow-xl/50 hidden md:block drop-shadow-amber-500/40'>
                     MessiFy
-                </span>
+                </Link>
 
                 <div className='flex lg:w-auto md:w-auto w-full gap-10 items-center justify-center font-thin'>
                     <ul className='flex gap-7  text-sm'>

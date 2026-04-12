@@ -3,7 +3,7 @@ import { Hammer, ArrowLeft } from 'lucide-react';
 
 const UnderDevelope = () => {
     return (
-        <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 px-4 ">
+        <div className="min-h-screen w-full flex flex-col items-center justify-center bg-gray-50 px-4 absolute z-100 ">
             <div className="text-center space-y-6 max-w-lg">
                 {/* Icon/Illustration */}
                 <div className="flex justify-center">
