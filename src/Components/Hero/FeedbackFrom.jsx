@@ -3,7 +3,7 @@ import { Reac, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Loding from '../Loding/Loding';
 
-const FeedbackForm = ({ onClose }) => {
+const FeedbackForm = ({ onClose, setServerMessage }) => {
 
   const [loading, setLoading] = useState(false);
   const {
@@ -27,7 +27,7 @@ const FeedbackForm = ({ onClose }) => {
     if (response.status === 200) {
       onClose();
       setLoading(false);
-      alert("Feedback submitted successfully!");
+      setServerMessage("Feedback submitted successfully!");
     }
 
 
@@ -75,6 +75,25 @@ const FeedbackForm = ({ onClose }) => {
           {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name.message}</p>}
         </div>
 
+        {/* email field */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+          <input
+            type='email'
+            {...register("email", {
+              required: "Email is required",
+              pattern: {
+                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                message: "Invalid email address"
+              }
+            })}
+            className={`w-full px-4 py-2 border rounded-lg outline-none transition-all ${errors.email ? 'border-red-500 focus:ring-red-200' : 'border-gray-300 focus:ring-indigo-200 focus:border-indigo-500'
+              }`}
+            placeholder="e.g. rahul@example.com"
+          />
+          {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>}
+        </div>
+
         {/* Place Field */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">Place</label>
@@ -84,7 +103,7 @@ const FeedbackForm = ({ onClose }) => {
             })}
             className={`w-full px-4 py-2 border rounded-lg outline-none transition-all ${errors.place ? 'border-red-500 focus:ring-red-200' : 'border-gray-300 focus:ring-indigo-200 focus:border-indigo-500'
               }`}
-            placeholder="e.g. New York"
+            placeholder="e.g. Balasore, Odisha"
           />
           {errors.place && <p className="text-red-500 text-xs mt-1">{errors.place.message}</p>}
         </div>
