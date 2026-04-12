@@ -14,6 +14,7 @@ import FindMess from './Components/FindMess/FindMess'
 import MessDetails from './Components/MessDetails/MessDetails'
 import AdminLayout from './Components/AdminLayout/AdminLayout'
 import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute'
+import UnderDevelope from './Components/ErrorPage/UnderDevelope';
 
 
 const App = () => {
@@ -50,7 +51,7 @@ const App = () => {
         <Route path='/faq' element={<Faq />} />
         <Route path='/login' element={<Login />} />
         <Route path='/search' element={<FindMess />} />
-        <Route path='/mess/:id' element={<MessDetails />} />
+        <Route path='/mess/:id' element={<UnderDevelope />} />
         <Route element={<ProtectedRoute />}>
           <Route path='/admin/dashboard' element={<AdminLayout />} />
         </Route>

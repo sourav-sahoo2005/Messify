@@ -159,7 +159,7 @@ const FilterForm = (props) => {
 
           {/* Categoty  */}
 
-          <div className='mt-3 border-b border-zinc-400 w-full py-2 relative group'>
+          {/* <div className='mt-3 border-b border-zinc-400 w-full py-2 relative group'>
             <p >Category</p>
             <img src="../Icons/icons8-down-arrow-24.png" alt="" className='invert absolute right-0 top-1.5 group-hover:rotate-180 transition-all duration-300 ease-in-out' />
             <div className='
@@ -238,7 +238,7 @@ const FilterForm = (props) => {
             </div>
 
 
-          </div>
+          </div> */}
         </div>
   )
 }
