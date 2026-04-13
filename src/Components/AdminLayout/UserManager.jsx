@@ -79,10 +79,10 @@ const UsersManager = ({ data, setServerMsg }) => {
                     <div className="p-2 bg-indigo-100 text-indigo-600 rounded-lg">
                         <UserPlus size={20} />
                     </div>
-                    <h2 className="text-xl font-bold text-gray-800">Add New Customer</h2>
+                    <h2 className=" font-bold text-gray-800">Add New Customer</h2>
                 </div>
 
-                <form onSubmit={handleSubmit(userFormSubmit)} className=" grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
+                <form onSubmit={handleSubmit(userFormSubmit)} className=" grid grid-cols-1 md:grid-cols-4 gap-4 items-end text-sm">
                     <div>
                         <label className="block text-xs font-semibold text-gray-500 uppercase mb-1">Full Name</label>
                         <div className="relative">
@@ -171,15 +171,15 @@ const UsersManager = ({ data, setServerMsg }) => {
             </div>
 
             {/* --- USERS LIST TABLE --- */}
-            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden ">
                 <div className="p-6 border-b border-gray-50 flex justify-between items-center">
-                    <h2 className="text-xl font-bold text-gray-800">Current Customers</h2>
+                    <h2 className=" font-bold text-gray-800">Current Customers</h2>
                     <span className="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-sm font-medium">
                         Total: {users.length}
                     </span>
                 </div>
 
-                <div className="overflow-x-auto">
+                <div className="overflow-x-auto text-xs">
                     <table className="w-full text-left border-collapse">
                         <thead>
                             <tr className="bg-gray-50">
@@ -236,7 +236,7 @@ const UsersManager = ({ data, setServerMsg }) => {
             <div className='flex justify-end gap-3'>
                 <button
                     onClick={() => setIsModalOpen(true)}
-                    className='px-3 py-2 border bg-indigo-600 hover:bg-indigo-700 rounded-lg'>
+                    className='px-3 py-2 border bg-indigo-600 hover:bg-indigo-700 rounded-lg text-sm shadow-md shadow-indigo-200'>
                     Send Message
                 </button>
                 {isModalOpen && (
@@ -251,7 +251,7 @@ const UsersManager = ({ data, setServerMsg }) => {
                 {(data.meal === "yes") && (
                     <button
                         onClick={() => setIsMakeManagerOpen(true)}
-                        className='px-3 py-2 border bg-indigo-600 hover:bg-indigo-700 rounded-lg'>
+                        className='px-3 py-2 border bg-indigo-600 hover:bg-indigo-700 rounded-lg text-sm shadow-md shadow-indigo-200'>
                         Make Manager
                     </button>
                 )}

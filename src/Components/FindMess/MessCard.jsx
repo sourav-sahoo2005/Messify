@@ -13,8 +13,8 @@ const MessCard = (props) => {
 
 
 
-    const { messName, type, capacity, vacancy, price, location, amenities } = props.data
-    // console.log(props.id)
+    const { messName, type, capacity, vacancy, price, address, city, amenities } = props.data
+    // console.log(address)
 
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -56,7 +56,7 @@ const MessCard = (props) => {
                     </div>
                     <div className='flex flex-col pt-2 '>
                         <span className='font-semibold lg:text-sm  md:text-sm'>{price}/-</span>
-                        <span className='lg:text-[11px] md:text-[11px] text-[12px] text-gray-800'>{location.area}, {location.city}</span>
+                        <span className='lg:text-[11px] md:text-[11px] text-[12px] text-gray-800'>{address.area}, {address.landmark}, {city}</span>
                     </div>
                 </div>
                 <div className="p-2  bottom flex justify-between gap-4 items-center">

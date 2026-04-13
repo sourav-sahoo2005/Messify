@@ -38,20 +38,10 @@ const Developers = () => {
         {/* <div className='p-5 bg-gray-700 rounded-2xl  h-80 w-56 flex-shrink-0 '></div> */}
         {developers.map((dev, index) => {
           return (
-            // <div key={index} className='p-4 h-80 lg:w-56 max-w-55 bg-gray-800 rounded-2xl shrink-0 '>
-            //     <img src={dev.img} alt="" className=' h-50 w-full rounded-2xl object-cover' />
-            //     <h2 className='mt-3 text-xl'>{dev.name}</h2>
-            //     <p className='text-gray-300'>{dev.role}</p>
-            //     <div className='border '>
-
-            //       <Github />
-
-            //     </div>
-            // </div>
 
             <div
               key={index}
-              className='group relative p-4 h-80 lg:w-65 max-w-65 bg-gray-800 rounded-2xl shrink-0 overflow-hidden'
+              className='group relative p-4 lg:h-70 h-80 lg:w-58 max-w-65 bg-gray-800 rounded-2xl shrink-0 overflow-hidden'
             >
               {/* Background Image */}
               <img
@@ -61,7 +51,7 @@ const Developers = () => {
               />
 
               {/* Overlay Content */}
-              <div className='absolute inset-0 bg-linear-to-t from-black/90 via-black/40 to-transparent flex flex-col justify-end p-5 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out'>
+              <div className='absolute rounded-2xl inset-0 bg-linear-to-t from-black/90 via-black/40 to-transparent flex flex-col justify-end p-5 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out'>
 
                 <h2 className='pb-2 text-xl font-bold text-white'>{dev.name}</h2>
 

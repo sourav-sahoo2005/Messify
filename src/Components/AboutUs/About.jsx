@@ -48,7 +48,7 @@ const About = () => {
         {/* about intro Section */}
 
         <div  className='bg-transparent h-120 flex justify-center items-center flex-col'>
-          <span ref={aboutAnimation} className='lg:text-6xl text-4xl font-semibold'>What About Us</span>
+          <span ref={aboutAnimation} className='lg:text-5xl text-4xl font-semibold'>What About Us</span>
           <p ref={aboutSub} className='mt-5 text-xl text-center italic'>
             " Find your space. Live your life. <br /> Leave the rest to us "
           </p>

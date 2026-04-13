@@ -1,10 +1,11 @@
 import { React, useEffect, useRef } from 'react'
-import MessData from './FindMessData';
+// import MessData from './FindMessData';
 import MessCard from './MessCard';
 import { useState } from 'react';
 import SearchForm from './SearchForm';
 import FilterForm from './FilterForm';
 import ContactPopup from './ContactPopup';
+import axios from 'axios';
 
 
 const FindMess = () => {
@@ -12,7 +13,7 @@ const FindMess = () => {
 
 
   // const newData = [];
-  const [newData, setnewData] = useState(MessData)
+  const [newData, setnewData] = useState([])
   const [filters, setFilters] = useState({
     priceRange: [],
     amenities: [],
@@ -25,8 +26,10 @@ const FindMess = () => {
   const filterImg = useRef(null);
   const searchImg = useRef(null);
 
+
+  // for mobile responsiveness
   function openSearch() {
-   
+
     if (searchImg.current.src.includes("icons8-search-24.png")) {
       searchImg.current.src = "../Icons/icons8-close-24.png";
     } else {
@@ -45,7 +48,7 @@ const FindMess = () => {
   }
 
   function openFilter() {
-    
+
     if (filterImg.current.src.includes("icons8-filter-24.png")) {
       filterImg.current.src = "../Icons/icons8-close-24.png";
     } else {
@@ -65,6 +68,23 @@ const FindMess = () => {
     // console.log(newData)
 
   }, [newData])
+
+
+  //fetch data from backend
+  async function fetchMessData() {
+    try {
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/customer/getmess`);
+      // console.log(response.data.mess);
+      setnewData(response.data.mess);
+
+    } catch (error) {
+      console.error("Error fetching mess data:", error)
+    }
+  }
+
+  useEffect(() => {
+    fetchMessData();
+  }, []);
 
 
   // filters state is updated via this helper whenever a checkbox changes
@@ -90,7 +110,7 @@ const FindMess = () => {
     const city = formData.get("City");
     const type = formData.get("Type");
 
-    const filtered = MessData.filter((d) => {
+    const filtered = newData.filter((d) => {
 
       // Search by mess name
       if (messname && !d.messName.toLowerCase().includes(messname)) {
@@ -98,7 +118,7 @@ const FindMess = () => {
       }
 
       // Filter by city
-      if (city && d.location.city !== city) {
+      if (city && d.city !== city) {
         return false;
       }
 
@@ -202,7 +222,7 @@ const FindMess = () => {
           </div>
         </div>
       </div>
-      <ContactPopup/>
+      <ContactPopup />
     </div>
 
   )

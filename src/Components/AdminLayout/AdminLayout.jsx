@@ -113,7 +113,7 @@ const AdminLayout = ({ children }) => {
             </button>
           </div>
 
-          <nav className="flex-1 overflow-y-auto p-4 space-y-2">
+          <nav className="flex-1 overflow-y-auto p-4 space-y-2 text-sm">
             <NavItem
               active={activeTab === 'profile'}
               onClick={() => { setActiveTab('profile'); setIsOpen(false); }}
@@ -165,9 +165,9 @@ const AdminLayout = ({ children }) => {
         {/* Main Content Area */}
         <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
           {/* Mobile Header */}
-          <header className="lg:hidden bg-white border-b p-4 flex items-center justify-between">
-            <p className='font-bold text-amber-500 text-xl'>Messify</p>
-            <button onClick={toggleSidebar} className="p-2 text-slate-600">
+          <header className="lg:hidden bg-slate-900 border-b p-4 flex items-center justify-between">
+            <p className='font-semibold text-amber-500 text-xl'>Messify</p>
+            <button onClick={toggleSidebar} className="p-2 text-white">
               <Menu size={28} />
             </button>
           </header>
@@ -186,7 +186,7 @@ const AdminLayout = ({ children }) => {
 const NavItem = ({ icon, label, onClick, active }) => (
   <div
     onClick={onClick}
-    className={`p-3 ${active ? 'bg-indigo-600' : 'hover:bg-slate-800'} rounded-lg cursor-pointer transition flex items-center gap-3`}
+    className={`p-3 ${active ? 'bg-indigo-600' : 'hover:bg-slate-800'} rounded-lg text-sm cursor-pointer transition flex items-center gap-3`}
   >
     {icon}
     <span>{label}</span>
