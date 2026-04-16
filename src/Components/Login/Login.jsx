@@ -53,7 +53,7 @@ const Login = () => {
             if (resData.status === 200 && resData.data.message !== "Invalid OTP") {
                 setIsOTPSend(false);
                 localStorage.setItem('token', true);
-                navigate('/admin/dashboard');
+                navigate('/admin/profile');
             } else {
                 setIsOTPSend(true);
             }
@@ -80,7 +80,7 @@ const Login = () => {
             if (resData.status === 200 && resData.data.message == "Registration successful") {
 
                 localStorage.setItem('token', true);
-                navigate('/admin/dashboard');
+                navigate('/admin/profile');
             }
         } catch (e) {
             console.error("This is not JSON! It's likely an HTML error page.");

@@ -10,12 +10,16 @@ import Dashboard from './Dashboard';
 import { useNavigate } from 'react-router';
 import Msgpopup from '../Login/Msgpopup';
 import MealTrackingDashboard from './MealTrackingDashboard';
-// import { BACKEND_URL } from '../../config';
+import TrackMeal from './TrackMeal';
+import { useLocation, Link } from 'react-router'
+
+
 
 const AdminLayout = ({ children }) => {
 
 
   const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   const [profile, setProfile] = useState('');
   const [activeTab, setActiveTab] = useState('profile');
@@ -49,18 +53,21 @@ const AdminLayout = ({ children }) => {
   }
 
 
+  const pathParts = pathname.split('/');
+  const currentPath = pathParts[pathParts.length - 1];
+
   const renderContent = () => {
-    switch (activeTab) {
+    switch (currentPath) {
       case 'profile':
         return <MessProfile data={profile} />;
-      case 'users':
+      case 'users-management':
         return <UsersManager data={profile} setServerMsg={setServerMsg} />;
       case 'dashboard':
         return <Dashboard data={profile} />;
-      case 'edit':
+      case 'edit-profile':
         return <EditProfile data={profile} setServerMsg={setServerMsg} />;
-      case 'meal':
-        return <MealTrackingDashboard />
+      case 'track-meal':
+        return <TrackMeal />
       default:
         return <MessProfile data={profile} />;
     }
@@ -115,36 +122,41 @@ const AdminLayout = ({ children }) => {
 
           <nav className="flex-1 overflow-y-auto p-4 space-y-2 text-sm">
             <NavItem
-              active={activeTab === 'profile'}
+              active={pathname === '/admin/profile' || pathname === '/admin/profile/'}
               onClick={() => { setActiveTab('profile'); setIsOpen(false); }}
               icon={<CircleUserRound />}
               label="Mess Profile"
+              path='/admin/profile'
             />
             <NavItem
-              active={activeTab === 'users'}
+              active={pathname.includes('users-management')}
               onClick={() => { setActiveTab('users'); setIsOpen(false); }}
               icon={<Users />}
               label="Users"
+              path='/admin/profile/users-management'
             />
             <NavItem
-              active={activeTab === 'dashboard'}
+              active={pathname.includes('dashboard')}
               onClick={() => { setActiveTab('dashboard'); setIsOpen(false); }}
               icon={<LayoutDashboard />}
               label="Dashboard"
+              path='/admin/profile/dashboard'
             />
             <NavItem
-              active={activeTab === 'edit'}
+              active={pathname.includes('edit-profile')}
               onClick={() => { setActiveTab('edit'); setIsOpen(false); }}
               icon={<UserRoundPen />}
               label="Edit Profile"
+              path='/admin/profile/edit-profile'
             />
 
             {profile.meal === "yes" && (
               <NavItem
-                active={activeTab === 'meal'}
+                active={pathname.includes('track-meal')}
                 onClick={() => { setActiveTab('meal'); setIsOpen(false); }}
                 icon={<CookingPot />}
                 label="Track Meal"
+                path='/admin/profile/track-meal'
               />
             )}
 
@@ -183,14 +195,15 @@ const AdminLayout = ({ children }) => {
     </div>
   );
 };
-const NavItem = ({ icon, label, onClick, active }) => (
-  <div
+const NavItem = ({ icon, label, onClick, active, path }) => (
+  <Link
+    to={path}
     onClick={onClick}
     className={`p-3 ${active ? 'bg-indigo-600' : 'hover:bg-slate-800'} rounded-lg text-sm cursor-pointer transition flex items-center gap-3`}
   >
     {icon}
     <span>{label}</span>
-  </div>
+  </Link>
 );
 
 export default AdminLayout;

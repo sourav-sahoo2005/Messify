@@ -15,6 +15,7 @@ import MessDetails from './Components/MessDetails/MessDetails'
 import AdminLayout from './Components/AdminLayout/AdminLayout'
 import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute'
 import UnderDevelope from './Components/ErrorPage/UnderDevelope';
+import MealTrackingDashboard from './Components/AdminLayout/MealTrackingDashboard';
 
 
 const App = () => {
@@ -53,7 +54,8 @@ const App = () => {
         <Route path='/search' element={<FindMess />} />
         <Route path='/mess/:id' element={<UnderDevelope />} />
         <Route element={<ProtectedRoute />}>
-          <Route path='/admin/dashboard' element={<AdminLayout />} />
+          <Route path='/admin/profile/*' element={<AdminLayout />} />
+          <Route path='/:messingId/messing-dashboard' element ={ <MealTrackingDashboard/>} />
         </Route>
 
       </Routes >

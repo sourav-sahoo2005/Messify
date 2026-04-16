@@ -1,28 +1,43 @@
 import React from 'react'
-import { useLocation, Link } from 'react-router'
+import { useLocation, Link, matchPath } from 'react-router'
 import './Navbar.css'
 
 const Navbar = () => {
+
+    const location = useLocation();
+    const path = location.pathname;
+
+    // Convert to lowercase to prevent case-sensitivity bugs
+    const pathname = location.pathname.toLowerCase();
+
+    // Hide if path is exactly '/admin/dashboard' OR starts with '/admin/dashboard/'
+
+    //   const isDashboard = path === '/admin/profile' || path.startsWith('/admin/profile/' || path === '/:messingId/messing-dashboard');
+    const isDashboard =
+        pathname.startsWith('/admin/profile') ||
+        !!matchPath({ path: "/:messingId/messing-dashboard" }, path);
+
+
     return (
         <>
-        <nav className={`p-5 h-15 w-full fixed  justify-between items-center lg:hidden md:hidden  zalando-sans-expanded-head z-10 bg-black/50 backdrop-blur-md ${useLocation().pathname == '/admin/dashboard' ? 'hidden' : 'flex'}`}>
-              <Link to='/' className='text-xl text-amber-500 drop-shadow-xl/50  drop-shadow-amber-500/40'>
+            <nav className={`p-5 h-15 w-full fixed  justify-between items-center lg:hidden md:hidden  zalando-sans-expanded-head z-10 bg-black/50 backdrop-blur-md ${isDashboard ? 'hidden' : 'flex'}`}>
+                <Link to='/' className='text-xl text-amber-500 drop-shadow-xl/50  drop-shadow-amber-500/40'>
                     MessiFy
                 </Link>
-                 <Link
-                        className='px-4 py-1.5  rounded-full bg-amber-600 text-white hover:bg-amber-700 transition-all '
-                        to="/login"
-                    >
-                        Login
-                    </Link>
+                <Link
+                    className='px-4 py-1.5  rounded-full bg-amber-600 text-white hover:bg-amber-700 transition-all '
+                    to="/login"
+                >
+                    Login
+                </Link>
 
-        </nav>
+            </nav>
             <nav id='navbar' className={`
       w-[95%]
       mx-auto
       h-15
       px-8
-      ${useLocation().pathname == '/admin/dashboard'? 'hidden':'flex'}
+      ${isDashboard ? 'hidden' : 'flex'}
       justify-between
       items-center
       rounded-full
