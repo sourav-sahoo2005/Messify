@@ -171,7 +171,7 @@ const FindMess = () => {
 
 
   return (
-    <div className="min-h-screen w-full lg:pt-30 pt-25 lg:p-10 md:p-5 mb-5">
+    <div className="min-h-screen w-full lg:pt-23 pt-25 lg:p-10 md:p-5 mb-5">
 
       <button onClick={openSearch} className=' lg:hidden md:hidden h-10 w-10 flex justify-center items-center bg-amber-700 rounded-full fixed z-100 right-9 cursor-pointer'>
         <img

@@ -54,8 +54,6 @@ const SearchForm = (props) => {
               <option className="text-black">All</option>
               <option className="text-black">Boys</option>
               <option className="text-black">Girls</option>
-              <option className="text-black">Family</option>
-              <option className="text-black">Working Professionals</option>
             </select>
           </label>
 

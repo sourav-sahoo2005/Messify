@@ -50,7 +50,7 @@ const Footer = () => {
         <div className='lg:w-1/4 '>
           <h1 className='text-xl font-semibold text-amber-300'>Contact Us</h1>
           <h2 className='mt-2 text-sm'>Email:</h2>
-          <p className='text-xs text-gray-300'>messify@gmail.com</p>
+          <p className='text-xs text-gray-300'>service.messify@gmail.com</p>
           <h2 className='mt-4 text-sm'>Call:</h2>
           <p className='text-xs text-gray-300'>+91 9348121330</p>
         </div>

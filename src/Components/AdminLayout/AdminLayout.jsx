@@ -15,12 +15,14 @@ import { useLocation, Link } from 'react-router'
 
 
 
+
 const AdminLayout = ({ children }) => {
 
 
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
+  const [loding, setLoding] = useState(false);
   const [profile, setProfile] = useState('');
   const [activeTab, setActiveTab] = useState('profile');
   const [serverMsg, setServerMsg] = useState("");
@@ -32,12 +34,15 @@ const AdminLayout = ({ children }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setLoding(true)
         const response = await axios.post(
           `${import.meta.env.VITE_BACKEND_URL}/owner/dashboard`,
-          {}, // No body needed for the token!
-          { withCredentials: true } // Tells Axios to send the cookie
+          {},
+          { withCredentials: true }
         );
-        // console.log(response.data.profile);
+
+        setLoding(false)
+
         setProfile(response.data.profile)
         setServerMsg(response.data.message)
       } catch (error) {
@@ -61,13 +66,13 @@ const AdminLayout = ({ children }) => {
       case 'profile':
         return <MessProfile data={profile} />;
       case 'users-management':
-        return <UsersManager data={profile} setServerMsg={setServerMsg} />;
+        return <UsersManager data={profile} setServerMsg={setServerMsg} setLoding={setLoding} />;
       case 'dashboard':
         return <Dashboard data={profile} />;
       case 'edit-profile':
         return <EditProfile data={profile} setServerMsg={setServerMsg} />;
       case 'track-meal':
-        return <TrackMeal />
+        return <TrackMeal setLoding={setLoding}/>
       default:
         return <MessProfile data={profile} />;
     }
@@ -77,9 +82,11 @@ const AdminLayout = ({ children }) => {
   const logOut = async function () {
 
     if (confirm("Are you sure want to logout from your account")) {
+      setLoding(true);
       await axios.get(`${import.meta.env.VITE_BACKEND_URL}/owner/logout`);
       localStorage.clear();
       navigate('/');
+      setLoding(false);
 
 
     }
@@ -175,9 +182,14 @@ const AdminLayout = ({ children }) => {
         </aside>
 
         {/* Main Content Area */}
-        <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
+        <div className="flex-1 flex flex-col justify-center items-center min-w-0 overflow-hidden">
+          {loding && (
+            <div className='h-screen lg:w-[80%] w-full  bg-black/20 backdrop-blur-sm flex flex-col justify-center items-center absolute z-1000'>
+              <div className="h-12 w-12 animate-spin rounded-full border-8 border-gray-200 border-t-blue-600 border-b-amber-500"></div>
+            </div>
+          )}
           {/* Mobile Header */}
-          <header className="lg:hidden bg-slate-900 border-b p-4 flex items-center justify-between">
+          <header className="lg:hidden w-full bg-slate-900 border-b p-4 flex items-center justify-between">
             <p className='font-semibold text-amber-500 text-xl'>Messify</p>
             <button onClick={toggleSidebar} className="p-2 text-white">
               <Menu size={28} />
@@ -185,6 +197,7 @@ const AdminLayout = ({ children }) => {
           </header>
 
           <main className="w-full flex-1 overflow-y-auto p-4 md:p-8 bg-slate-50">
+
             <div className="max-w-7xl mx-auto">
               {renderContent()}
             </div>

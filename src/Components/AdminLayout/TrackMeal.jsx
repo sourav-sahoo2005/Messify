@@ -11,10 +11,10 @@ import Msgpopup from '../Login/Msgpopup';
 
 
 
-const TrackMeal = () => {
+const TrackMeal = ({ setLoding }) => {
 
     const [messing, setMessing] = useState([]);
-    const [loding, setLoding] = useState(false);
+    // const [loding, setLoding] = useState(false);
     const [serverMsg, setServerMsg] = useState("");
 
 
@@ -53,13 +53,16 @@ const TrackMeal = () => {
 
     const deleteDashboard = async function (messing_id) {
         try {
-            setLoding(true);
-            const res = await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/owner/delete-dashboard/${messing_id}`, { withCredentials: true });
+            if (confirm("Do you Seriously want to delete this dashboard,once you delete you can't restore this dashboard")) {
 
-            setLoding(false)
-            res.status == 200 ? getMessingData() : '';
-            // console.log(messing_id)
-            setServerMsg(res.data.message)
+                setLoding(true);
+                const res = await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/owner/delete-dashboard/${messing_id}`, { withCredentials: true });
+
+                setLoding(false)
+                res.status == 200 ? getMessingData() : '';
+                setServerMsg(res.data.message)
+
+            }
 
         } catch (err) {
             console.error(err);
@@ -71,7 +74,6 @@ const TrackMeal = () => {
 
     }, [])
 
-    // console.log(messing)
 
     return (
         <div className='grid grid-col-1 grid-row-2 gap-3 relative'>
@@ -94,16 +96,13 @@ const TrackMeal = () => {
                     className='px-3 py-2 rounded-2xl text-xs bg-indigo-700 text-white  transition-colors shadow-sm active:transform active:scale-95'>Create A Dashboard</button>
 
             </div>
-            <div className='min-h-screen grid lg:grid-cols-3 lg:grid-rows-3 md:grid-cols-2 grid-cols-1 gap-3 place-content-center justify-items-center '>
+            <div className='h-auto grid lg:grid-cols-2  md:grid-cols-2 grid-cols-1 gap-3 '>
 
                 {messing.map(function (data) {
                     return (<Messing data={data} key={data._id} deleteDashboard={deleteDashboard} />)
                 })}
 
             </div>
-            {loding && <Loding />}
-
-
         </div>
     )
 }

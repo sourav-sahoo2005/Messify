@@ -56,15 +56,15 @@ const EditProfile = ({ data }) => {
         <div className="max-w-5xl mx-auto pb-12">
             <div className="flex justify-between items-center mb-8">
                 <div>
-                    <h1 className="text-3xl font-bold text-slate-800">Edit Mess Profile</h1>
-                    <p className="text-slate-500">Update your mess details and contact information.</p>
+                    <h1 className="text-2xl font-bold text-slate-800">Edit Mess Profile</h1>
+                    <p className="text-slate-500 text-sm ">Update your mess details and contact information.</p>
                 </div>
                 <button
                     onClick={handleSubmit}
                     disabled={isSaving}
-                    className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2.5 rounded-xl font-semibold transition shadow-lg shadow-indigo-200 disabled:opacity-50"
+                    className="text-sm flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2.5 rounded-xl font-semibold transition shadow-lg shadow-indigo-200 disabled:opacity-50"
                 >
-                    {isSaving ? 'Saving...' : <><Save size={20} /> Save Changes</>}
+                    {isSaving ? 'Saving...' : <><Save size={16} /> Save Changes</>}
                 </button>
             </div>
 
@@ -75,11 +75,11 @@ const EditProfile = ({ data }) => {
 
                     {/* Section 1: Basic Info */}
                     <section className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
-                        <div className="flex items-center gap-2 mb-6 text-indigo-600">
+                        <div className="flex items-center gap-2 mb-4 text-indigo-600">
                             <Building2 size={20} />
-                            <h2 className="font-bold text-lg text-slate-800">Mess Details</h2>
+                            <h2 className="font-semibold text-lg text-slate-800">Mess Details</h2>
                         </div>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className=" text-sm grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div className="md:col-span-2">
                                 <label className="block text-sm font-medium text-slate-600 mb-2">Mess Name</label>
                                 <input
@@ -95,26 +95,26 @@ const EditProfile = ({ data }) => {
                                 >
                                     <option value="boys">Boys</option>
                                     <option value="girls">Girls</option>
-                                    <option value="unisex">Unisex</option>
                                 </select>
                             </div>
                             <div>
                                 <label className="block text-sm font-medium text-slate-600 mb-2">Description</label>
                                 <textarea
+                                 
                                     name="description" value={formData.description} onChange={handleChange} rows="1"
-                                    className="w-full p-3 text-black bg-slate-50 border border-slate-200 rounded-xl outline-none"
+                                    className="w-full lg:min-h-auto min-h-30 p-3 text-black bg-slate-50 border border-slate-200 rounded-xl outline-none"
                                 />
                             </div>
                         </div>
                     </section>
 
                     {/* Section 2: Location */}
-                    <section className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
-                        <div className="flex items-center gap-2 mb-6 text-indigo-600">
+                    <section className="text-sm bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
+                        <div className="flex items-center gap-2 mb-4 text-indigo-600">
                             <MapPin size={20} />
                             <h2 className="font-bold text-lg text-slate-800">Location Information</h2>
                         </div>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label className="block text-sm font-medium text-slate-600 mb-2">City</label>
                                 <input
@@ -150,8 +150,8 @@ const EditProfile = ({ data }) => {
                 {/* RIGHT COLUMN: Pricing & Owner */}
                 <div className="space-y-8">
                     {/* Section 3: Pricing & Capacity */}
-                    <section className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
-                        <div className="flex items-center gap-2 mb-6 text-orange-600">
+                    <section className="text-sm bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
+                        <div className="flex items-center gap-2 mb-4 text-orange-600">
                             <ShieldCheck size={20} />
                             <h2 className="font-bold text-lg text-slate-800">Inventory & Pricing</h2>
                         </div>
@@ -168,18 +168,18 @@ const EditProfile = ({ data }) => {
                             </div>
                             <div>
                                 <label className="text-xs font-bold text-slate-400 uppercase">Monthly Price (₹)</label>
-                                <input type="number" name="price" value={formData.price} onChange={handleChange} className="w-full p-2 bg-slate-50 border-b border-slate-200 outline-none text-xl font-bold text-indigo-600" />
+                                <input type="number" name="price" value={formData.price} onChange={handleChange} className="w-full p-2 bg-slate-50 border-b border-slate-200 outline-none text-lg font-bold text-indigo-600" />
                             </div>
                             <div>
                                 <label className="text-xs font-bold text-slate-400 uppercase">Security Deposit (₹)</label>
-                                <input type="number" name="security" value={formData.security} onChange={handleChange} className="w-full p-2 text-black bg-slate-50 border-b border-slate-200 outline-none" />
+                                <input type="number" name="security" value={formData.security} onChange={handleChange} className="w-full p-2 text-red-500 font-bold  bg-slate-50 border-b border-slate-200 outline-none" />
                             </div>
                         </div>
                     </section>
 
                     {/* Section 4: Owner Contact */}
-                    <section className="bg-slate-900 rounded-2xl p-6 shadow-xl text-white">
-                        <div className="flex items-center gap-2 mb-6">
+                    <section className="text-sm bg-slate-900 rounded-2xl p-6 shadow-xl text-white">
+                        <div className="flex items-center gap-2 mb-4">
                             <UserCircle size={20} className="text-indigo-400" />
                             <h2 className="font-bold text-lg">Owner Contact</h2>
                         </div>
@@ -192,8 +192,12 @@ const EditProfile = ({ data }) => {
                                 <label className="text-xs text-slate-400 uppercase">Phone</label>
                                 <input type="text" name="phone" value={formData.owner.phone} onChange={(e) => handleChange(e, 'owner')} className="w-full bg-transparent border-b border-slate-700 py-1 outline-none" />
                             </div>
+                             <div>
+                                <label className="text-xs text-slate-400 uppercase">Email</label>
+                                <input type="text" name="phone" value={formData.owner.email} onChange={(e) => handleChange(e, 'owner')} className="w-full bg-transparent border-b border-slate-700 py-1 outline-none" />
+                            </div>
                             <div className="pt-2 opacity-50 italic text-xs">
-                                <Info size={12} className="inline mr-1" /> UserID and Email cannot be changed here.
+                                <Info size={12} className="inline mr-1" /> UserID cannot be changed .
                             </div>
                         </div>
                     </section>

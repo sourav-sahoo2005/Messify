@@ -42,20 +42,7 @@ const Loding = () => {
     
     <div className='h-screen w-full  bg-black/20 backdrop-blur-sm flex flex-col justify-center items-center absolute z-1000'>
 
-      {/* <h1
-        ref={textRef}
-        className="text-white text-6xl font-semibold flex"
-      >
-        {text.split("").map((char, index) => (
-          <span
-            key={index}
-            className="inline-block"
-          >
-            {char === " " ? "\u00A0" : char}
-          </span>
-        ))}
-      </h1> */}
-
+    
       <div className="h-12 w-12 animate-spin rounded-full border-8 border-gray-200 border-t-blue-600 border-b-amber-500"></div> 
 
     </div>

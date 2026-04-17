@@ -61,7 +61,7 @@ const MessCard = (props) => {
                 </div>
                 <div className="p-2  bottom flex justify-between gap-4 items-center">
 
-                    <Link to={`/mess/${props.id}`} className='lg:text-[10px] md:text-[10px] text-sm w-1/2 font-semibold   px-2 lg:py-2 md:py-2 py-3 border rounded text-center cursor-pointer '>Details</Link>
+                    <Link to={`/mess/${props.data._id}`} className='lg:text-[10px] md:text-[10px] text-sm w-1/2 font-semibold   px-2 lg:py-2 md:py-2 py-3 border rounded text-center cursor-pointer '>Details</Link>
                     <button
                         onClick={() => setIsModalOpen(true)}
                         className='lg:text-[10px] md:text-[10px] text-sm w-1/2 bg-amber-600 text-white px-2 lg:py-2 md:py-2 py-3 rounded text-center cursor-pointer '>Contact Now</button>

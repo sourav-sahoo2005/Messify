@@ -5,7 +5,7 @@ import { UserPlus, Mail, Phone, User, Trash2, Search } from 'lucide-react';
 import SendSms from './SendSms';
 import MakeManagerPopup from './MakeManagerPopup';
 
-const UsersManager = ({ data, setServerMsg }) => {
+const UsersManager = ({ data, setServerMsg,setLoding }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isMakeManagerOpen, setIsMakeManagerOpen] = useState(false);
     const [users, setUsers] = useState([]);
@@ -16,9 +16,11 @@ const UsersManager = ({ data, setServerMsg }) => {
     const fetchUsers = async () => {
         try {
             // This route should return the array of customers linked to the owner
+            setLoding(true)
             const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/owner/get-customers`, {
                 withCredentials: true
             });
+            setLoding(false);
             setUsers(response.data.customers);
         } catch (error) {
             console.error("Error fetching users:", error);
@@ -34,6 +36,7 @@ const UsersManager = ({ data, setServerMsg }) => {
     // 3. Handle Form Submission
     const userFormSubmit = async (formData) => {
         try {
+            setLoding(true);
             const response = await axios.post(
                 `${import.meta.env.VITE_BACKEND_URL}/owner/add-customer`,
                 formData,
@@ -43,6 +46,7 @@ const UsersManager = ({ data, setServerMsg }) => {
             if (response.status === 200) {
                 await fetchUsers();
                 reset();        //clear the form
+                setLoding(false);
                 setServerMsg(response.data.message)
             }
         } catch (error) {
@@ -54,9 +58,11 @@ const UsersManager = ({ data, setServerMsg }) => {
     // Handle Delete
     const deleteUser = (id) => {
         if (window.confirm("Are you sure you want to delete this customer?")) {
+            setLoding(true)
             axios.delete(`${import.meta.env.VITE_BACKEND_URL}/owner/delete-customer/${id}`, { withCredentials: true })
                 .then(response => {
                     if (response.status === 200) {
+                        setLoding(false);
                         fetchUsers();
                         setServerMsg(response.data.message)
                     }
