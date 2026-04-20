@@ -59,6 +59,7 @@ const Login = () => {
             }
 
         } catch (e) {
+             navigate('/error')
             console.error("Login Error:", e);
             setServerMsg("Server error. Please try again.");
         }
@@ -83,6 +84,7 @@ const Login = () => {
                 navigate('/admin/profile');
             }
         } catch (e) {
+            navigate('/error')
             console.error("This is not JSON! It's likely an HTML error page.");
             setServerMsg("Server error. Please try again.");
         }

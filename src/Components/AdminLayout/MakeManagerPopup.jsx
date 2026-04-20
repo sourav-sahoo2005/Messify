@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { X, Search, CheckSquare, Square, UserPlus } from 'lucide-react';
+import { useNavigate } from 'react-router';
 import axios from 'axios';
 
 const MakeManagerPopup = ({ isOpen, onClose, customers, fetchUsers }) => {
 
-
-
-
+    const navigate = useNavigate();
     const [selectedIds, setSelectedIds] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
 
@@ -35,14 +34,19 @@ const MakeManagerPopup = ({ isOpen, onClose, customers, fetchUsers }) => {
 
     const makeManager = async function () {
         // console.log(selectedIds);
+        try {
 
-        const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/owner/make-manager`, { managerIds: selectedIds, customerIds: filteredCustomers.map(c => c._id) }, { withCredentials: true });
-        console.log(response.data);
-        if (response.status === 200) {
+            const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/owner/make-manager`, { managerIds: selectedIds, customerIds: filteredCustomers.map(c => c._id) }, { withCredentials: true });
+            console.log(response.data);
+            if (response.status === 200) {
 
-            onClose();
-            fetchUsers();
+                onClose();
+                fetchUsers();
 
+            }
+        } catch (err) {
+            navigate('/error')
+            console.error(err);
         }
     }
 
