@@ -5,7 +5,7 @@ const MessProfile = ({ data }) => {
     if (!data) return <div className="p-8 text-center">Loading profile...</div>;
 
     return (
-        <div className="max-w-full mx-auto p-6 bg-gray-50 min-h-screen">
+        <div className="max-w-full mx-auto p-2 bg-gray-50 min-h-screen">
             {/* Header Section */}
             <div className="bg-white rounded-2xl shadow-sm p-8 mb-6 border border-gray-100">
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">

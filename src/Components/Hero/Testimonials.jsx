@@ -26,14 +26,25 @@ const Testimonials = () => {
 
 
   useEffect(() => {
+
+    const currentReview = reviews[currentIndex];
+    const wordCount = currentReview?.description.split(' ').length || 0;
+    const delay = wordCount * 500 || 3000;
+
+
     const interval = setInterval(() => {
+
       setCurrentIndex((prevIndex) =>
         prevIndex === reviews.length - 1 ? 0 : prevIndex + 1
+
       );
-    }, 3000);
+
+    }, delay);
 
     return () => clearInterval(interval);
-  }, [reviews.length]);
+  }, [currentIndex, reviews]);
+
+
 
 
   const fetchData = async function () {
