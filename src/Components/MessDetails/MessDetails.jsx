@@ -43,7 +43,7 @@ const MessDetails = () => {
   }
 
   return (
-    <div className="min-h-screen w-full lg:pt-22 md:pt-22 p-5 bg-gray-50">
+    <div className="min-h-screen w-full lg:pt-22 md:pt-22 px-10 py-5 bg-gray-50">
       <MessProfile data={mess} />
     </div>
   );

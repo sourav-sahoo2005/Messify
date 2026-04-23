@@ -17,6 +17,7 @@ const FindMess = () => {
 
   // const newData = [];
   const [newData, setnewData] = useState([])
+  const [filterData, setFilterData] = useState([]);
   const [filters, setFilters] = useState({
     priceRange: [],
     amenities: [],
@@ -40,13 +41,13 @@ const FindMess = () => {
     }
 
     searchForm.current.classList.toggle("hidden");
-    searchForm.current.classList.toggle("flex-wrap");
-    searchForm.current.classList.add("absolute", "top-20", "left-0", "right-0", "mx-auto", "z-80", "h-auto", "flex", "flex-col", "justify-center", "items-center", "gap-10", "bg-amber-700");
+    searchForm.current.classList.toggle("flex-wrap", "bg-zinc-900");
+    searchForm.current.classList.add("absolute", "top-0", "left-0", "right-0", "mx-auto", "z-80", "h-auto", "flex", "flex-col", "justify-center", "items-center", "gap-10", "bg-amber-700");
 
     searchForm.current.querySelector("div").classList.add("w-full", "flex", "justify-between", "items-center", "flex-wrap", "gap-5");
 
     searchForm.current.querySelectorAll("label").forEach(element => {
-      element.classList.add("w-full", "flex", "justify-start", "items-center", "gap-3", "h-15", "rounded-full", "p-3", "bg-amber-900", "text-white");
+      element.classList.add("w-full", "flex", "justify-start", "items-center", "gap-3", "h-15", "rounded-full", "p-3", "bg-zinc-700", "text-white");
     });
   }
 
@@ -61,14 +62,14 @@ const FindMess = () => {
 
     filterForm.current.classList.toggle("hidden");
     filterForm.current.classList.toggle("flex-wrap");
-    filterForm.current.classList.add("absolute", "top-20", "left-0", "right-0", "mx-auto", "z-80", "h-[40vh]", "w-full", "flex", "flex-col", "justify-center", "items-center");
+    filterForm.current.classList.add("absolute", "top-0", "left-0", "right-0", "mx-auto", "z-80", "h-[40vh]", "w-full", "flex", "flex-col", "justify-center", "items-center");
   }
 
 
   // console.log(newData)
 
   useEffect(() => {
-    // console.log(newData)
+    console.log(newData)
 
   }, [newData])
 
@@ -80,6 +81,7 @@ const FindMess = () => {
       const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/customer/getmess`);
       // console.log(response.data.mess);
       setnewData(response.data.mess);
+      setFilterData(response.data.mess);
       setLoding(false)
 
     } catch (error) {
@@ -112,15 +114,24 @@ const FindMess = () => {
     e.preventDefault();
 
     const formData = new FormData(e.target);
-    const messname = formData.get("messname")?.toLowerCase() || "";
+    const searchText = formData.get("messname")?.toLowerCase().trim() || "";
     const city = formData.get("City");
     const type = formData.get("Type");
 
+    setLoding(true);
     const filtered = newData.filter((d) => {
 
-      // Search by mess name
-      if (messname && !d.messName.toLowerCase().includes(messname)) {
-        return false;
+      if (searchText) {
+
+        const isInName = d.messName?.toLowerCase().includes(searchText);
+        const isInCity = d.city?.toLowerCase().includes(searchText);
+        const isInLandmark = d.address.landmark?.toLowerCase().includes(searchText);
+        const isInPlace = d.address.area?.toLowerCase().includes(searchText);
+
+        // If the text isn't found in ANY of these, skip this item
+        if (!(isInName || isInCity || isInLandmark || isInPlace)) {
+          return false;
+        }
       }
 
       // Filter by city
@@ -170,16 +181,17 @@ const FindMess = () => {
       return true;
     });
 
-    setnewData(filtered);
+    setFilterData(filtered);
+    setLoding(false);
   };
 
 
 
 
   return (
-    <div className="min-h-screen w-full lg:pt-23 pt-25 lg:p-10 md:p-5 mb-5">
+    <div className="min-h-screen w-full lg:pt-23 pt-0 lg:p-10 md:p-5 mb-5">
 
-      <button onClick={openSearch} className=' lg:hidden md:hidden h-10 w-10 flex justify-center items-center bg-amber-700 rounded-full fixed z-100 right-9 cursor-pointer'>
+      <button onClick={openSearch} className=' lg:hidden md:hidden h-10 w-10 flex justify-center items-center bg-amber-700 rounded-full fixed z-100 right-22 top-8 cursor-pointer'>
         <img
           ref={searchImg}
           className='invert '
@@ -188,7 +200,7 @@ const FindMess = () => {
         />
       </button>
 
-      <button onClick={openFilter} className=' lg:hidden  h-10 w-10 flex justify-center items-center bg-blue-700 rounded-full fixed z-100 right-8 top-40 md:top-60 cursor-pointer'>
+      <button onClick={openFilter} className=' lg:hidden  h-10 w-10 flex justify-center items-center bg-blue-700 rounded-full fixed z-100 right-8 top-8 md:top-60 cursor-pointer'>
         <img
           ref={filterImg}
           className='invert '
@@ -202,7 +214,7 @@ const FindMess = () => {
       <SearchForm searchForm={searchForm} handleSubmit={handleSubmit} />
 
       {/* Main Layout */}
-      <div className="flex mt-3 ">
+      <div className="flex lg:mt-3 md:mt-3 ">
 
         {/* Filter Sidebar */}
         <FilterForm filterForm={filterForm} handleFilterChange={handleFilterChange} filters={filters} />
@@ -210,18 +222,31 @@ const FindMess = () => {
         {/* Mess Card Section */}
         <div className="lg:ml-3 flex-1 sticky top-24">
 
-          <div className="rounded lg:p-5 md:p-5 bg-zinc-900 ">
+          <div className="h-screen py-6 rounded lg:p-5 md:p-5 bg-zinc-900 ">
 
             <h1 className="text-xl px-7 py-2 font-semibold">
-              <span className="text-amber-400">({newData.length})</span> Results Found
+              <span className="text-amber-400">({newData.length})</span> Mess Found
             </h1>
 
             {/* Cards */}
-            <div className="flex  flex-wrap justify-center items-center lg:gap-5 gap-3 overflow-y-auto  h-[calc(100vh-8rem)]   py-15 scrollbar-hidden scrollbar-thin mask-[linear-gradient(to_bottom,transparent,black_15%,black_85%,transparent)] 
-  [-webkit-mask-image:linear-gradient(to_bottom,transparent,black_15%,black_75%,transparent)]">
+            <div className="flex  
+            flex-wrap 
+            justify-center 
+            items-center 
+            lg:gap-5 gap-3 
+            overflow-y-auto  
+            h-[calc(100vh-8rem)]   
+            py-15 
+            scrollbar-hidden 
+            scrollbar-thin 
+            [-webkit-mask-image:linear-gradient(to_bottom,transparent,black_15%,black_75%,transparent)]">
               {loding && <Loding />}
 
-              {newData.map((data, idx) => (
+              {filterData.length === 0 && !loding && (
+                <div className='h-full w-full flex justify-center items-center'>Not Registered Mess Found in This Location </div>
+              )}
+
+              {filterData.map((data, idx) => (
                 <MessCard key={data.messName || idx} data={data} id={idx} />
               ))}
 

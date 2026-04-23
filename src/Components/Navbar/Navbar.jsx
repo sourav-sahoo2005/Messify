@@ -18,6 +18,7 @@ const Navbar = () => {
         !!matchPath({ path: "/:messingId/messing-dashboard" }, path);
 
     const isMessPage = pathname.startsWith('/mess/') || !!matchPath({ path: "/mess/:id" }, path);
+    const isSearch = pathname.startsWith('/search') || !!matchPath({ path: "/search" }, path);
 
 
     return (
@@ -34,8 +35,10 @@ const Navbar = () => {
                 zalando-sans-expanded-head 
                 z-10 
                 ${isMessPage ? 'hidden' : 'flex'}
+                ${isSearch ? 'hidden' : 'flex'}
+                ${isDashboard ? 'hidden' : 'flex'}
                  backdrop-blur-md 
-                ${isDashboard ? 'hidden' : 'flex'}`}>
+                `}>
                 <Link to='/' className='text-xl text-amber-500 drop-shadow-xl/50  drop-shadow-amber-500/40'>
                     MessiFy
 

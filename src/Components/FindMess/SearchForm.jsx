@@ -19,13 +19,13 @@ const SearchForm = (props) => {
         <div className="w-5/6 flex justify-between items-center flex-wrap">
 
           {/* Search Name */}
-          <label className="lg:h-auto lg:w-1/3 lg:border-r-2 flex items-center">
+          <label className="lg:h-auto lg:w-1/3 lg:border-r-2 flex items-center wrap-break-words">
             <img className="invert" src="../Icons/icons8-search-24.png" alt="" />
             <input
               className="h-10 lg:w-full p-3 outline-none"
               type="text"
               name="messname"
-              placeholder="Search by Mess Name"
+              placeholder="Name, city, address,landmark"
             />
           </label>
 
