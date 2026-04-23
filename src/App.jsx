@@ -53,7 +53,7 @@ const App = () => {
         <Route path='/faq' element={<Faq />} />
         <Route path='/login' element={<Login />} />
         <Route path='/search' element={<FindMess />} />
-        <Route path='/mess/:id' element={<UnderDevelope />} />
+        <Route path='/mess/:id' element={<MessDetails />} />
         <Route element={<ProtectedRoute />}>
           <Route path='/admin/profile/*' element={<AdminLayout />} />
           <Route path='/:messingId/messing-dashboard' element={<MealTrackingDashboard />} />

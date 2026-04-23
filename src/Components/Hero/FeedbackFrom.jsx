@@ -27,7 +27,7 @@ const FeedbackForm = ({ onClose, setServerMessage }) => {
     if (response.status === 200) {
       onClose();
       setLoading(false);
-      setServerMessage("Feedback submitted successfully!");
+      setServerMessage(response.data.message);
     }
 
 

@@ -17,12 +17,28 @@ const Navbar = () => {
         pathname.startsWith('/admin/profile') ||
         !!matchPath({ path: "/:messingId/messing-dashboard" }, path);
 
+    const isMessPage = pathname.startsWith('/mess/') || !!matchPath({ path: "/mess/:id" }, path);
+
 
     return (
         <>
-            <nav className={`p-5 h-15 w-full fixed  justify-between items-center lg:hidden md:hidden  zalando-sans-expanded-head z-10 bg-black/50 backdrop-blur-md ${isDashboard ? 'hidden' : 'flex'}`}>
+            <nav className={`
+                p-5 
+                h-15 
+                w-full 
+                fixed  
+                justify-between 
+                items-center 
+                lg:hidden 
+                md:hidden  
+                zalando-sans-expanded-head 
+                z-10 
+                ${isMessPage ? 'hidden' : 'flex'}
+                 backdrop-blur-md 
+                ${isDashboard ? 'hidden' : 'flex'}`}>
                 <Link to='/' className='text-xl text-amber-500 drop-shadow-xl/50  drop-shadow-amber-500/40'>
                     MessiFy
+
                 </Link>
                 <Link
                     className='px-4 py-1.5  rounded-full bg-amber-600 text-white hover:bg-amber-700 transition-all '
@@ -48,12 +64,11 @@ const Navbar = () => {
       left-0
       right-0
       z-50
-      backdrop-blur-md
-      bg-transparent
+     ${isMessPage ? 'bg-linear-to-r from-indigo-950 via-slate-900 to-indigo-950 text-white border border-white/10' : 'bg-[#34333350]'}
       shadow-lg
       zalando-sans-expanded-head
     `}>
-                <Link to='/' className='text-2xl text-yellow-600 drop-shadow-xl/50 hidden md:block drop-shadow-amber-500/40'>
+                <Link to='/' className='text-xl text-amber-500 drop-shadow-xl/50 hidden md:block drop-shadow-amber-500/40'>
                     MessiFy
                 </Link>
 
@@ -80,7 +95,7 @@ const Navbar = () => {
                     </ul>
 
                     <Link
-                        className='px-4 py-1.5 rounded-lg bg-amber-600 text-white hover:bg-amber-700 transition-all hidden md:block '
+                        className='px-4 py-1.5 text-sm rounded-lg bg-amber-600 text-white hover:bg-amber-700 transition-all hidden md:block '
                         to="/login"
                     >
                         Login / SignUp

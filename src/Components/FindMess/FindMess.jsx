@@ -6,11 +6,14 @@ import SearchForm from './SearchForm';
 import FilterForm from './FilterForm';
 import ContactPopup from './ContactPopup';
 import axios from 'axios';
+import Loding from '../Loding/Loding';
+import { useNavigate } from 'react-router';
 
 
 const FindMess = () => {
 
-
+  const navigate = useNavigate();
+  const [loding, setLoding] = useState(false)
 
   // const newData = [];
   const [newData, setnewData] = useState([])
@@ -73,11 +76,14 @@ const FindMess = () => {
   //fetch data from backend
   async function fetchMessData() {
     try {
+      setLoding(true)
       const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/customer/getmess`);
       // console.log(response.data.mess);
       setnewData(response.data.mess);
+      setLoding(false)
 
     } catch (error) {
+      navigate('/error')
       console.error("Error fetching mess data:", error)
     }
   }
@@ -213,6 +219,7 @@ const FindMess = () => {
             {/* Cards */}
             <div className="flex  flex-wrap justify-center items-center lg:gap-5 gap-3 overflow-y-auto  h-[calc(100vh-8rem)]   py-15 scrollbar-hidden scrollbar-thin mask-[linear-gradient(to_bottom,transparent,black_15%,black_85%,transparent)] 
   [-webkit-mask-image:linear-gradient(to_bottom,transparent,black_15%,black_75%,transparent)]">
+              {loding && <Loding />}
 
               {newData.map((data, idx) => (
                 <MessCard key={data.messName || idx} data={data} id={idx} />
