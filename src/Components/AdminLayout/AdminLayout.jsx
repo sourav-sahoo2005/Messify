@@ -32,25 +32,27 @@ const AdminLayout = ({ children }) => {
 
   const toggleSidebar = () => setIsOpen(!isOpen);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoding(true)
-        const response = await axios.post(
-          `${import.meta.env.VITE_BACKEND_URL}/owner/dashboard`,
-          {},
-          { withCredentials: true }
-        );
+  const fetchData = async () => {
+    try {
+      setLoding(true)
+      const response = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/owner/dashboard`,
+        {},
+        { withCredentials: true }
+      );
 
-        setLoding(false)
+      setLoding(false)
 
-        setProfile(response.data.profile)
+      setProfile(response.data.profile)
+      if (pathname === '/admin/profile') {
         setServerMsg(response.data.message)
-      } catch (error) {
-        console.error("Access denied", error);
       }
-    };
+    } catch (error) {
+      console.error("Access denied", error);
+    }
+  };
 
+  useEffect(() => {
     fetchData();
   }, []);
 
@@ -71,9 +73,9 @@ const AdminLayout = ({ children }) => {
       case 'dashboard':
         return <Dashboard data={profile} />;
       case 'edit-profile':
-        return <EditProfile data={profile} setServerMsg={setServerMsg} />;
+        return <EditProfile data={profile} setServerMsg={setServerMsg} fetchData={fetchData} />;
       case 'track-meal':
-        return <TrackMeal setLoding={setLoding}/>
+        return <TrackMeal setLoding={setLoding} />
       default:
         return <MessProfile data={profile} />;
     }

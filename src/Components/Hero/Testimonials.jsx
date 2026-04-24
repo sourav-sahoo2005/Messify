@@ -52,7 +52,7 @@ const Testimonials = () => {
 
       const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/customer/reviews`, { withCredentials: true });
 
-      setReview(response.data.feedbacks);
+      setReview(response.data.feedbacks.reverse());
 
     } catch (err) {
       console.log("error:", err);

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Github ,Instagram,Linkedin} from 'lucide-react'
+import { Github, Instagram, Linkedin } from 'lucide-react'
 
 const Developers = () => {
 
@@ -8,9 +8,9 @@ const Developers = () => {
     {
       name: "Sourav Sahoo",
       img: "../Images/Developer/Sourav.jpg",
-      github:"https://github.com/sourav-sahoo2005",
-      linkedin:"https://www.linkedin.com/in/sourav-sahoo01/",
-      instagram:"https://www.instagram.com/wdsourav?igsh=Y3B3OG44Z3Q4cXpl"
+      github: "https://github.com/sourav-sahoo2005",
+      linkedin: "https://www.linkedin.com/in/sourav-sahoo01/",
+      instagram: "https://www.instagram.com/wdsourav?igsh=Y3B3OG44Z3Q4cXpl"
 
     },
     {
@@ -47,26 +47,29 @@ const Developers = () => {
               <img
                 src={dev.img}
                 alt={dev.name}
-                className='h-full w-full rounded-2xl object-cover transition-transform duration-500 group-hover:scale-110'
+                className='h-full w-full rounded-2xl object-cover transition-transform duration-500 group-hover:scale-110 group-active:scale-110'
               />
 
               {/* Overlay Content */}
-              <div className='absolute rounded-2xl inset-0 bg-linear-to-t from-black/90 via-black/40 to-transparent flex flex-col justify-end p-5 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out'>
+              <div className='absolute rounded-2xl inset-0 bg-linear-to-t from-black/90 via-black/40 to-transparent flex flex-col justify-end p-5 translate-y-full group-hover:translate-y-0 group-active:translate-y-0 transition-transform duration-300 ease-out'>
 
                 <h2 className='pb-2 text-xl font-bold text-white'>{dev.name}</h2>
 
                 <div className='flex gap-4 items-center'>
-                  <a href={dev.github} className="hover:text-amber-400 transition-colors">
+                  {dev.github && (<a href={dev.github} className="hover:text-amber-400 transition-colors">
                     <Github />
-                  </a>
-                  <a href={dev.linkedin} className="hover:text-blue-500 transition-colors">
+                  </a>)}
+
+                  {dev.linkedin && (<a href={dev.linkedin} className="hover:text-blue-500 transition-colors">
                     {/* Assuming you have a LinkedIn icon component */}
                     <Linkedin />
-                  </a>
-                  <a href={dev.instagram} className="hover:text-pink-500 transition-colors">
-                    {/* Assuming you have a LinkedIn icon component */}
-                    <Instagram />
-                  </a>
+                  </a>)}
+                  {dev.instagram && (
+                    <a href={dev.instagram} className="hover:text-pink-500 transition-colors">
+                      {/* Assuming you have an Instagram icon component */}
+                      <Instagram />
+                    </a>
+                  )}
                 </div>
 
               </div>
@@ -78,7 +81,7 @@ const Developers = () => {
         )}
       </div>
 
-    </div>
+    </div >
   )
 }
 

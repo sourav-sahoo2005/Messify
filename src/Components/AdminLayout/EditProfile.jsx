@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import { Save, Building2, MapPin, UserCircle, ShieldCheck, Info } from 'lucide-react';
+import axios from 'axios';
 
-const EditProfile = ({ data }) => {
+const EditProfile = ({ data, setServerMsg, fetchData }) => {
+
+    const [initialData, setInitialData] = useState(data);
+
     // Initialize state with the existing data
     const [formData, setFormData] = useState({
         messName: data?.messName || '',
@@ -39,17 +43,63 @@ const EditProfile = ({ data }) => {
         }
     };
 
+
+    // Function to get only the changed values compared to initial data
+    const getDirtyValues = (initialValues, currentValues) => {
+        let dirtyValues = {};
+
+        Object.keys(currentValues).forEach(key => {
+            // If it's a nested object (like your 'section' logic)
+            if (typeof currentValues[key] === 'object' && currentValues[key] !== null) {
+                const nestedDiff = getDirtyValues(initialValues[key] || {}, currentValues[key]);
+                if (Object.keys(nestedDiff).length > 0) {
+                    dirtyValues[key] = nestedDiff;
+                }
+            }
+            // If the value has changed from the initial state
+            else if (currentValues[key] !== initialValues[key]) {
+                dirtyValues[key] = currentValues[key];
+            }
+        });
+
+        return dirtyValues;
+    };
+
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setIsSaving(true);
 
-        // Simulate API Call
-        console.log("Saving to Backend:", formData);
 
-        setTimeout(() => {
+        // 2. Extract only what changed
+        const changedDataOnly = getDirtyValues(initialData, formData);
+
+        if (Object.keys(changedDataOnly).length === 0) {
+            setServerMsg("No changes detected.");
             setIsSaving(false);
-            alert("Profile updated successfully!");
-        }, 1000);
+            return;
+        }
+
+        try {
+
+            const response = await axios.patch(`${import.meta.env.VITE_BACKEND_URL}/owner/update-profile`, changedDataOnly, {
+                withCredentials: true
+            });
+
+            if (response.status === 200) {
+                setIsSaving(false);
+                fetchData();
+                setServerMsg("Profile updated successfully!");
+            }
+
+
+        } catch (err) {
+            console.error("Error saving profile:", err);
+            setIsSaving(false);
+            alert("Failed to save profile. Please try again.");
+
+
+        }
     };
 
     return (
@@ -100,7 +150,7 @@ const EditProfile = ({ data }) => {
                             <div>
                                 <label className="block text-sm font-medium text-slate-600 mb-2">Description</label>
                                 <textarea
-                                 
+
                                     name="description" value={formData.description} onChange={handleChange} rows="1"
                                     className="w-full lg:min-h-auto min-h-30 p-3 text-black bg-slate-50 border border-slate-200 rounded-xl outline-none"
                                 />
@@ -192,9 +242,9 @@ const EditProfile = ({ data }) => {
                                 <label className="text-xs text-slate-400 uppercase">Phone</label>
                                 <input type="text" name="phone" value={formData.owner.phone} onChange={(e) => handleChange(e, 'owner')} className="w-full bg-transparent border-b border-slate-700 py-1 outline-none" />
                             </div>
-                             <div>
+                            <div>
                                 <label className="text-xs text-slate-400 uppercase">Email</label>
-                                <input type="text" name="phone" value={formData.owner.email} onChange={(e) => handleChange(e, 'owner')} className="w-full bg-transparent border-b border-slate-700 py-1 outline-none" />
+                                <input type="text" name="email" value={formData.owner.email} onChange={(e) => handleChange(e, 'owner')} className="w-full bg-transparent border-b border-slate-700 py-1 outline-none" />
                             </div>
                             <div className="pt-2 opacity-50 italic text-xs">
                                 <Info size={12} className="inline mr-1" /> UserID cannot be changed .
