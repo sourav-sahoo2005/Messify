@@ -1,8 +1,10 @@
 import React from 'react'
 import faqs from './FaqData'
+import FAQItem from './FAQItem';
 
 
 const Faq = () => {
+
 
   return (
     <div className='lg:p-10 pb-10 min-h-screen flex lg:flex-row flex-col justify-center items-center'>
@@ -20,24 +22,7 @@ const Faq = () => {
         {
           faqs.map((faq, idx) => {
             return (
-              <div key={idx} className='group bg-zinc-900 border border-zinc-800 rounded-2xl hover:scale-[1.02] cursor-pointer transition-all duration-400 ease-in-out relative '>
-                <h2 className=' p-6 pr-13 rounded-2xl bg-zinc-900 font-semibold'>{idx + 1}. {faq.question}</h2>
-                <p className='px-6 pb-4
-                          text-sm
-                          text-zinc-300
-                          max-h-0
-                          overflow-hidden
-                          opacity-0
-                          group-hover:max-h-40 
-                          group-hover:opacity-100 
-                          transition-all 
-                          duration-400 
-                          ease-in-out '>
-                  {faq.answer}</p>
-                <img src="../Icons/icons8-down-arrow-24.png" alt="" className='absolute top-7 right-7  invert group-hover:hidden ' />
-
-              </div>
-
+              <FAQItem key={idx} faq={faq} idx={idx} />
             )
           })
         }
