@@ -36,7 +36,7 @@ const MealStatus = () => {
     return (
         <div>
             {loding && <Loding />}
-            <div className='lg:pt-18 md:pt-18 p-6 bg-gray-50'>
+            <div className='lg:pt-18 md:pt-18 px-0 py-6 bg-gray-50'>
 
                 <h1 className="px-6 pt-5 text-2xl font-bold text-gray-800">Hello! <span className="text-blue-700">Sourav Sahoo</span></h1>
 
