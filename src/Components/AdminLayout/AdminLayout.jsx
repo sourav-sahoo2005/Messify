@@ -12,6 +12,7 @@ import Msgpopup from '../Login/Msgpopup';
 import MealTrackingDashboard from './MealTrackingDashboard';
 import TrackMeal from './TrackMeal';
 import { useLocation, Link } from 'react-router'
+import InternalServerError from '../ErrorPage/InternalServerError';
 
 
 
@@ -28,6 +29,7 @@ const AdminLayout = ({ children }) => {
   const [activeTab, setActiveTab] = useState('profile');
   const [serverMsg, setServerMsg] = useState("");
   const [isOpen, setIsOpen] = useState(false);
+  const [isError, setError] = useState(false);
 
 
   const toggleSidebar = () => setIsOpen(!isOpen);
@@ -48,6 +50,7 @@ const AdminLayout = ({ children }) => {
         setServerMsg(response.data.message)
       }
     } catch (error) {
+      setError(true);
       console.error("Access denied", error);
     }
   };
@@ -56,9 +59,6 @@ const AdminLayout = ({ children }) => {
     fetchData();
   }, []);
 
-  if (!profile) {
-    return <Loding />;
-  }
 
 
   const pathParts = pathname.split('/');
@@ -95,6 +95,18 @@ const AdminLayout = ({ children }) => {
     }
 
   }
+
+
+
+  if (!profile) {
+    return <Loding />;
+  }
+
+
+  if (isError) {
+    return <InternalServerError />
+  }
+
 
   return (
 

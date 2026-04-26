@@ -7,13 +7,14 @@ import FilterForm from './FilterForm';
 import ContactPopup from './ContactPopup';
 import axios from 'axios';
 import Loding from '../Loding/Loding';
-import { useNavigate } from 'react-router';
+import InternalServerError from '../ErrorPage/InternalServerError';
+
 
 
 const FindMess = () => {
 
-  const navigate = useNavigate();
-  const [loding, setLoding] = useState(false)
+  const [loding, setLoding] = useState(false);
+  const [isError, setError] = useState(false);
 
   // const newData = [];
   const [newData, setnewData] = useState([])
@@ -85,7 +86,7 @@ const FindMess = () => {
       setLoding(false)
 
     } catch (error) {
-      navigate('/error')
+      setError(true);
       console.error("Error fetching mess data:", error)
     }
   }
@@ -186,7 +187,9 @@ const FindMess = () => {
   };
 
 
-
+  if (isError) {
+    return <InternalServerError />
+  }
 
   return (
     <div className="min-h-screen w-full lg:pt-23 pt-0 lg:p-10 md:p-5 mb-5">

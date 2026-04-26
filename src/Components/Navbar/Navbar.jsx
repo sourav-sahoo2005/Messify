@@ -37,6 +37,7 @@ const Navbar = () => {
                 md:hidden  
                 zalando-sans-expanded-head 
                 z-10 
+                bg-black/50
                 ${isMessPage ? 'hidden' : 'flex'}
                 ${isSearch ? 'hidden' : 'flex'}
                 ${isDashboard ? 'hidden' : 'flex'}

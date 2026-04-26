@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { Save, Building2, MapPin, UserCircle, ShieldCheck, Info } from 'lucide-react';
 import axios from 'axios';
+import InternalServerError from '../ErrorPage/InternalServerError';
 
 const EditProfile = ({ data, setServerMsg, fetchData }) => {
 
     const [initialData, setInitialData] = useState(data);
+    const [isError, setError] = useState(false);
+
 
     // Initialize state with the existing data
     const [formData, setFormData] = useState({
@@ -96,11 +99,18 @@ const EditProfile = ({ data, setServerMsg, fetchData }) => {
         } catch (err) {
             console.error("Error saving profile:", err);
             setIsSaving(false);
+            setError(true);
             alert("Failed to save profile. Please try again.");
 
 
         }
     };
+
+
+    if (isError) {
+        return <InternalServerError />
+    }
+
 
     return (
         <div className="max-w-5xl mx-auto pb-12">
