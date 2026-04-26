@@ -9,7 +9,7 @@ const HeroIntro = () => {
         One
         <span className='text-amber-600'> Platform</span>, Multiple <span className='text-amber-600'>Solution</span>
       </p>
-      <p id='hero_sub_intro' className='lg:text-xl md:text-xl text-lg mt-1 font-light'>Track meals, control costs, and stay updated in real time.</p>
+      <p id='hero_sub_intro' className='lg:text-xl md:text-xl text-lg mt-1 font-light'>Find Mess, Track meals, control costs, and stay updated in real time.</p>
     </div>
   )
 }

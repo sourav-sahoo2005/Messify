@@ -17,6 +17,8 @@ import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute'
 import UnderDevelope from './Components/ErrorPage/UnderDevelope';
 import MealTrackingDashboard from './Components/AdminLayout/MealTrackingDashboard';
 import InternalServerError from './Components/ErrorPage/InternalServerError';
+import MealForm from './Components/MealTracking/MealForm';
+import MealStatus from './Components/MealTracking/MealStatus';
 
 
 const App = () => {
@@ -54,6 +56,8 @@ const App = () => {
         <Route path='/login' element={<Login />} />
         <Route path='/search' element={<FindMess />} />
         <Route path='/mess/:id' element={<MessDetails />} />
+        <Route path='/track-meal' element={<MealForm />} />
+        <Route path='/meal-status/:mealId' element={<MealStatus />} />
         <Route element={<ProtectedRoute />}>
           <Route path='/admin/profile/*' element={<AdminLayout />} />
           <Route path='/:messingId/messing-dashboard' element={<MealTrackingDashboard />} />

@@ -17,7 +17,10 @@ const Navbar = () => {
         pathname.startsWith('/admin/profile') ||
         !!matchPath({ path: "/:messingId/messing-dashboard" }, path);
 
-    const isMessPage = pathname.startsWith('/mess/') || !!matchPath({ path: "/mess/:id" }, path);
+    const isMessPage = (pathname.startsWith('/mess/') || !!matchPath({ path: "/mess/:id" }, path)) ||
+        (pathname.startsWith('/track-meal') || !!matchPath({ path: "/track-meal" }, path)) ||
+        (pathname.startsWith('/meal-status') || !!matchPath({ path: "/meal-status/:mealId" }, path));
+
     const isSearch = pathname.startsWith('/search') || !!matchPath({ path: "/search" }, path);
 
 
@@ -67,7 +70,7 @@ const Navbar = () => {
       left-0
       right-0
       z-50
-     ${isMessPage ? 'bg-linear-to-r from-indigo-950 via-slate-900 to-indigo-950 text-white border border-white/10' : 'bg-[#34333350]'}
+     ${isMessPage ? 'bg-linear-to-r from-slate-950 via-indigo-900 to-slate-950 text-white border border-white/10' : 'bg-[#34333350]'}
       shadow-lg
       zalando-sans-expanded-head
     `}>
@@ -98,10 +101,10 @@ const Navbar = () => {
                     </ul>
 
                     <Link
-                        className='px-4 py-1.5 text-sm rounded-lg bg-amber-600 text-white hover:bg-amber-700 transition-all hidden md:block '
+                        className='px-4 py-1.5 text-sm rounded-full bg-linear-to-r from-amber-700 via-amber-600 to-amber-700 text-white hover:bg-amber-700 transition-all hidden md:block '
                         to="/login"
                     >
-                        Login / SignUp
+                        Login
                     </Link>
                 </div>
             </nav>

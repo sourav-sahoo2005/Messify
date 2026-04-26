@@ -51,7 +51,7 @@ const Developers = () => {
               />
 
               {/* Overlay Content */}
-              <div className='absolute rounded-2xl inset-0 bg-linear-to-t from-black/90 via-black/40 to-transparent flex flex-col justify-end p-5 translate-y-full group-hover:translate-y-0 group-active:translate-y-0 transition-transform duration-300 ease-out'>
+              <div className='absolute rounded-2xl inset-0 bg-linear-to-t from-black/90 via-black/40 to-transparent flex flex-col justify-end p-5 lg:translate-y-full group-hover:translate-y-0 group-active:translate-y-0 transition-transform duration-300 ease-out'>
 
                 <h2 className='pb-2 text-xl font-bold text-white'>{dev.name}</h2>
 

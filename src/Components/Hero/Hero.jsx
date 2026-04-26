@@ -1,3 +1,4 @@
+import React, { useEffect } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { Link } from 'react-router';
@@ -7,9 +8,13 @@ import Cities from './Cities';
 import Testimonials from './Testimonials';
 import CTA from './CTA';
 import Feedback from './Feedback';
+import { ChevronRight } from 'lucide-react';
+import { useCookies } from 'react-cookie';
 
 const Hero = () => {
 
+  const [cookies, setCookie, removeCookie] = useCookies(['mealId']);
+  const isAuthenticated = !!(cookies.mealId); // Convert mealId to a boolean
 
   //Animation using GSAP
   useGSAP(() => {
@@ -46,11 +51,19 @@ const Hero = () => {
         <div className='px-10  bg-black/50 w-full h-full'>
           <div className=' min-h-screen w-full flex flex-col items-center justify-center gap-8 py-70'>
             <HeroIntro />
-            <Link
-              to={'/search'}
-              className='bg-amber-600 p-2 w-50 flex items-center justify-center rounded-xl'
-            >Search Now
-            </Link>
+            <div className='flex flex-wrap justify-center items-center gap-6 '>
+              <Link
+                to={'/search'}
+                className='bg-linear-to-r from-amber-700 via-amber-500 to-amber-700 p-2 w-50 flex items-center justify-center rounded-full shadow-lg hover:scale-105 transition-all ease-in-out duration-300'
+              >Search Now
+              </Link>
+
+              <Link
+                to={isAuthenticated ? `/meal-status/${cookies.mealId}` : '/track-meal'}
+                className='lg:bg-black/70 bg-linear-to-r from-slate-950 via-indigo-900 to-slate-950 border p-2 px-5  w-auto flex items-center justify-center rounded-full shadow-lg  hover:scale-105 transition-all ease-in-out duration-300 gap-2'
+              ><span>{isAuthenticated ? 'Check Your Meal' : 'Track Your Meal'}</span> <ChevronRight />
+              </Link>
+            </div>
 
 
 
@@ -58,12 +71,12 @@ const Hero = () => {
           </div>
         </div>
       </div>
-      
-      <PowerfulFeature/>
-      <Cities/>
-      <Testimonials/>  
-      <CTA/>
-      <Feedback/>
+
+      <PowerfulFeature />
+      <Cities />
+      <Testimonials />
+      <CTA />
+      <Feedback />
     </div>
   )
 }
