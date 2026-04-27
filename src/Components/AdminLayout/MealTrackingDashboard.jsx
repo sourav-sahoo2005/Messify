@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
 import { ShoppingCart, Hash, TrendingUp, PieChart } from 'lucide-react';
+import MenuCard from '../MealTracking/MenuCard';
+import MenuUpdateForm from '../MealTracking/MenuUpdateForm';
 
-const MealTrackingDashboard = () => {
+const MealTrackingDashboard = ({ messingData, manager, fetchmealStatus }) => {
+    const [isOpen, setIsOpen] = useState(false);
+    const [selectedDay, setSelectedDay] = useState(null);
+
     // Mock Data - In a real app, this comes from your Backend API
     const [data, setData] = useState({
         totalSpend: 12500,
@@ -60,6 +65,8 @@ const MealTrackingDashboard = () => {
         },
     ];
 
+   
+    
     return (
         <div className="p-6 bg-gray-50 min-h-screen">
             <div className="mb-8">
@@ -109,14 +116,42 @@ const MealTrackingDashboard = () => {
                     </div>
                 </div>
 
-                <div className="bg-slate-900 p-6 rounded-2xl shadow-lg text-white flex flex-col justify-center">
-                    <h4 className="text-orange-400 font-bold mb-2">Quick Action</h4>
-                    <p className="text-gray-400 text-sm mb-6">Need to update today's market prices for curry or rice?</p>
-                    <button className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 rounded-xl transition">
-                        Update Inventory Rates
-                    </button>
+                {manager && (
+                    <div className="bg-slate-900 p-6 rounded-2xl shadow-lg text-white flex flex-col justify-center">
+                        <h4 className="text-orange-400 font-bold mb-2">Quick Action</h4>
+                        <p className="text-gray-400 text-sm mb-6">Need to update today's market prices for curry or rice?</p>
+                        <button className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 rounded-xl transition">
+                            Update Inventory Rates
+                        </button>
+                    </div>
+                )}
+            </div>
+
+            <div className='grid lg:grid-cols-3 grid-cols-1'>
+                <div className="lg:col-span-2 mt-10 bg-linear-to-r from-slate-950 via-indigo-950 to-slate-950 p-6 rounded-2xl shadow-lg text-white flex flex-col justify-center">
+                    <h4 className="text-orange-400 font-bold mb-2">Menu Details</h4>
+                    <p className="text-gray-400 text-sm mb-6">This is an overview of the menu items and their availability.</p>
+                    <div className='py-5 grid grid-cols-1 gap-2 h-64 overflow-x-auto overflow-y-scroll [scrollbar-width:none] [-webkit-mask-image:linear-gradient(to_bottom,transparent,black_15%,black_75%,transparent)]'>
+                        <div className='py-5 h-auto bg-linear-to-r from-amber-700 via-yellow-600 to-amber-700 rounded-b-lg uppercase text-md  flex   font-semibold text-white'>
+                            <span className='h-full w-1/5 rounded-lg  flex justify-center items-center'>Day</span>
+                            <span className='flex-1 w-3/5 justify-center items-center flex flex-col gap-2'>Meals</span>
+                            {manager && (<span className='w-1/5 flex justify-center items-center'>Edit</span>)}
+                        </div>
+                        {Object.entries(messingData?.menu || {}).map(([day, meals]) => (
+                            <MenuCard key={day} day={day} meals={meals} manager={manager} setIsOpen={setIsOpen} setSelectedDay={setSelectedDay} />
+                        ))}
+                    </div>
+
+                </div>
+                <div>
+
                 </div>
             </div>
+
+
+            {isOpen && <MenuUpdateForm setIsOpen={setIsOpen} selectedDay={selectedDay} fetchmealStatus={fetchmealStatus} />}
+
+
         </div>
     );
 };
