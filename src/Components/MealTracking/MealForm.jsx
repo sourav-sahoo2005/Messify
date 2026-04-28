@@ -27,7 +27,7 @@ const MealForm = () => {
             const result = await response.data;
             if (response.status === 200 && response.data.message === "Authentication successful") {
                 navigate(`/meal-status/${data.mealId}`);
-                setCookie('mealId', data.mealId, { path: '/' });
+                // setCookie('mealId', data.mealId, { path: '/' });
                 setServerMessage(response.data.message);
             }
             setServerMessage(response.data.message);
