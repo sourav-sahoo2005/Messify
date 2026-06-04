@@ -15,7 +15,8 @@ const Navbar = () => {
     //   const isDashboard = path === '/admin/profile' || path.startsWith('/admin/profile/' || path === '/:messingId/messing-dashboard');
     const isDashboard =
         pathname.startsWith('/admin/profile') ||
-        !!matchPath({ path: "/:messingId/messing-dashboard" }, path);
+        !!matchPath({ path: "/:messingId/messing-dashboard" }, path) ||
+        (pathname.startsWith('/forgot-password'));
 
     const isMessPage = (pathname.startsWith('/mess/') || !!matchPath({ path: "/mess/:id" }, path)) ||
         (pathname.startsWith('/track-meal') || !!matchPath({ path: "/track-meal" }, path)) ||

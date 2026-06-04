@@ -19,6 +19,7 @@ import MealTrackingDashboard from './Components/AdminLayout/MealTrackingDashboar
 import InternalServerError from './Components/ErrorPage/InternalServerError';
 import MealForm from './Components/MealTracking/MealForm';
 import MealStatus from './Components/MealTracking/MealStatus';
+import ForgotPassword from './Components/Login/ForgotPassword';
 
 
 const App = () => {
@@ -54,6 +55,7 @@ const App = () => {
         <Route path='/about' element={<About />} />
         <Route path='/faq' element={<Faq />} />
         <Route path='/login' element={<Login />} />
+        <Route path='/forgot-password' element={<ForgotPassword />} />
         <Route path='/search' element={<FindMess />} />
         <Route path='/mess/:id' element={<MessDetails />} />
         <Route path='/track-meal' element={<MealForm />} />

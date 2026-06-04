@@ -4,7 +4,8 @@ import Loding from '../Loding/Loding';
 import Msgpopup from './Msgpopup';
 import axios from 'axios';
 import './Login.css';
-import { useNavigate } from 'react-router';
+import { useNavigate, Link } from 'react-router';
+
 
 
 const Login = () => {
@@ -200,6 +201,8 @@ const Login = () => {
 
                                     <input type="submit" className='min-w-52 mt-10.75 p-3 rounded-full bg-[#ff8400] text-white' value="Login" />
                                 )}
+
+                                <Link to="/forgot-password" className='mt-4 text-sm text-center font-semibold hover:underline'> Forgot Password?</Link>
                         </form>
 
 
