@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import MealTrackingDashboard from '../AdminLayout/MealTrackingDashboard'
 import axios from 'axios';
-import { useParams, useNavigate } from 'react-router';
+import { useParams, useNavigate, Link } from 'react-router';
 import Loding from '../Loding/Loding'
 import CustomerMealStatus from './CustomerMealStatus';
+import TodayMeal from './TodayMeal';
 import { Search, X } from 'lucide-react';
 
 const MealStatus = () => {
@@ -15,6 +16,7 @@ const MealStatus = () => {
     const [messingData, setMessingData] = useState(null);
     const [mealData, setMealData] = useState(null);
     const [customerData, setCustomerData] = useState(null);
+    const [open, setOpen] = useState(false);
 
 
     const fetchMealStatus = async () => {
@@ -67,22 +69,27 @@ const MealStatus = () => {
 
     return (
         <div className='pb-10 bg-gray-50' >
+
             {loding && <Loding />}
+            {open && <TodayMeal setOpen={setOpen} />}
             <div className='lg:pt-18 md:pt-18 px-0 py-6'>
-
-                <h1 className="px-6 pt-5 text-2xl font-bold text-gray-800">Dear! <span className="text-blue-700">{customerData ? customerData.name : 'User'}</span></h1>
-
+                <div className='px-6 pt-5 flex items-center justify-between md:flex-row sm:flex-col gap-4'>
+                    <h1 className=" text-2xl font-bold text-gray-800">Dear! <span className="text-blue-700">{customerData ? customerData.name : 'User'}</span></h1>
+                    <button onClick={() => setOpen(true)} className=" bg-blue-500 hover:bg-blue-700 text-white font-semibold transition-colors duration-300 inline-block  py-2 px-4 rounded-2xl shadow-md shadow-blue-200">
+                        Update Today's Meal
+                    </button>
+                </div>
 
                 <MealTrackingDashboard messingData={messingData} manager={customerData?.ismanager} fetchmealStatus={fetchMealStatus} />
 
 
             </div>
             <div className='mt-0  mx-6  p-5 h-auto w-auto bg-white rounded-lg drop-shadow-xl border'>
-                <div className="flex items-center justify-between my-5">
+                <div className="flex items-center justify-between my-5 flex-wrap gap-3">
                     <h1 className='px-8 py-3 mx-7  text-md font-semibold inline-block text-white rounded-full bg-linear-to-tr from-amber-700 to-orange-400'>Customer Meal Status</h1>
 
                     {/* Search bar */}
-                    <form onSubmit={handleSubmit} className="min-w-md  mx-7">
+                    <form onSubmit={handleSubmit} className="lg:min-w-md mix-w-md  mx-7">
                         <div className="relative flex items-center w-full h-12 rounded-xl border border-gray-600 bg-white px-3 transition-all duration-200 focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-blue-100">
 
                             {/* Lucide Search Icon */}
