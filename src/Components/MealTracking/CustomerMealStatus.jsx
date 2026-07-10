@@ -45,7 +45,7 @@ const CustomerMealStatus = () => {
             </div>
 
             {/* Items Breakdown Container */}
-            <div className="bg-slate-50/60 rounded-2xl p-4 space-y-3 border border-slate-50">
+            <div className="bg-slate-50/60 rounded-2xl lg:p-4 space-y-3 border border-slate-50">
 
                 {/* Item 1: Rice */}
                 <div className="flex items-center justify-between bg-white p-3 rounded-xl border border-slate-100/80 shadow-sm">

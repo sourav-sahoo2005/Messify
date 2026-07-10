@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useParams, useNavigate } from 'react-router';
 import Loding from '../Loding/Loding'
 import CustomerMealStatus from './CustomerMealStatus';
+import { Search, X } from 'lucide-react';
 
 const MealStatus = () => {
 
@@ -44,6 +45,25 @@ const MealStatus = () => {
     }, [mealId]);
 
 
+    //search functionality
+    const [query, setQuery] = useState('');
+
+    const handleInputChange = (e) => {
+        const value = e.target.value;
+        setQuery(value);
+        // if (onSearch) onSearch(value); // Live search
+    };
+
+    const handleClear = () => {
+        setQuery('');
+        // if (onSearch) onSearch('');
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        // if (onSearch) onSearch(query); // Explicit submit
+    };
+
 
     return (
         <div className='pb-10 bg-gray-50' >
@@ -57,9 +77,41 @@ const MealStatus = () => {
 
 
             </div>
-            <div className='mt-10  mx-6  p-5 h-auto w-auto bg-white rounded-lg drop-shadow-xl border'>
-                <h1 className='px-8 py-2  text-md font-bold inline-block text-blue-900 rounded-full bg-blue-100'>Customer Meal Status</h1>
-                <div className="px-6 py-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className='mt-0  mx-6  p-5 h-auto w-auto bg-white rounded-lg drop-shadow-xl border'>
+                <div className="flex items-center justify-between my-5">
+                    <h1 className='px-8 py-3 mx-7  text-md font-semibold inline-block text-white rounded-full bg-linear-to-tr from-amber-700 to-orange-400'>Customer Meal Status</h1>
+
+                    {/* Search bar */}
+                    <form onSubmit={handleSubmit} className="min-w-md  mx-7">
+                        <div className="relative flex items-center w-full h-12 rounded-xl border border-gray-600 bg-white px-3 transition-all duration-200 focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-blue-100">
+
+                            {/* Lucide Search Icon */}
+                            <Search className="h-5 w-5 text-gray-400 shrink-0 select-none" />
+
+                            {/* Input Field */}
+                            <input
+                                type="text"
+                                className="h-full w-full bg-transparent pl-3 pr-8 outline-none text-sm text-gray-700 placeholder-gray-400"
+                                placeholder="Search items, tags, or keys..."
+                                value={query}
+                                onChange={handleInputChange}
+                            />
+
+                            {/* Lucide Clear Icon (Conditional) */}
+                            {query && (
+                                <button
+                                    type="button"
+                                    onClick={handleClear}
+                                    className="absolute right-3 p-1 rounded-full text-gray-400 hover:bg-gray-100 hover:text-gray-600 transition-colors"
+                                    aria-label="Clear search"
+                                >
+                                    <X className="h-4 w-4" />
+                                </button>
+                            )}
+                        </div>
+                    </form>
+                </div>
+                <div className="lg:px-6 py-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
 
                     <CustomerMealStatus />
                     <CustomerMealStatus />
